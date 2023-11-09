@@ -1,0 +1,23 @@
+.sidenav{
+    box-sizing: border-box;
+    width: 15em;
+}
+
+.sidenav a{
+    color: black;
+}
+.sidenav .nav .nav-link.active{
+    background-color: gainsboro;
+    color: black;
+}
+
+.summary__element{
+    box-sizing: border-box;
+    background-color: gainsboro;
+    width: 22em;
+}
+
+.topsales{
+    box-sizing: border-box;
+    border: 1em solid whitesmoke;
+}
