@@ -1,0 +1,51 @@
+.modal{
+    display: none; /* Hidden by default */
+      position:absolute; /* Stay in place */ 
+      width: 100; /* Full width */
+      height: 100; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(255, 255, 255, ); /* Black w/ opacity */
+  }
+  .modal-content{
+      background-color: #fefefe;
+      top: 60px; /* 15% from the top and centered */
+      left: 1200px;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+      height: 400px; /* Could be more or less, depending on screen size */
+      align-items: center;
+    
+  }
+  .modal-content svg{
+    width: 20px;
+    height: 10px;
+    margin-left: 160px;
+    margin-top: -80px;
+    border: #000000;
+  }
+  .modal-content .detail-page__check_item_list{
+    margin-top: 200px ;
+    margin-left: -100px;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 60px;
+    white-space: nowrap;
+    background-color: #0d0d0d;
+    display: flex;
+    width: 200px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px 102px;
+    position:absolute ;
+    background-color: #0d0d0d;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #000000;
+    backdrop-filter: blur(4px) brightness(100%);
+    -webkit-backdrop-filter: blur(4px) brightness(100%);
+  }
