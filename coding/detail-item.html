@@ -2,82 +2,80 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>detail-page</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detail-page</title>
+  <!-- Fonts -->
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/base.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <!-- CSS -->
+  <link href="style.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/style-detail__page.css">
+  <meta name="robots" content="noindex,follow" />
+
+
 </head>
 
 <body>
-  <div class="header border border-1">
-    <nav class="navbar navbar-expand-lg mx-3">
-      <div class="container-fluid p-0">
-        <a class="me-5 p-0 navbar-brand" href="#">
-          <img src="./assets/img/fivechickens.jpg" alt="Bootstrap" width="30" height="33.2"> FIVECHICKENS </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  <div class="header">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <a class="me-5 p-0 navbar-brand" href="#">
+            <img src="./img/fivechickens.jpg" alt="Bootstrap" width="30" height="33.2"> FIVECHICKENS </a>
           <ul class="navbar-nav w-50 ms-5 mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="p-0 me-5 nav-link active" aria-current="page" href="./index.html">TRANG CHỦ</a>
+              <a class="p-0 me-5 nav-link active" aria-current="page" href="#">TRANG CHỦ</a>
             </li>
             <li class="header__dropdown-menu-item nav-item dropdown">
               <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false"> NAM </a>
+                aria-expanded="false"> NAM
+              </a>
               <ul class="dropdown-menu border-0 pb-0">
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
               </ul>
             </li>
             <li class="header__dropdown-menu-item nav-item dropdown">
               <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false"> NỮ </a>
               <ul class="dropdown-menu border-0 pb-0">
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
               </ul>
             </li>
             <li class="header__dropdown-menu-item nav-item dropdown">
               <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false"> BÉ TRAI </a>
               <ul class="dropdown-menu border-0 pb-0">
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
               </ul>
             </li>
             <li class="header__dropdown-menu-item nav-item dropdown">
               <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false"> BÉ GÁI </a>
               <ul class="dropdown-menu border-0 pb-0">
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
+                <li class="border"><a class="dropdown-item" href="#">Danh mục</a></li>
               </ul>
             </li>
           </ul>
@@ -89,28 +87,26 @@
             <li class="nav-item me-lg-0 dropdown">
               <a class="nav-link p-0 ms-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
                   class="bi bi-person fs-3"></i></a>
-              <div class="header__user-dropdown dropdown-menu dropdown-menu-end">
+              <!-- <div class="header__user-dropdown dropdown-menu dropdown-menu-end">
+                                <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
+                                <hr class="hr hr-blurry w-75 my-2 mx-auto" />
+                                <p class="ms-2 mb-1">Tên User</p>
+                                <ul class="header__user-list">
+                                    <li><a href="">Thông tin tài khoản</a></li>
+                                    <li><a href="">Quản lý đơn hàng</a></li>
+                                    <li><a href="">Danh sách địa chỉ</a></li>
+                                    <li><a href="">Đăng xuất</a>
+                                    </li>
+                                </ul>
+                            </div> -->
+              <div class="header__login-dropdown dropdown-menu dropdown-menu-end">
                 <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
                 <hr class="hr hr-blurry w-75 my-2 mx-auto" />
-                <p class="ms-2 mb-1">Tên User</p>
-                <ul class="header__user-list">
-                  <li><a href="./account.html">Thông tin tài khoản</a></li>
-                  <li><a href="./account-manage.html">Quản lý đơn hàng</a></li>
-                  <li><a href="./account-maps.html">Danh sách địa chỉ</a></li>
-                  <li><a href="">Đăng xuất</a>
-                  </li>
-                </ul>
+                <div class="d-grid gap-2 col-10 mx-auto">
+                  <button class="btn btn-primary" type="button">Đăng nhập</button>
+                  <button class="btn btn-success" type="button">Đăng ký</button>
+                </div>
               </div>
-              <!-- <div class="header__login-dropdown dropdown-menu dropdown-menu-end">
-                                      <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
-                                      <hr class="hr hr-blurry w-75 my-2 mx-auto" />
-                                      <div class="d-grid gap-2 col-10 mx-auto">
-                                          <button onclick="location.href='./login.html'" class="btn btn-primary"
-                                              type="button">Đăng nhập</button>
-                                          <button onclick="location.href='./signup.html'" class="btn btn-success"
-                                              type="button">Đăng ký</button>
-                                      </div>
-                                  </div> -->
             </li>
             <li class="nav-item me-lg-0 dropdown">
               <a class="nav-link p-0 ms-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
@@ -119,19 +115,38 @@
                 <p class="text-center mb-0">GIỎ HÀNG</p>
                 <hr class="hr hr-blurry w-75 my-2 mx-auto" />
                 <div>
-                  <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item"
-                    href="./detail-item.html">
+                  <div class="row g-0 border">
                     <div class="col-md-4">
-                      <img src="./assets/img/shoe/shoename/shoeimg.png" class="img-fluid rounded-start" alt="...">
+                      <img src="./img/shoeimg.png" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8 card-body">
                       <div class="row mx-0 mb-3">
-                        <p class="card-text col-md-12 header__cart-title">Tên sản phẩm</p>
+                        <p class="card-text col-md-12">Tên sản phẩm</p>
                       </div>
                       <div class="row mb-3 mx-0">
                         <div class="col-md-8">
-                          <p class="card-text"><small class="text-body-secondary">Màu/Size</small>
-                          </p>
+                          <p class="card-text"><small class="text-body-secondary">Màu/Size</small></p>
+                        </div>
+                        <div class="col-md-2 header__cart-quantity"> 1 </div>
+                      </div>
+                      <div class="row justify-content-end mx-0">
+                        <p class="card-text col-md-6">500.000đ</p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="row g-0 border">
+                    <div class="col-md-4">
+                      <img src="./img/shoeimg.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8 card-body">
+                      <div class="row mx-0 mb-3">
+                        <p class="card-text col-md-12">Tên sản phẩm</p>
+                      </div>
+                      <div class="row mb-3 mx-0">
+                        <div class="col-md-8">
+                          <p class="card-text"><small class="text-body-secondary">Màu/Size</small></p>
                         </div>
                         <div class="col-md-2 header__cart-quantity"> 1 </div>
                       </div>
@@ -139,39 +154,19 @@
                         <p class="card-text col-md-6">500.000đ</p>
                       </div>
                     </div>
-                  </a>
-                  <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item"
-                    href="./detail-item.html">
-                    <div class="col-md-4">
-                      <img src="./assets/img/shoe/shoename/shoeimg.png" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8 card-body">
-                      <div class="row mx-0 mb-3">
-                        <p class="card-text col-md-12 header__cart-title">Tên sản phẩm</p>
-                      </div>
-                      <div class="row mb-3 mx-0">
-                        <div class="col-md-8">
-                          <p class="card-text"><small class="text-body-secondary">Màu/Size</small>
-                          </p>
-                        </div>
-                        <div class="col-md-2 header__cart-quantity"> 1 </div>
-                      </div>
-                      <div class="row justify-content-end mx-0">
-                        <p class="card-text col-md-6">500.000đ</p>
-                      </div>
-                    </div>
-                  </a>
+                  </div>
                 </div>
                 <div class="row justify-content-end mx-0 my-2">
                   <p class="card-text text-danger col-md-4">1.000.000đ</p>
                 </div>
                 <div class="d-grid col-10 mx-auto">
-                  <button onclick="location.href='./cart.html'" class="btn btn-dark" type="button">Xem giỏ hàng</button>
+                  <button class="btn btn-dark" type="button">Xem giỏ hàng</button>
                 </div>
+
               </div>
             </li>
             <li class="nav-item me-lg-0 dropdown">
-              <a class="nav-link p-0 ms-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+              <a class="nav-link p-0 mx-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
                   class="bi bi-bell fs-3"></i></a>
               <div class="header__notification-dropdown dropdown-menu dropdown-menu-end">
                 <p class="text-center mb-0">THÔNG BÁO</p>
@@ -187,131 +182,121 @@
                   </div>
                 </div>
                 <div class="d-grid col-10 mx-auto">
-                  <button onclick="url.href='./account-notifi.html'" class="btn btn-dark" type="button">Xem tất
-                    cả</button>
+                  <button class="btn btn-dark" type="button">Xem tất cả</button>
                 </div>
               </div>
             </li>
           </ul>
+
         </div>
       </div>
     </nav>
   </div>
+  <div class="detail-page__container">
 
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb px-5 py-2 bg-light fs-6">
-      <li class="breadcrumb-item"><a class="text-black link-underline link-underline-opacity-0 breadcrumb__item"
-          href="./index.html">Trang chủ</a></li>
-      <li class="breadcrumb-item"><a class="text-black link-underline link-underline-opacity-0 breadcrumb__item"
-          href="#">Tên danh mục</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Tên sản phẩm</li>
-    </ol>
-  </nav>
+    <!-- Left Column / Headphones Image -->
+    <div class="detail-page__left-column">
 
-  <div class="detail_page__body">
-    <img class="detail_page__main-image" src="./assets/img/shoe/shoename2/af1_w_1.jpg" />
-    <div class="detail_page__frame">
-      <div class="detail_page__overlap-group">
-        <div class="text-wrapper">Tên sản phẩm</div>
-        <p class="element"><span class="span">10,000,000 </span> <span class="text-wrapper-2">đ</span></p>
-        <img class="image-1" src="./assets/img/shoe/shoename2/shoecolor/small_af1_b.png" />
-        <img class="image-2" src="./assets/img/shoe/shoename2/shoecolor/small_af1_w.png" />
-      </div>
-      <div class="text-wrapper-3">Chọn kích cỡ</div>
-      <div class="text-wrapper-4">
-        <div class="div-wrapper">
-          40</div>
-        <div class="element-wrapper">
-          41</div>
-        <div class="frame-2">
-          42</div>
-        <div class="frame-3">
-          43</div>
-        <div class="frame-4">
-          44
-        </div>
-      </div>
-      <div class="frame-5">
-        <button class="text-wrapper-5" data-bs-toggle="modal" data-bs-target="#item-added">
-          Thêm sản phẩm vào giỏ hàng
-          </button>
-      </div>
+      <img data-image="black" src="img/af1_b_1.jpg" alt="">
+      <img data-image="white" class="active" src="img/af1_w_1.jpg" alt="">
     </div>
 
-    <div class="modal fade" id="item-added" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+
+    <!-- Right Column -->
+    <div class="detail-page__right-column">
+
+      <!-- Product Description -->
+      <div class="detail-page__product-description">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb px py bg-light fs-8">
+            <li class="breadcrumb-item"><a class="text-black link-underline link-underline-opacity-0 breadcrumb__item"
+                href="./index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a class="text-black link-underline link-underline-opacity-0 breadcrumb__item"
+                href="#">Tên danh mục</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tên sản phẩm</li>
+          </ol>
+        </nav>
+        <h1>Tên sản phẩm</h1>
+        <p>10,000,00 <span>đ</span></p>
+        <p1>Tình trạng: <p1 style="color: blue;"> Còn hàng</p1>
+        </p1>
+      </div>
+
+      <!-- Product Configuration -->
+      <div class="detail-page__product-configuration">
+        <!-- Product Color -->
+        <div class="detail-page__product-color">
+
+          <div class="detail-page__color-choose">
+            <div>
+              <input data-image="white" type="image" src="img/small_af1_w.jpg" checked>
+              <span><span></span></span>
+            </div>
+            <div>
+              <input data-image="black" type="image" src="img/small_af1_b.jpg">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Cable Configuration -->
+        <div class="detail-page__size-config">
+          <span>Chọn Kích Cỡ</span>
+
+          <div class="detail-page__size-choose">
+            <button>40</button>
+            <button>41</button>
+            <button>42</button>
+            <button>43</button>
+            <button>44</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Trigger/Open The Modal -->
+      <div class="detail-page__item-config">
+        <button id="item-btn">Thêm sản phẩm vào giỏ hàng</button>
+      </div>
+
+      <div class="detail-page__detail-description">
+        <h1>
+          Chi tiết sản phẩm
+        </h1>
+        <p>Kiểu giày FN0344-901</p>
+        <p>Giá bán 10,000,000đ</p>
+        <p>Ngày ra mắt 23/09/2023</p>
+        <p>Phụ kiện đi kèm SMILEY FACE HANGTAG</p>
+      </div>
+
+
+      <div id="item-modal" class="modal">
         <div class="modal-content">
-          <div class="modal-header">
-            <div class="row">
-              <div class="col-sm-2">
-                <img src="./assets/img/verified.png" class="img-fluid" alt="">
-              </div>
-              <div class="col-10">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Sản phẩm đã được thêm</h1>
-              </div>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <span>
+            <svg viewBox="0 0 20 9" role="presentation" class>
+              <path
+                d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z"
+                fill="#fffff" class=""></path>
+            </svg>
+          </span>
+          <div class="row">
+            <h1>Giỏ hàng</h1>
           </div>
-          <div class="modal-body">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <img src="./assets/img/shoe/shoename2/af1_w_1.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="col ">
-                  <div class="row-md">
-                    <h2>Tên sản phẩm</h2>
-                  </div>
-                  <div class="row-4">
-                    10,000,000 đ
-                  </div>
-                  <div class="row-4">
-                    Cỡ giày : 40
-                  </div>
-                </div>
-              </div>
+          <div class="row">
+            Item
+          </div>
+          <div class="row">
+            <div class="detail-page__check_item_list">
+              Xem giỏ hàng
             </div>
           </div>
-          <div class="modal-footer">
-            <div class="container ">
-              <div class="row">
-                <div class="col">
-                  <button type="button" class="modal-footer__text-wrapper-1">Xem giỏ hàng</button>
-                </div>
-                <div class="col">
-                  <button type="button" class="modal-footer__text-wrapper">Thanh toán</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
-    <p class="description">
-      <span class="text-wrapper-6">Chi tiết sản phẩm<br /></span>
-      <span class="text-wrapper-7"><br /></span>
-      <span class="text-wrapper-8">Kiểu
-        giày&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="text-wrapper-9">FN0344-901<br /></span>
-      <span class="text-wrapper-8">Giá
-        bán&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="text-wrapper-9">10,000,000 </span>
-      <span class="text-wrapper-10">đ<br /></span>
-      <span class="text-wrapper-8">Ngày ra
-        mắt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="text-wrapper-9">09/23/2023<br /></span>
-      <span class="text-wrapper-8">Phụ kiện đi
-        kèm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="text-wrapper-9">SMILEY FACE HANGTAG</span>
-    </p>
-    <div class="text-wrapper-11">Mô tả sản phẩm</div>
+
   </div>
-
-
-
-  <div class="container-fluid footer border border-1">
-    <div class="row justify-content-md-center mt-4">
+  <div class="footer">
+    <div class="row justify-content-center mt-2">
       <div class="col-md-5">
         <h5 class="fw-bold">Liên hệ</h5>
         <ul>
@@ -323,27 +308,28 @@
             <a class="footer__contact" href="">tiennguyen2283@gmail.com</a>
           </li>
         </ul>
+
       </div>
       <div class="col-md-5">
         <h5 class="fw-bold">Theo dõi chúng tôi tại</h5>
         <ul class="list-group list-group-horizontal">
           <li class="list-group-item border-0 py-0 ps-0">
-            <a class="footer__another-app" href="#">
+            <a class="header__another-app" href="#">
               <i class="fs-2 bi bi-instagram"></i>
             </a>
           </li>
           <li class="list-group-item border-0 py-0 ps-0">
-            <a class="footer__another-app" href="#">
+            <a class="header__another-app" href="#">
               <i class="fs-2 bi bi-facebook"></i>
             </a>
           </li>
           <li class="list-group-item border-0 py-0 ps-0">
-            <a class="footer__another-app" href="#">
+            <a class="header__another-app" href="#">
               <i class="fs-2 bi bi-twitter"></i>
             </a>
           </li>
           <li class="list-group-item border-0 py-0 ps-0">
-            <a class="footer__another-app" href="#">
+            <a class="header__another-app" href="#">
               <i class="fs-2 bi bi-youtube"></i>
             </a>
           </li>
@@ -351,12 +337,9 @@
       </div>
     </div>
   </div>
-
-
-  <script src="../js/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+  <script src="script.js" charset="utf-8"></script>
 </body>
 
 </html>
