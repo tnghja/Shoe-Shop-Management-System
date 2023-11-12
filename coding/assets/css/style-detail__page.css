@@ -1,27 +1,27 @@
+
 .modal{
-    display: none; /* Hidden by default */
-      position:absolute; /* Stay in place */ 
-      width: 100; /* Full width */
-      height: 100; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgba(255, 255, 255, ); /* Black w/ opacity */
+    display: none;
+      position:absolute;
+      width: 100%; 
+      height: 100%;
+      background-color: rgba(255, 255, 255, );
   }
   .modal-content{
       background-color: #fefefe;
-      top: 60px; /* 15% from the top and centered */
-      left: 1200px;
+      top: 11%; 
+      left:  77.1%;
       padding: 20px;
       border: 1px solid #888;
-      width: 300px;
-      height: 400px; /* Could be more or less, depending on screen size */
+      width: 22%;
+      height: 65%; 
       align-items: center;
     
   }
   .modal-content svg{
     width: 20px;
-    height: 10px;
-    margin-left: 160px;
-    margin-top: -80px;
+    height: 150%;
+    margin-left: 400%;
+    margin-top: -400%;
     border: #000000;
   }
   .modal-content .detail-page__check_item_list{
