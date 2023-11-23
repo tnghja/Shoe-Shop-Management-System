@@ -2,4 +2,5 @@
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB_NAME", "shoe_shop");
+define("DB_NAME", "shoe");
+// session_start();
