@@ -26,50 +26,50 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav w-50 ms-5 mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="p-0 me-5 nav-link active" aria-current="page" href="./index.html">TRANG CHỦ</a>
+                                <a class="p-0 me-5 nav-link active" aria-current="page" href="../app/index.php">TRANG CHỦ</a>
                             </li>
                             <li class="header__dropdown-menu-item nav-item dropdown">
                                 <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false"> NAM </a>
                                 <ul class="dropdown-menu border-0 pb-0">
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                                    <?php
+$categories = $category_model->get_category_by_object("Nam");
+foreach ($categories as $category) {?>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <?php }?>
                                 </ul>
                             </li>
                             <li class="header__dropdown-menu-item nav-item dropdown">
                                 <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false"> NỮ </a>
                                 <ul class="dropdown-menu border-0 pb-0">
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                                    <?php
+$categories = $category_model->get_category_by_object("Nữ");
+foreach ($categories as $category) {?>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <?php }?>
                                 </ul>
                             </li>
                             <li class="header__dropdown-menu-item nav-item dropdown">
                                 <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false"> BÉ TRAI </a>
                                 <ul class="dropdown-menu border-0 pb-0">
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                                    <?php
+$categories = $category_model->get_category_by_object("Bé Trai");
+foreach ($categories as $category) {?>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <?php }?>
                                 </ul>
                             </li>
                             <li class="header__dropdown-menu-item nav-item dropdown">
                                 <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false"> BÉ GÁI </a>
                                 <ul class="dropdown-menu border-0 pb-0">
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                    <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                                    <?php
+$categories = $category_model->get_category_by_object("Bé Gái");
+foreach ($categories as $category) {?>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <?php }?>
                                 </ul>
                             </li>
                         </ul>
@@ -82,7 +82,7 @@
                             <li class="nav-item me-lg-0 dropdown">
                                 <a class="nav-link p-0 ms-3" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false"><i class="bi bi-person fs-3"></i></a>
-                                <div class="header__user-dropdown dropdown-menu dropdown-menu-end">
+                                <!-- <div class="header__user-dropdown dropdown-menu dropdown-menu-end">
                                                 <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
                                                 <hr class="hr hr-blurry w-75 my-2 mx-auto" />
                                                 <p class="ms-2 mb-1">Tên User</p>
@@ -93,17 +93,17 @@
                                                     <li><a href="">Đăng xuất</a>
                                                     </li>
                                                 </ul>
-                                            </div>
-                                <!-- <div class="header__login-dropdown dropdown-menu dropdown-menu-end">
+                                            </div> -->
+                                <div class="header__login-dropdown dropdown-menu dropdown-menu-end">
                                     <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
                                     <hr class="hr hr-blurry w-75 my-2 mx-auto" />
                                     <div class="d-grid gap-2 col-10 mx-auto">
-                                        <button onclick="location.href='./login.html'" class="btn btn-primary"
+                                        <button onclick="location.href='../view/login.php'" class="btn btn-primary"
                                             type="button">Đăng nhập</button>
-                                        <button onclick="location.href='./signup.html'" class="btn btn-success"
+                                        <button onclick="location.href='../view/signup.php'" class="btn btn-success"
                                             type="button">Đăng ký</button>
                                     </div>
-                                </div> -->
+                                </div>
                             </li>
                             <li class="nav-item me-lg-0 dropdown">
                                 <a class="nav-link p-0 ms-3" href="#" role="button" data-bs-toggle="dropdown"
@@ -115,7 +115,7 @@
                                         <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item"
                                             href="./detail-item.html">
                                             <div class="col-md-4">
-                                                <img src="./assets/img/shoe/shoename/shoeimg.png"
+                                                <img src="../view/assets/img/shoe/shoename/shoeimg.png"
                                                     class="img-fluid rounded-start" alt="...">
                                             </div>
                                             <div class="col-md-8 card-body">
@@ -137,7 +137,7 @@
                                         <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item"
                                             href="./detail-item.html">
                                             <div class="col-md-4">
-                                                <img src="./assets/img/shoe/shoename/shoeimg.png"
+                                                <img src="../view/assets/img/shoe/shoename/shoeimg.png"
                                                     class="img-fluid rounded-start" alt="...">
                                             </div>
                                             <div class="col-md-8 card-body">

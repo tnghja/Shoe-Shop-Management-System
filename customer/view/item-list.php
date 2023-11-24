@@ -83,97 +83,17 @@
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-5 g-4 mt-5">
+                <?php foreach ($product_list as $product) {?>
                 <a class="item-list__card-link px-3 link-underline link-underline-opacity-0"  href="./detail-item.html">
                     <div class="item-list__card card col p-0 h-100 rounded-0">
-                            <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Tên sản phẩm</h5>
-                                <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
                         <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
+                            <h5 class="card-title"><?php echo $product->getName(); ?></h5>
+                            <p class="card-text"><?php echo $product->getPrice(); ?>đ</p>
                         </div>
                     </div>
                 </a>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0" href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tên sản phẩm</h5>
-                            <p class="card-text">500.000đ</p>
-                        </div>
-                    </div>
-                </a>
+                <?php }?>
             </div>
             <div class="d-flex justify-content-center my-5">
                 <button type="button" class="item-list__view-more-btn btn btn-primary ">Xem thêm</button>
