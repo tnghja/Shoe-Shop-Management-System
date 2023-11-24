@@ -7,18 +7,12 @@
                         aria-expanded="false"> Màu sắc </button>
                     <div class="dropdown-menu">
                         <div class="d-flex flex-row">
-                            <a href="#" class="rounded-circle bg-success item-list__filter mx-1 border border-1 text-center">
+                            <?php foreach ($color_list as $color) {?>
+                            <a href="#" class="item-list__filter mx-1 text-center">
+                                <img src="<?php echo $color->getColorImg(); ?>" class="w-100 h-100 img-fluid rounded-circle border border-1" alt="...">
                                 <!-- <i class="bi bi-check-lg text-white"></i> -->
                             </a>
-                            <a href="#" class="rounded-circle bg-warning item-list__filter mx-1 border border-1"></a>
-                            <a class="rounded-circle bg-danger item-list__filter mx-1 border border-1" href="#"></a>
-                            <a class="rounded-circle bg-primary item-list__filter mx-1 border border-1" href="#"></a>
-                            <a class="rounded-circle bg-black item-list__filter mx-1 border border-1" href="#"></a>
-                            <a class="rounded-circle bg-secondary item-list__filter mx-1 border border-1" href="#"></a>
-                            <a class="rounded-circle bg-white item-list__filter mx-1 border border-1" href="#"></a>
-                            <a class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1" href="#"></a>
-                            <a class="rounded-circle bg-danger-subtle item-list__filter mx-1 border border-1" href="#"></a>
-                            <a class="rounded-circle bg-info item-list__filter mx-1 border border-1" href="#"></a>
+                            <?php }?>
                         </div>
                     </div>
                 </div>
@@ -28,31 +22,11 @@
                         aria-expanded="false"> Kích thước </button>
                     <div class="dropdown-menu">
                         <div class="d-flex flex-row">
+                            <?php foreach ($size_list as $size) {?>
                             <a href="#" class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
-                                24
+                                <?php echo $size->getSizeName(); ?>
                             </a>
-                            <a href="#"
-                                class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
-                                25
-                            </a>
-                            <a href="#"
-                                class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
-                                26 </a>
-                            <a href="#"
-                                class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
-                                27 </a>
-                                <a href="#"
-                                    class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
-                                    28 </a>
-                                <a href="#"
-                                    class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
-                                    29 </a>
-                                <a href="#"
-                                    class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
-                                    30 </a>
-                                <a href="#"
-                                    class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
-                                    31 </a>
+                            <?php }?>
                         </div>
                     </div>
                 </div>

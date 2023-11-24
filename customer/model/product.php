@@ -5,6 +5,7 @@ class Product
     private $name;
     private $price;
     private $description;
+
     // private $category_id;
 
     public function __construct($id, $name, $price, $description)

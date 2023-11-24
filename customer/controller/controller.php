@@ -18,7 +18,13 @@ class Controller
     public function controlContent()
     {
         if (isset($_GET["item_list"])) {
+            include_once "../model/color_model.php";
+            include_once "../model/size_model.php";
             include_once "../model/product_model.php";
+            $color_model = new Color_Model();
+            $color_list = $color_model->get_color_list();
+            $size_model = new Size_Model();
+            $size_list = $size_model->get_size_list();
             $product_model = new Product_Model();
             $product_list = $product_model->get_product_list($_GET['category_id']);
             include_once "../view/item-list.php";
