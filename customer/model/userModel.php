@@ -1,5 +1,5 @@
 <?php
-//      include("../lib/database.php");
+      include("../lib/database.php");
 
 class UserModel extends Database
 {

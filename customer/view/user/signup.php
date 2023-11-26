@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
 $username = isset($_SESSION['signup-data']['username']) ? $_SESSION['signup-data']['username'] : null;
 $email = isset($_SESSION['signup-data']['email']) ? $_SESSION['signup-data']['email'] : null;
