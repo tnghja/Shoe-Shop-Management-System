@@ -98,7 +98,7 @@
                                     <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
                                     <hr class="hr hr-blurry w-75 my-2 mx-auto" />
                                     <div class="d-grid gap-2 col-10 mx-auto">
-                                        <button onclick="location.href='?controller=user&&action=login'" class="btn btn-primary"
+                                        <button onclick="location.href='?controller=user&&action=signin'" class="btn btn-primary"
                                             type="button">Đăng nhập</button>
                                         <button onclick="location.href='?controller=user&&action=signup'" class="btn btn-success"
                                             type="button">Đăng ký</button>

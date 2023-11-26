@@ -19,9 +19,9 @@ class User
                         $this->signup();
                         break;
                     }
-                case "login": {
+                case "signin": {
                         //  include('../view/user/header.php');
-                        include('../view/user/login.php');
+
                         $this->signin();
                         break;
                     }
@@ -82,7 +82,7 @@ class User
     public function signin()
     {
 
-
+        include_once('../view/user/login.php');
         if (isset($_POST['signin'])) {
             $userModel = new UserModel();
             $username_email = filter_var($_POST['username_email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -109,7 +109,7 @@ class User
                                
                     header('Location: '. ROOT_URL . '/admin'); 
                     */
-                        header("location:" . '.');
+                        header('Location: ' . '.');
                         return;
                     } else {
                         $error = "Mật khẩu không chính xác";

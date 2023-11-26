@@ -9,19 +9,17 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../view/assets/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="../view/assets/css/authen.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <title>Login or Signup</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../view/assets/css/authen.css">
 </head>
 
 
 <body>
-    <div class="main d-flex justify-content-center">
+    <div class="main" id="main">
         <!-- Sing in  Form -->
         <section class="sign-in">
             <div class="container">
@@ -69,11 +67,13 @@ session_start();
         </section>
 
     </div>
-
+    <?php
+    
+    ?>
     <script src="../view/assets/js/main.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script> 
     <!-- JS -->
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
