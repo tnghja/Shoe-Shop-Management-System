@@ -23,4 +23,17 @@ class Color_Model
         }
         return $color_list;
     }
+
+    public function get_color_name_by_ids($ids)
+    {
+        $query = "SELECT `color_name` FROM `color` WHERE `id` in ($ids);";
+        $result = $this->database->select($query);
+        $color_table = $result->fetch_all(MYSQLI_ASSOC);
+        $color_list = array();
+        foreach ($color_table as $row) {
+            array_push($color_list, $row['color_name']);
+        }
+        return $color_list;
+
+    }
 }

@@ -435,3 +435,7 @@ a {
     width: 30px;
 }
 
+/* homepage */
+.homepage img{
+    height: 60vw;
+}
