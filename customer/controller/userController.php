@@ -15,15 +15,19 @@ class User
             switch ($action) {
                 case "signup": {
 
-                        include('../view/user/signup.php');
+
                         $this->signup();
                         break;
                     }
                 case "signin": {
                         //  include('../view/user/header.php');
-
-                        $this->signin();
-                        break;
+                        if (!isset($_COOKIE['Cookieid'])) {
+                            $this->signin();
+                            break;
+                        }
+                        else {
+                            header("location:" .'.');
+                        }
                     }
             }
         }
@@ -40,6 +44,7 @@ class User
 
     public function signup()
     {
+        include('../view/user/signup.php');
         if (isset($_POST['signup'])) {
             $userModel = new UserModel();
             $username = filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -83,6 +88,7 @@ class User
     {
 
         include_once('../view/user/login.php');
+
         if (isset($_POST['signin'])) {
             $userModel = new UserModel();
             $username_email = filter_var($_POST['username_email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -109,8 +115,11 @@ class User
                                
                     header('Location: '. ROOT_URL . '/admin'); 
                     */
-                        header('Location: ' . '.');
-                        return;
+                        if ($user_record['role'] == '1') {
+                            $_SESSION['user_is_admin'] = true;
+                            header('Location: ' . 'view/detail-item.php');
+                            return;
+                        }
                     } else {
                         $error = "Mật khẩu không chính xác";
                     }
@@ -129,5 +138,10 @@ class User
                 die();
             }
         }
+    }
+
+    public function logout(){
+        unset($_SESSION['user-id']);
+        setcookie('Cookieid','-1', time() - 86400*30,'/');
     }
 }
