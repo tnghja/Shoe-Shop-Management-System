@@ -26,8 +26,5 @@ class Category
     {
         return $this->object;
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> dev-authen

@@ -25,8 +25,6 @@ class Color
     {
         return $this->color_img;
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> dev-authen
+

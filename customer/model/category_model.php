@@ -23,8 +23,5 @@ class Category_Model
         }
         return $category_list;
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> dev-authen

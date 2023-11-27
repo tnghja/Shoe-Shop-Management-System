@@ -23,8 +23,6 @@ class Product_Model
         }
         return $product_list;
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> dev-authen
+

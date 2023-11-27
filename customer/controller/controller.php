@@ -4,6 +4,7 @@ class Controller
     public function invoke()
     {
         if (isset($_GET["controller"])) {
+            
             $action = $_GET["action"];
             $controller = $_GET['controller'];
             

@@ -23,8 +23,5 @@ class Color_Model
         }
         return $color_list;
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> dev-authen

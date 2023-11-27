@@ -19,8 +19,6 @@ class Size
     {
         return $this->size_name;
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> dev-authen
+

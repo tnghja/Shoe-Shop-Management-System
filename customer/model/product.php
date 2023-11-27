@@ -37,8 +37,5 @@ class Product
     // {
     //     return $this->category_id;
     // }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> dev-authen
