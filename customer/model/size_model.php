@@ -23,4 +23,8 @@ class Size_Model
         }
         return $size_list;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev-authen
