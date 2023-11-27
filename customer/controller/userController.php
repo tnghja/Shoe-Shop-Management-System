@@ -14,8 +14,6 @@ class User
             $action = $_GET['action'];
             switch ($action) {
                 case "signup": {
-
-
                         $this->signup();
                         break;
                     }
@@ -24,11 +22,19 @@ class User
                         if (!isset($_COOKIE['Cookieid'])) {
                             $this->signin();
                             break;
-                        }
-                        else {
-                            header("location:" .'.');
+                        } else {
+                            header("location:" . '.');
                         }
                     }
+                case 'logout': {
+                        echo "123";
+                        $this->logout();
+                        break;
+                    }
+                default : {
+                    header("location:" . '.');
+                    break;
+                }
             }
         }
 
@@ -140,8 +146,17 @@ class User
         }
     }
 
-    public function logout(){
-        unset($_SESSION['user-id']);
-        setcookie('Cookieid','-1', time() - 86400*30,'/');
+    public function logout()
+    {
+        if (isset($_SESSION['user-id'])) {
+            var_dump($_SESSION['user-id']);
+            unset($_SESSION['user-id']);
+        } else {
+            echo "WTF";
+        }
+        setcookie('Cookieid', '-1', time() - 86400 * 30, '/');
+        setcookie('PHPSESSID', '-1', time() - 86400 * 30, '/'); // hơi dơ =))
+        include_once "../view/homepage.php";
+        header("location:" . './index.php');
     }
 }

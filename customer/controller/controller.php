@@ -4,19 +4,21 @@ class Controller
     public function invoke()
     {
         if (isset($_GET["controller"])) {
-            
             $action = $_GET["action"];
             $controller = $_GET['controller'];
-            
-            require('../controller/' . $controller . 'Controller.php'); 
-            $controller = ucfirst($controller); 
+            require('../controller/' . $controller . 'Controller.php');
+            $controller = ucfirst($controller);
             $request = new $controller;
+        }
+        else if (isset($_GET['action'])) {
+            $action = $_GET["action"];
+            require('../controller/accountController.php');
+            
+            $request = new Account;
             
         } else {
             session_start();
             $this->controlHeader();
-            $this->controlContent();
-            $this->controlFooter();
         }
     }
 
