@@ -7,8 +7,15 @@
                         aria-expanded="false"> Màu sắc </button>
                     <div class="dropdown-menu">
                         <div class="d-flex flex-row">
-                            <?php foreach ($color_list as $color) {?>
-                            <a href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor . $color->getId(); ?>" class="item-list__filter mx-1 text-center">
+                            <?php foreach ($color_list as $color) {
+    $onclick = true;
+    $disable = '';
+    if ($color->getColorState()) {
+        $onclick = false;
+        $disable = 'disabled';
+    }
+    ?>
+                            <a aria-disabled=<?php echo $onclick; ?> href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor . $color->getId() . ','; ?>&&size=<?php echo $filteredSize; ?>&&price=<?php echo $price; ?>" class="item-list__filter mx-1 text-center <?php echo $disable ?>">
                                 <img src="<?php echo $color->getColorImg(); ?>" class="w-100 h-100 img-fluid rounded-circle border border-1" alt="...">
                                 <!-- <i class="bi bi-check-lg text-white"></i> -->
                             </a>
@@ -22,8 +29,15 @@
                         aria-expanded="false"> Kích thước </button>
                     <div class="dropdown-menu">
                         <div class="d-flex flex-row">
-                            <?php foreach ($size_list as $size) {?>
-                            <a href="#" class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none">
+                            <?php foreach ($size_list as $size) {
+    $onclick = true;
+    $disable = '';
+    if ($size->getSizeState()) {
+        $onclick = false;
+        $disable = 'disabled';
+    }
+    ?>
+                            <a <?php echo $disable ?> aria-disabled=<?php echo $onclick; ?> href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $filteredSize . $size->getId() . ','; ?>&&price=<?php echo $price; ?>" class="rounded-circle bg-secondary-subtle item-list__filter mx-1 border border-1 text-center text-black text-decoration-none <?php echo $disable ?>">
                                 <?php echo $size->getSizeName(); ?>
                             </a>
                             <?php }?>
@@ -37,9 +51,9 @@
                     <div class="dropdown-menu item-list__filter-price">
                         <div class="mx-3">
                             <label for="customRange3" class="form-label w-100">
-                                <p class="text-center m-0">Giá từ: 0 đ - 2.000.000 đ</p>
+                                <p class="text-center m-0">Giá từ: 0 đ - <span id="choice_price">2000000</span> đ</p>
                             </label>
-                            <input type="range" class="form-range" min="0" max="2000000" step="50000" id="customRange3">
+                            <input onmouseup="getPrice('../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $filteredSize; ?>&&price=')" type="range" class="form-range" min="0" max="2000000" step="50000" id="customRange3" value="0">
                         </div>
                     </div>
                 </div>
@@ -59,7 +73,13 @@
 
             <div class="mt-3">
                 <?php foreach ($filteredColor_list as $color) {?>
-                    <button class="btn border border-primary"><?php echo $color; ?><i class="p-1 bi bi-x-circle text-primary"></i></button>
+                    <a href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $color_model->remove_color($_GET['color'], $color->getId()); ?>&&size=<?php echo $filteredSize; ?>&&price=<?php echo $price; ?>" class="btn border border-primary filter-btn"><?php echo $color->getColorName(); ?><i class="p-1 bi bi-x-circle text-primary"></i></a>
+                <?php }?>
+                <?php foreach ($filteredSize_list as $size) {?>
+                    <a href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $size_model->remove_size($_GET['size'], $size->getId()); ?>&&price=<?php echo $price; ?>" class="btn border border-primary filter-btn"><?php echo $size->getSizeName(); ?><i class="p-1 bi bi-x-circle text-primary"></i></a>
+                <?php }?>
+                <?php if ($price != '') {?>
+                    <a href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $filteredSize; ?>&&price=" class="btn border border-primary filter-btn"><<?php echo $price; ?> đ<i class="p-1 bi bi-x-circle text-primary"></i></a>
                 <?php }?>
             </div>
 

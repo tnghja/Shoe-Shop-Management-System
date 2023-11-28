@@ -19,11 +19,9 @@ class Controller
     {
         include_once "../model/color_model.php";
         $color_model = new Color_Model();
-        $color_list = $color_model->get_color_list();
 
         include_once "../model/size_model.php";
         $size_model = new Size_Model();
-        $size_list = $size_model->get_size_list();
 
         include_once "../model/product_model.php";
         $product_model = new Product_Model();
@@ -33,11 +31,32 @@ class Controller
         $productColor_model = new ProductColor_Model();
 
         $filteredColor_list = array();
+        $filteredColor = "";
         if (isset($_GET["color"])) {
-            $filteredColor_list = $color_model->get_color_name_by_ids($_GET["color"]);
-            $filteredColor = $_GET["color"] . ',';
+            $color_list = $color_model->get_color_list($_GET["color"]);
+            $filteredColor_list = $color_model->get_color_list_by_ids($color_list);
+            if ($_GET["color"] != '') {
+                $filteredColor = $_GET["color"];
+            }
         } else {
-            $filteredColor = "";
+            $color_list = $color_model->get_color_list('');
+        }
+
+        $filteredSize_list = array();
+        $filteredSize = "";
+        if (isset($_GET["size"])) {
+            $size_list = $size_model->get_size_list($_GET["size"]);
+            $filteredSize_list = $size_model->get_size_list_by_ids($size_list);
+            if ($_GET["size"] != '') {
+                $filteredSize = $_GET["size"];
+            }
+        } else {
+            $size_list = $size_model->get_size_list('');
+        }
+
+        $price = '';
+        if (isset($_GET['price'])) {
+            $price = $_GET['price'];
         }
 
         include_once "../view/item-list.php";

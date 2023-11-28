@@ -102,6 +102,11 @@
     opacity: 0.5;
 }
 
+.disabled{
+    opacity: 0.5;
+    cursor: default;
+}
+
 .item-list__filter-price {
     width: 250px !important;
 }
