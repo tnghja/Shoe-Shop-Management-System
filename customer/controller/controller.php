@@ -25,10 +25,6 @@ class Controller
 
         include_once "../model/product_model.php";
         $product_model = new Product_Model();
-        $product_list = $product_model->get_product_list($_GET['category_id']);
-
-        include_once "../model/productColor_model.php";
-        $productColor_model = new ProductColor_Model();
 
         $filteredColor_list = array();
         $filteredColor = "";
@@ -58,6 +54,8 @@ class Controller
         if (isset($_GET['price'])) {
             $price = $_GET['price'];
         }
+
+        $product_list = $product_model->filter_product_list($filteredColor, $filteredSize, $price, $_GET['category_id']);
 
         include_once "../view/item-list.php";
     }

@@ -35,7 +35,7 @@
                                     <?php
 $categories = $category_model->get_category_by_object("Nam");
 foreach ($categories as $category) {?>
-                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id'] ?>"><?php echo $category['category_name']; ?></a></li>
                                     <?php }?>
                                 </ul>
                             </li>
@@ -46,7 +46,7 @@ foreach ($categories as $category) {?>
                                     <?php
 $categories = $category_model->get_category_by_object("Nữ");
 foreach ($categories as $category) {?>
-                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                     <?php }?>
                                 </ul>
                             </li>
@@ -57,7 +57,7 @@ foreach ($categories as $category) {?>
                                     <?php
 $categories = $category_model->get_category_by_object("Bé Trai");
 foreach ($categories as $category) {?>
-                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                     <?php }?>
                                 </ul>
                             </li>
@@ -68,7 +68,7 @@ foreach ($categories as $category) {?>
                                     <?php
 $categories = $category_model->get_category_by_object("Bé Gái");
 foreach ($categories as $category) {?>
-                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                     <?php }?>
                                 </ul>
                             </li>

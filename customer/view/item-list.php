@@ -84,16 +84,20 @@
             </div>
 
             <div class="row row-cols-1 row-cols-md-5 g-4 mt-5">
-                <?php foreach ($product_list as $product) {?>
-                <a class="item-list__card-link px-3 link-underline link-underline-opacity-0"  href="./detail-item.html">
-                    <div class="item-list__card card col p-0 h-100 rounded-0">
-                        <img src="<?php echo $productColor_model->get_first_product_img($product->getId()); ?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $product->getName(); ?></h5>
-                            <p class="card-text"><?php echo $product->getPrice(); ?>đ</p>
+                <?php if ($product_list) {
+    foreach ($product_list as $product) {?>
+                    <a class="item-list__card-link px-3 link-underline link-underline-opacity-0"  href="./detail-item.html">
+                        <div class="item-list__card card col p-0 h-100 rounded-0">
+                            <img src="<?php echo $product['avatar']; ?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $product['product_name']; ?></h5>
+                                <p class="card-text"><?php echo $product['price']; ?>đ</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                    <?php }
+} else {?>
+                    <div>Không tìm thấy kết quả phù hợp</div>
                 <?php }?>
             </div>
             <div class="d-flex justify-content-center my-5">
