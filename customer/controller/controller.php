@@ -17,7 +17,7 @@ class Controller
     public function controlHeader()
     {
         $category_model = new Category_Model();
-        include_once "../view/header.php";
+        include_once "../view/partials/header.php";
     }
 
     public function control_item_list()
@@ -86,7 +86,8 @@ class Controller
             }
         }
 
-        include_once "../view/item-list.php";
+        include_once "../view/layouts/product/item-list.php";
+
     }
 
     public function control_detail_item()
@@ -114,10 +115,8 @@ class Controller
         }
         $quantity = $product_model->get_quantity($product_id, $color_id, $size_id);
 
-        include_once "../view/breadcrumb.php";
-
-        include_once "../view/detail-item.php";
-
+        include_once "../view/layouts/product/breadcrumb.php";
+        include_once "../view/layouts/product/detail-item.php";
     }
 
     public function controlContent()
@@ -127,12 +126,12 @@ class Controller
         } else if (isset($_GET["detail_item"])) {
             $this->control_detail_item();
         } else {
-            include_once "../view/homepage.php";
+            include_once "../view//layouts/homepage.php";
         }
     }
 
     public function controlFooter()
     {
-        include_once "../view/footer.php";
+        include_once "../view//partials/footer.php";
     }
 }
