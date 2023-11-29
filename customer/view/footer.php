@@ -1,4 +1,4 @@
-<div class="container-fluid footer border border-1">
+<div class="container-fluid footer border border-1 mt-5">
             <div class="row justify-content-md-center mt-4">
                 <div class="col-md-5">
                     <h5 class="fw-bold">Liên hệ</h5>

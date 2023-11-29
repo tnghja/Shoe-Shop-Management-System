@@ -1,7 +1,12 @@
     <div class="container-fluid p-0">
         <div class="mx-5">
-            <h2 class="text-center my-4"> Tên danh mục </h2>
-            <div class="">
+            <h2 class="text-center my-4"> <?php if ($search != '') {
+    echo 'Kết quả tìm kiếm cho "' . $search . '"';} else {echo $category['category_name'] . '-' . $category['object'];}?> </h2>
+            <div class="<?php if ($search != '') {
+    echo 'hide';
+}
+?>">
+                <div class="">
                 <div class="btn-group">
                     <button class="btn btn-light dropdown-toggle border border-1" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Màu sắc </button>
@@ -62,11 +67,10 @@
                     <button class="btn btn-light dropdown-toggle border border-1" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false"> Sắp xếp theo </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Giá: Tăng dần</a></li>
-                        <li><a class="dropdown-item" href="#">Giá: Giảm dần</a></li>
-                        <li><a class="dropdown-item" href="#">Tên: A-Z</a></li>
-                        <li><a class="dropdown-item" href="#">Cũ nhất</a></li>
-                        <li><a class="dropdown-item" href="#">Mới nhất</a></li>
+                        <li><a class="dropdown-item <?php if ($sort == '1') {echo 'steelblue';}?>" href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $filteredSize; ?>&&price=<?php echo $price; ?>&&sort=1">Giá: Tăng dần</a></li>
+                        <li><a class="dropdown-item <?php if ($sort == '2') {echo 'steelblue';}?>" href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $filteredSize; ?>&&price=<?php echo $price; ?>&&sort=2">Giá: Giảm dần</a></li>
+                        <li><a class="dropdown-item <?php if ($sort == '3') {echo 'steelblue';}?>" href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $filteredSize; ?>&&price=<?php echo $price; ?>&&sort=3">Tên: A-Z</a></li>
+                        <li><a class="dropdown-item <?php if ($sort == '4') {echo 'steelblue';}?>" href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $filteredSize; ?>&&price=<?php echo $price; ?>&&sort=4">Tên: Z-A</a></li>
                     </ul>
                 </div>
             </div>
@@ -82,11 +86,13 @@
                     <a href="../app/index.php?item_list&&category_id=<?php echo $_GET['category_id']; ?>&&color=<?php echo $filteredColor; ?>&&size=<?php echo $filteredSize; ?>&&price=" class="btn border border-primary filter-btn"><<?php echo $price; ?> đ<i class="p-1 bi bi-x-circle text-primary"></i></a>
                 <?php }?>
             </div>
+            </div>
+
 
             <div class="row row-cols-1 row-cols-md-5 g-4 mt-5">
                 <?php if ($product_list) {
     foreach ($product_list as $product) {?>
-                    <a class="item-list__card-link px-3 link-underline link-underline-opacity-0"  href="./detail-item.html">
+                    <a class="item-list__card-link px-3 link-underline link-underline-opacity-0"  href="../app/index.php?detail_item&&product_id=<?php echo $product['id']; ?>">
                         <div class="item-list__card card col p-0 h-100 rounded-0">
                             <img src="<?php echo $product['avatar']; ?>" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -97,12 +103,27 @@
                     </a>
                     <?php }
 } else {?>
-                    <div>Không tìm thấy kết quả phù hợp</div>
+                    <div class="pb-5">Không tìm thấy kết quả phù hợp</div>
                 <?php }?>
             </div>
-            <div class="d-flex justify-content-center my-5">
-                <button type="button" class="item-list__view-more-btn btn btn-primary ">Xem thêm</button>
+            <div class="<?php if (!$product_list || $limited) {
+    echo 'hide';
+}
+?>">
+                <div class="d-flex justify-content-center my-5">
+                    <a href="<?php if ($viewmore) {
+    echo str_replace('&&viewmore', '', $_SERVER['REQUEST_URI']);
+} else {
+    echo $_SERVER['REQUEST_URI'] . '&&viewmore';
+}?>" type="button" class="item-list__view-more-btn btn btn-primary"><?php if ($viewmore) {
+    echo 'Thu gọn';
+} else {
+    echo 'Xem thêm';
+}?>
+</a>
+                </div>
             </div>
+
 
         </div>
 

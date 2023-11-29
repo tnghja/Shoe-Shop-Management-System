@@ -73,9 +73,9 @@ foreach ($categories as $category) {?>
                                 </ul>
                             </li>
                         </ul>
-                        <form class="d-flex mx-5 w-25" role="search">
+                        <form class="d-flex mx-5 w-25" role="search" method="post" action="../app/index.php?item_list">
                             <input class="p-0 form-control me-2" type="search" placeholder="Bạn cần tìm gì ..."
-                                aria-label="Search">
+                                aria-label="Search" name='search' required>
                             <button class="p-0 btn w-50 btn-outline-success" type="submit">Tìm kiếm</button>
                         </form>
                         <ul class="ms-5 navbar-nav d-flex flex-row me-1">

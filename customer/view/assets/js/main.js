@@ -16,3 +16,17 @@ rangeInput.addEventListener("input", function () {
 function getPrice(href) {
   window.location.href = href + rangeInput.value;
 }
+
+function limit_quantity(quantity) {
+  value = document.getElementById("quantity").value;
+  if (value > quantity) {
+    var modal = document.getElementById("limitModal");
+    modal.style.display = "block";
+  }
+}
+
+// Function to close the modal
+function closeModal() {
+  var modal = document.getElementById("limitModal");
+  modal.style.display = "none";
+}

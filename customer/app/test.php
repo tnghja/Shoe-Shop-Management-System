@@ -1,2 +1,2 @@
 <?php
-echo empty('');
+echo $_SERVER['REQUEST_URI'];

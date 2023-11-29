@@ -16,4 +16,12 @@ class Category_Model
         $result = $this->database->select($query);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function get_category_by_id($id)
+    {
+        $query = "SELECT * FROM `category` WHERE id = $id;";
+        $result = $this->database->select($query);
+        return $result->fetch_all(MYSQLI_ASSOC)[0];
+
+    }
 }

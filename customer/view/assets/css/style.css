@@ -61,6 +61,10 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.hide{
+    display: none;
+}
+
 .item-list__card:hover .card-title,
 .item-list__card:hover .card-text {
     color: steelblue;
@@ -92,6 +96,10 @@
     color: steelblue !important;
 }
 
+.steelblue{
+    color: steelblue !important;
+}
+
 .item-list__filter {
     content: '';
     width: 25px !important;
@@ -111,6 +119,27 @@
     width: 250px !important;
 }
 
+
+/*detail item*/
+.shoe-color .thumbnail:hover{
+    opacity: 0.5;
+}
+
+.w-95{
+    width: 95%;
+}
+
+.w-85 {
+    width: 85%;
+}
+
+.w-15{
+    width: 15%;
+}
+
+.w-35 {
+    width: 35%;
+}
 
 /* -------------ACOUNT INFORMATION -------------- */
 /* ---------------------------------------------- */
@@ -267,172 +296,6 @@ a {
 }
 
 
-/* detail page */
-.detail-page__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px;
-    display: flex;
-  }
-  
-  .detail-page__left-column {
-    width: 65%;
-    position: relative;
-  }
-  .detail-page__ight-column {
-    width: 35%;
-    margin-top: 20px;
-  }
-  
-
-  .detail-page__left-column img{
-    width: 80%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    transition: all 0.8s ease;
-  }
-  
-  .detail-page__left-column img.active {
-    opacity: 1;
-  }
-  
-  .detail-page__product-description {
-    border-bottom: 1px solid #E1E8EE;
-    margin-bottom: 20px;
-  }
-  .detail-page__product-description h1 {
-    font-weight: 500;
-    font-size: 40px;
-    color: #000000;
-  }
-  .detail-page__product-description p {
-    font-size: 25px;
-    font-weight: 400;
-    color: #000000;
-    line-height: 24px;
-  }
-  .detail-page__product-description span {
-    font-size: 25px;
-    font-weight: 400;
-    color: #000000;
-    line-height: 24px;
-    text-decoration: underline;
-  }
-  
-  /* Product Configuration */
-  .detail-page__product-color span,
-  .detail-page__size-config span {
-    font-size: 30px;
-    font-weight: 400;
-    color: #86939E;
-    margin-bottom: 20px;
-    display: inline-block;
-  }
-  
-  /* Product Color */
-  .detail-page__product-color {
-    margin-bottom: 30px;
-  }
-  
-  .detail-page__color-choose div {
-    display: inline-block;
-  }
-  
-  .detail-page__color-choose input[type="image"] {
-    display: none;
-  }
-  
-  .detail-page__color-choose input[type="image"]  {
-    display: inline-block;
-    width: 95%;
-    height: 95%;
-    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.33);
-  
-  }
-  
-  .detail-page__color-choose input[type="image"]:focus  {
-    border: 1px solid #000000;
-  }
-  
-  .detail-page__size-choose {
-    margin-bottom: 20px;
-  }
-  
-  .detail-page__size-choose button {
-    border: 2px solid #E1E8EE;
-    border-radius: 6px;
-    padding: 13px 20px;
-    font-size: 14px;
-    color: #2e2f30;
-    background-color: #fff;
-    cursor: pointer;
-    transition: all .5s;
-  }
-  
-  .detail-page__size-choose button:hover,
-  .detail-page__size-choose button:active,
-  .detail-page__size-choose button:focus {
-    border: 3px solid #000000;
-    outline: none;
-  }
-  
-  .detail-page__size-config {
-    border-bottom: 1px solid #E1E8EE;
-    margin-bottom: 20px;
-  }
-  .detail-page__size-config span{
-    color: #000000;
-  }
-  
-  .detail-page__product-price {
-    display: flex;
-    align-items: center;
-  }
-  
-  .detail-page__product-price span {
-    font-size: 26px;
-    font-weight: 300;
-    color: #43474D;
-    margin-right: 20px;
-  }
-  
-  .detail-page__item-config button{
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 100%;
-    line-height: 60px;
-    white-space: nowrap;
-    background-color: #0d0d0d;
-    display: flex;
-    width: 25%;
-    height: 12%;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 30px 102px;
-    position:absolute ;
-    background-color: #0d0d0d;
-    border-radius: 30px;
-    overflow: hidden;
-    border: 1px solid;
-    border-color: #000000;
-    backdrop-filter: blur(4px) brightness(100%);
-    -webkit-backdrop-filter: blur(4px) brightness(100%);
-    
-  }
-  
-  
-  .detail-page__detail-description{
-    border-top: 1px solid#86939e;
-    margin-top: 120px;
-  
-  }
-  .detail-page__detail-description h1{
-    font-size: 30px;
-    font-weight: 700;
-  }
 
 /* checkout */
 .payment-method__icon {
