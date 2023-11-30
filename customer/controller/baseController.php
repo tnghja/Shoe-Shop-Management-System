@@ -3,7 +3,7 @@ include_once "../model/category_model.php";
 include_once "../model/product_model.php";
 include_once "../model/color_model.php";
 include_once "../model/size_model.php";
-class Controller
+class BController
 {
     public function invoke()
     {
