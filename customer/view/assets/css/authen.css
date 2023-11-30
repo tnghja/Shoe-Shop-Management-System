@@ -108,9 +108,6 @@ h2 {
     margin-bottom: 2%; */
     background: #f8f8f8;
     padding: 20px 0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
 }
 
 .clear {
@@ -125,7 +122,6 @@ body {
     font-weight: 400;
     font-family: 'Montserrat', sans-serif;
 }
-
 
 .container {
     /* width: 900px; */
@@ -449,15 +445,8 @@ label.valid:after {
 .signin-content {
     padding-top: 40px;
     padding-bottom: 40px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
 }
-.form-button{
-    display:flex;
-    flex-direction:column;
-    align-item:centers;
-}
+
 .social-login {
     align-items: center;
     -moz-align-items: center;

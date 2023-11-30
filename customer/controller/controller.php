@@ -9,9 +9,17 @@ class Controller
 {
     public function invoke()
     {
-        $this->controlHeader();
-        $this->controlContent();
-        $this->controlFooter();
+        if (isset($_GET["controller"])) {
+            $action = $_GET["action"];
+            $controller = $_GET['controller'];
+            require('../controller/' . $controller . 'Controller.php');
+            $request = new User;
+        } else {
+            session_start();
+            $this->controlHeader();
+            $this->controlContent();
+            $this->controlFooter();
+        }
     }
 
     public function controlHeader()

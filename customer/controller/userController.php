@@ -50,7 +50,7 @@ class User
 
     public function signup()
     {
-        include('../view/user/signup.php');
+        include_once "../view/layouts/authentication/signup.php";
         if (isset($_POST['signup'])) {
             $userModel = new UserModel();
             $username = filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -93,7 +93,7 @@ class User
     public function signin()
     {
 
-        include_once('../view/user/login.php');
+        include_once "../view/layouts/authentication/login.php";
 
         if (isset($_POST['signin'])) {
             $userModel = new UserModel();

@@ -1,5 +1,5 @@
 <?php
-      include("../lib/database.php");
+include_once("../lib/database.php");
 
 class UserModel extends Database
 {
@@ -25,7 +25,7 @@ class UserModel extends Database
     {
         $sql = "SELECT * FROM customeraccount WHERE username = '$username' OR email = '$email'";
         $result = self::$link->query($sql);
-        
+
         return $result;
     }
     /*

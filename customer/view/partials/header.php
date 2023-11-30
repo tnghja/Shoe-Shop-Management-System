@@ -1,3 +1,23 @@
+<?php
+
+if (isset($_SESSION["user-id"])) {
+    $user_id = $_SESSION['user-id'];
+} else {
+    $user_id = null;
+}
+/*
+
+if($user_id){
+    echo 'a'.$user_id.'a';
+}
+else {
+    echo 'null'.$user_id.'null';
+}
+*/
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,14 +105,35 @@
                                                     </li>
                                                 </ul>
                                             </div> -->
-                            <div class="header__login-dropdown dropdown-menu dropdown-menu-end">
-                                <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
-                                <hr class="hr hr-blurry w-75 my-2 mx-auto" />
-                                <div class="d-grid gap-2 col-10 mx-auto">
-                                    <button onclick="location.href='../view/login.php'" class="btn btn-primary" type="button">Đăng nhập</button>
-                                    <button onclick="location.href='../view/signup.php'" class="btn btn-success" type="button">Đăng ký</button>
+                            <?php
+                            // Login
+                            if (isset($user_id)) {
+
+                            ?>
+
+                                <div class="header__user-dropdown dropdown-menu dropdown-menu-end">
+                                    <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
+                                    <hr class="hr hr-blurry w-75 my-2 mx-auto" />
+                                    <p class="ms-2 mb-1">Tên User</p>
+                                    <ul class="header__user-list">
+                                        <li><a href="?account&&action">Thông tin tài khoản</a></li>
+                                        <li><a href="./account/manage">Quản lý đơn hàng</a></li>
+                                        <li><a href="./account/maps">Danh sách địa chỉ</a></li>
+                                        <li><a href="?controller=user&&action=logout">Đăng xuất</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
+                            <?php } else {  ?>
+                                <!-- Not login -->
+                                <div class="header__login-dropdown dropdown-menu dropdown-menu-end">
+                                    <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
+                                    <hr class="hr hr-blurry w-75 my-2 mx-auto" />
+                                    <div class="d-grid gap-2 col-10 mx-auto">
+                                        <button onclick="location.href='?controller=user&&action=signin'" class="btn btn-primary" type="button">Đăng nhập</button>
+                                        <button onclick="location.href='?controller=user&&action=signup'" class="btn btn-success" type="button">Đăng ký</button>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </li>
                         <li class="nav-item me-lg-0 dropdown">
                             <a class="nav-link p-0 ms-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-cart3 fs-3"></i></a>
