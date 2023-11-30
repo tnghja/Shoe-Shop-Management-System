@@ -1,31 +1,23 @@
 <?php
+
+include_once "../model/category_model.php";
+include_once "../model/product_model.php";
+include_once "../model/color_model.php";
+include_once "../model/size_model.php";
+
 class Controller
 {
     public function invoke()
     {
-        if (isset($_GET["controller"])) {
-            $action = $_GET["action"];
-            $controller = $_GET['controller'];
-            require('../controller/' . $controller . 'Controller.php');
-            $controller = ucfirst($controller);
-            $request = new $controller;
-        } else if (isset($_GET['action'])) {
-            $action = $_GET["action"];
-            require('../controller/accountController.php');
-
-            $request = new Account;
-        } else {
-            session_start();
-            $this->controlHeader();
-            $this->controlContent();
-            $this->controlFooter();
-        }
+        $this->controlHeader();
+        $this->controlContent();
+        $this->controlFooter();
     }
 
     public function controlHeader()
     {
-        include_once "../model/category_model.php";
         $category_model = new Category_Model();
+        include_once "../view/partials/header.php";
     }
 
     public function control_item_list()
@@ -79,6 +71,7 @@ class Controller
             $category = $category_model->get_category_by_id($_GET['category_id']);
 
             $product_list = $product_model->filter_product_list($filteredColor, $filteredSize, $price, $category['id'], $sort);
+
         }
 
         $viewmore = true;
@@ -94,6 +87,7 @@ class Controller
         }
 
         include_once "../view/layouts/product/item-list.php";
+
     }
 
     public function control_detail_item()
