@@ -20,3 +20,19 @@
 - Nghĩa : làm lại phần ui
 
 # admin website : management website for product
+# Hoàn thành:
+- add-product: hoàn thành.
+- category: ...
+- product-list:
+  + view-product: ...
+  + edit-product: ...
+  + remove-product: ...
+- inventory: ...
+- notification: ...
+# Lưu ý:
+- Nhớ để file đúng thư mục.
+- Đã phân hàm ở controller. Làm trang nào thì tập trung vào hàm ở đó.
+  Link get trang theo cấu trúc: /app/index.php?page=dashboard.
+  Trong đó tham số page =  [các trang chính: dashboard, add-product, product-list, inventory, category, notification]
+  Thêm ví dụ: /app/index.php?page=add-product&action=submit => điều hướng xử lý khi submit form thêm sản phẩm. Sau đó khi xử lý xong,  header('location: ../app/index.php?page=add-product'); => để điều hướng đến trang danh sách sản phẩm.
+- Nhớ đọc kỹ tên các file.
