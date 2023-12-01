@@ -17,16 +17,76 @@ function getPrice(href) {
   window.location.href = href + rangeInput.value;
 }
 
-function limit_quantity(quantity) {
+function add_item() {
+  // Get the current URL
+  const url = new URL(window.location.href);
+
+  // Get the query parameters
+  const queryParams = new URLSearchParams(url.search);
+
+  // Access individual query parameters
+  const productId = queryParams.get("product_id");
+  const colorId = queryParams.get("color_id");
+  const sizeId = queryParams.get("size_id");
+
+  // Save items to the cart
+  const quantity = document.getElementById("quantity").value;
+
+  const payload = {
+    'product_id': productId,
+    'color_id': colorId,
+    'size_id': sizeId,
+    'quantity': quantity
+  };
+  
+  const hostname = window.location.hostname;
+
+  // Todo: Add new item to the user's cart by sending a post request
+  // to the server.
+  fetch("add_cart_item.php", {
+    method: 'POST',
+    mode: 'cors',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  }).then((response) => {
+    // Display success message.
+    if (response.status == 200) {
+      var successModal = document.getElementById("add-item-success");
+      successModal.style.display = "block";
+    } else {
+      var errorModal = document.getElementById("add-item-error");
+      errorModal.style.display = "block";
+    }
+  }).catch((response) => {
+    // Display error message to the screen if there is an error occured.
+      var errorModal = document.getElementById("add-item-error");
+      errorModal.style.display = "block";
+  })
+} 
+
+function add_item_handler(quantity) {
+  // quantity is used to check if the product is out of stock.
   value = document.getElementById("quantity").value;
   if (value > quantity) {
     var modal = document.getElementById("limitModal");
     modal.style.display = "block";
+    return;
   }
+
+  add_item();
 }
 
 // Function to close the modal
 function closeModal() {
   var modal = document.getElementById("limitModal");
+  var successModal = document.getElementById("add-item-success");
+  var errorModal = document.getElementById("add-item-error");
+
   modal.style.display = "none";
+  successModal.style.display = "none";
+  errorModal.style.display = "none";
 }
+
