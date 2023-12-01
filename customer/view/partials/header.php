@@ -35,7 +35,7 @@
                                     <?php
 $categories = $category_model->get_category_by_object("Nam");
 foreach ($categories as $category) {?>
-                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id'] ?>"><?php echo $category['category_name']; ?></a></li>
                                     <?php }?>
                                 </ul>
                             </li>
@@ -46,7 +46,7 @@ foreach ($categories as $category) {?>
                                     <?php
 $categories = $category_model->get_category_by_object("Nữ");
 foreach ($categories as $category) {?>
-                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                     <?php }?>
                                 </ul>
                             </li>
@@ -57,7 +57,7 @@ foreach ($categories as $category) {?>
                                     <?php
 $categories = $category_model->get_category_by_object("Bé Trai");
 foreach ($categories as $category) {?>
-                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                     <?php }?>
                                 </ul>
                             </li>
@@ -68,14 +68,14 @@ foreach ($categories as $category) {?>
                                     <?php
 $categories = $category_model->get_category_by_object("Bé Gái");
 foreach ($categories as $category) {?>
-                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a></li>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                     <?php }?>
                                 </ul>
                             </li>
                         </ul>
-                        <form class="d-flex mx-5 w-25" role="search">
+                        <form class="d-flex mx-5 w-25" role="search" method="post" action="../app/index.php?item_list">
                             <input class="p-0 form-control me-2" type="search" placeholder="Bạn cần tìm gì ..."
-                                aria-label="Search">
+                                aria-label="Search" name='search' required>
                             <button class="p-0 btn w-50 btn-outline-success" type="submit">Tìm kiếm</button>
                         </form>
                         <ul class="ms-5 navbar-nav d-flex flex-row me-1">
@@ -161,7 +161,7 @@ foreach ($categories as $category) {?>
                                         <p class="card-text text-danger col-md-4">1.000.000đ</p>
                                     </div>
                                     <div class="d-grid col-10 mx-auto">
-                                        <button onclick="location.href='./cart.html'" class="btn btn-dark"
+                                        <button onclick="location.href='./cart.php'" class="btn btn-dark"
                                             type="button">Xem giỏ hàng</button>
                                     </div>
                                 </div>
