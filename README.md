@@ -20,7 +20,7 @@
 - Nghĩa : làm lại phần ui
 
 # admin website : management website for product
-# Hoàn thành:
+*Hoàn thành:
 - add-product: hoàn thành.
 - category: ...
 - product-list:
@@ -29,7 +29,7 @@
   + remove-product: ...
 - inventory: ...
 - notification: ...
-# Lưu ý:
+*Lưu ý:
 - Nhớ để file đúng thư mục.
 - Đã phân hàm ở controller. Làm trang nào thì tập trung vào hàm ở đó.
   Link get trang theo cấu trúc: /app/index.php?page=dashboard.
