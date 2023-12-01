@@ -21,7 +21,8 @@ class Category_Model
     {
         $query = "SELECT * FROM `category` WHERE id = $id;";
         $result = $this->database->select($query);
+        if(mysqli_num_rows($result) > 0)
         return $result->fetch_all(MYSQLI_ASSOC)[0];
-
+        return null;
     }
 }

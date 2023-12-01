@@ -5,6 +5,14 @@ if (isset($_SESSION["user-id"])) {
 } else {
     $user_id = null;
 }
+
+if ($user_id) {
+    $user_model = new UserModel();
+    $users = $user_model->__get($user_id);
+    $user = $users->fetch_all(MYSQLI_ASSOC)[0];
+    $username = ($user['username']);
+}
+
 /*
 
 if($user_id){
@@ -29,6 +37,13 @@ else {
     <link rel="stylesheet" href="../view/assets/css/base.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+
+
+
 </head>
 
 <body>
@@ -114,11 +129,11 @@ else {
                                 <div class="header__user-dropdown dropdown-menu dropdown-menu-end">
                                     <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
                                     <hr class="hr hr-blurry w-75 my-2 mx-auto" />
-                                    <p class="ms-2 mb-1">Tên User</p>
+                                    <p class="ms-4 m-1 px-2"> Xin chào <?= $username ?></p>
                                     <ul class="header__user-list">
-                                        <li><a href="?account&&action">Thông tin tài khoản</a></li>
-                                        <li><a href="./account/manage">Quản lý đơn hàng</a></li>
-                                        <li><a href="./account/maps">Danh sách địa chỉ</a></li>
+                                        <li><a href="?account">Thông tin tài khoản</a></li>
+                                        <li><a href="?account&&action=manage">Quản lý đơn hàng</a></li>
+                                        <li><a href="?account&&action=maps">Danh sách địa chỉ</a></li>
                                         <li><a href="?controller=user&&action=logout">Đăng xuất</a>
                                         </li>
                                     </ul>

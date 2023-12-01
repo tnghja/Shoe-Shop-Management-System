@@ -5,9 +5,8 @@ class User
     public function __construct()
     {
 
-        require('../model/userModel.php');
+        // require('../model/userModel.php');
 
-        $userModel = new UserModel();
         // self::signup();
 
         if (isset($_GET['action'])) {
