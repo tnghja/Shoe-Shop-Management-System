@@ -41,7 +41,7 @@
 
         <?php if ($cart_items) {?>
             <div class="text-center my-2">
-                <button onclick="location.href='./checkout.html'" type="button" class="btn btn-primary">Đặt mua</button>
+                <button onclick="location.href='/app/checkout.php'" type="button" class="btn btn-primary">Đặt mua</button>
             </div>
         <?php } ?>
 

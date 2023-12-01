@@ -11,21 +11,12 @@ class PaymentController extends Controller {
     private $db;
 
     public function __construct() {
-        $customer = $this->get_customer_info();
-        $session = new Session();
-        $db = new Database();
+        $this->session = new Session();
+        $this->db = new Database();
     }
 
     public function invoke() {
         // TODO: Check if the incoming request is sent from authenticated user.
-        if (!($this->is_authenticated())) {
-            header('HTTP/1.1 401 Unauthorized');
-            header('Content-Type: text/plain');
-            echo '401 Unauthorized - Authentication Required';
-
-            return;
-        }
-
         $method = $_SERVER['REQUEST_METHOD'];
 
         if ($method === 'GET') {
@@ -58,8 +49,26 @@ class PaymentController extends Controller {
 
         $conn = new Database();
         $session = $this->session;
+
+        if (!$session->get('customer_id')) {
+            return null;
+        }
+
         $res = $conn->select("SELECT * FROM customeraccount WHERE id = {$session->get('customer_id')}");
-        return $res or $res->fetch_assoc();
+
+        if (!$res) {
+            return $res->fetch_assoc();
+        }
+
+        return $res;
+    }
+
+    private function get_customer_id() {
+        if (!$this->get('user-id')) {
+            return null;
+        }
+
+        return $this->get('user-id');
     }
 
 
@@ -70,71 +79,91 @@ class PaymentController extends Controller {
          *  - Update transaction's history
          *  - Clear user's cart if the transaction is successful.
          */         
-    }
-
-    private function is_authenticated() {
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            return $_SESSION['login'];
+        $raw_body = file_get_contents("php://input");
+        $payload = json_decode($raw_body, true);
+        if (!$payload) {
+            http_response_code(400);
+            exit;
         }
 
-        return false;
-    }
-
-    /** get_cart_info: Retrieve items in the customer's cart.
-     *  Return:
-     *      An associative array representing the cart, each item
-     *      is an associative array (hashmap) including the following fields:
-     *          -   product_name: product's name
-     *          -   color: product's color
-     *          -   size: product's size
-     *          -   price: product's price
-     *          -   quantity
-     */
-    private function get_cart_info() {
-        if (!($this->customer)) {
-           // TODO: Handle the case that user is logged in anonymously.
-           return null;
+        $fields = ['province', 'district', 'full_name', 'phone_number', 'address', 'payment'];
+        foreach ($fields as $field) {
+            if (!isset($payload, $field)) {
+                http_response_code(400);
+                exit;
+            }
         }
 
-        $db = $this->db;
-        
-        // Get cart's id
-        $cart_id = null;
-        if ($this->customer) {
-            $fetch_cart_res = $this->db->query("SELECT id FROM cart WHERE customer_id={$this->customer['id']}");
-            $cart_id = $fetch_cart_res->fetch_assoc()["id"];
-        } else {
-            $cart_id = $this->session->get("cart_id");
+        $cart_id = $this->get_cart_id();
+        if (!$cart_id) {
+            http_response_code(400);
+            exit;
         }
 
-        $query = "
-            SELECT product_name, price, color_name, size_name, quantity
-            FROM cart_item JOIN cart ON cart_item.cart_id = cart.id
-                JOIN product ON product.id = cart_item.product_id
-                JOIN color ON color.id = cart_item.color_id
-                JOIN size ON size.id = cart_item.size_id
-            WHERE cart.id = {$cart_id};
-        ";
+        // Calculate total price
+        $total_price_q = "SELECT product_count, price
+                        FROM order_has_product
+                        JOIN product ON order_has_product.product_id = product.id
+                        WHERE order_has_product.order_id = ".$cart_id.";";
 
-        $result = $db->select($query);
-        $cart = array();
-        while ($row = $result->fetch_assoc()) {
-            $cart_item = array(
-                "product_name" => $row["product_name"],
-                "size" => $row["size_name"],
-                "color" => $row["color_name"],
-                "price" => $row["price"],
-                "quantity" => $row["quantity"]
-            );
-            $cart[] = $row;
+
+        $rows = $this->db->select($total_price_q)->fetch_all(MYSQLI_ASSOC);
+
+        $total_price = array_reduce($rows, 
+            fn ($total_price, $item) => $total_price + $item["price"] * $item["product_count"], 0);
+
+        $update_q = "UPDATE orderdetails
+                    SET order_date = NOW(),
+                    province = '".$payload["province"]."',
+                    district = '".$payload["district"]."',
+                    fullname = '".$payload["full_name"]."',
+                    phone_number = '".$payload["phone_number"]."',
+                    payment = '".$payload["payment"]."',
+                    address_details = '".$payload["address"]."',
+                    is_cart = FALSE,
+                    total_money = ".$total_price."
+                    WHERE id = ".$cart_id.";";
+
+        echo $update_q;
+
+        if (!$this->db->update($update_q)) {
+            http_response_code(500);
+            echo "DEBUG: Error occured while updating";
+            exit;
         }
-        return $cart;
+
+        unset($_COOKIE['order-id']);
+        setcookie("order-id", "", time()-3600);
+        http_response_code(200);
     }
 
-    /** get_default_addr: Retrieve customer's default address. */
-    private function get_default_address() {
-        return;
+    private function check_cart($id) {
+        $check_cart_q = "SELECT is_cart FROM orderdetails WHERE id = ".$id.";";
+        $check_cart_res = $this->db->select($check_cart_q);
+        if (!$check_cart_res) {
+            return false;
+        }
+        $row = $check_cart_res->fetch_assoc();
+        return $row["is_cart"] != 0;
     }
+
+
+    private function get_cart_id() {
+        $session = new Session();
+        if (!$session->get('user-id')) {
+            if (isset($_COOKIE['order-id']) and $this->check_cart($_COOKIE['order-id'])) {
+                return $_COOKIE['order-id'];
+            }
+            return null;
+        }
+        $q = "SELECT id FROM orderdetails WHERE customer_id = ".$_SESSION['user-id']." AND is_cart = TRUE";
+        $res = $this->db->select($q);
+        if (!$res) {
+            return $res->fetch_assoc()["id"];
+        }
+        return null;
+    }
+
 
     private function render() {
         /** Render the checkout menu.
@@ -145,20 +174,45 @@ class PaymentController extends Controller {
          */
 
         parent::controlHeader();
-        
-        // Retrieve user's cart
-        $cart = $this->get_cart_info();
 
-        // Calculate total price of the cart
-        $total_price = array_reduce($cart, 
-            fn ($total_price, $cart_item) => $total_price + $cart_item["price"] * $cart_item["quantity"], 0);
-        
-        // TODO: Get customer's default address
+        $cart_id = $this->get_cart_id();
 
-        $def_addr = $this->get_default_address();
-        $transport_cost = 12000;
 
-        include '../view/checkout.php';
+        if ($cart_id) {
+            $query = "SELECT order_has_product.product_id, product_name, order_has_product.color_id, color.color_name,
+                 order_has_product.size_id, size_name, order_has_product.product_count as cart_quantity, 
+                 color_has_sizes.quantity as max_quantity, price, product_has_colors.product_img
+                FROM order_has_product
+                JOIN product ON order_has_product.product_id = product.id
+                JOIN orderdetails ON orderdetails.id = order_has_product.order_id
+                JOIN color ON order_has_product.color_id = color.id
+                JOIN size ON order_has_product.size_id = size.id
+                JOIN product_has_colors 
+                    ON order_has_product.product_id = product_has_colors.product_id 
+                    AND order_has_product.color_id = product_has_colors.color_id
+                JOIN color_has_sizes ON
+                    color_has_sizes.product_id = order_has_product.product_id
+                    AND color_has_sizes.color_id = order_has_product.color_id
+                    AND color_has_sizes.size_id = order_has_product.size_id
+                WHERE order_has_product.order_id = ". $cart_id . ";";
+
+            $query_res = $this->db->select($query);
+
+
+            if (!$query_res) {
+                http_response_code(500);
+                exit;
+            }
+
+            $cart_items = $query_res->fetch_all(MYSQLI_ASSOC);
+
+            $total_price = array_reduce($cart_items, 
+                fn ($total_price, $cart_item) => $total_price + $cart_item["price"] * $cart_item["cart_quantity"], 0);
+
+            include_once "../view/layouts/cart/checkout.php";
+        } else {
+            include_once "../view/layouts/cart/checkout-error.php";
+        }
 
         parent::controlFooter();
     }
