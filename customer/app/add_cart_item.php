@@ -37,6 +37,7 @@ if ($user_id) {
             exit;
         }
     } else {
+        $row = $res->fetch_assoc();
         $order_id = $row['id'];
     }
 } else if (!isset($_COOKIE['order-id'])) {

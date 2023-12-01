@@ -161,7 +161,7 @@ foreach ($categories as $category) {?>
                                         <p class="card-text text-danger col-md-4">1.000.000đ</p>
                                     </div>
                                     <div class="d-grid col-10 mx-auto">
-                                        <button onclick="location.href='./cart.html'" class="btn btn-dark"
+                                        <button onclick="location.href='./cart.php'" class="btn btn-dark"
                                             type="button">Xem giỏ hàng</button>
                                     </div>
                                 </div>

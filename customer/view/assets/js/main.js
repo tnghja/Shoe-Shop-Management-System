@@ -90,3 +90,48 @@ function closeModal() {
   errorModal.style.display = "none";
 }
 
+function updateQuantity(product_id, color_id, size_id) {
+    // Create the payload object
+
+    console.log("'updateQuantity' listener is called.");
+
+    let payload = {
+        product_id: product_id,
+        color_id: color_id,
+        size_id: size_id,
+    };
+
+    function changeQuantityHandler(event) {
+        // Retrieve the input element that fired the event
+        var inputElement = event.target;
+
+        // Retrieve the quantity value from the input element
+        var quantity = inputElement.value;
+
+        payload.quantity = quantity;
+
+        // Make a POST request to the endpoint
+        fetch("update_cart_item.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(function(response) {
+            // Handle the response here
+            if (response.ok) {
+                console.log("Quantity updated successfully");
+            } else {
+                throw new Error("Failed to update quantity");
+            }
+        })
+        .catch(function(error) {
+            // Handle any errors that occur during the request
+            console.error(error);
+        });
+    }
+
+    return changeQuantityHandler;
+}
+
