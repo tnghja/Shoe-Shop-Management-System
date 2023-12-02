@@ -67,28 +67,28 @@ $detail_ = $address["address_details"] ?? null;
                     <div class="left w-50">
                         <div class="user__infor-map w-100">
                             <div class="user__infor-title d-flex justify-content-between m-1 p-2" id="map-bg">
-                                <?php if ($fullname) : ?>
-                                    <span><?= $fullname ?> (Địa chỉ mặc định)</span>
+                                <?php if (isset($address['fullname'])) : ?>
+                                    <span><?= $address['fullname'] ?> (Địa chỉ mặc định)</span>
                                 <?php else : ?>
                                     <p class='text-danger'>Bạn cần cập nhật họ và tên</p>
                                 <?php endif; ?>
 
-                                <a href="?account&&action=delete?id=<?=$address['id']?>">
+                                <a href="?account&&action=delete&&id=<?= $address['id'] ?>">
                                     <i class="bi bi-x text-danger"></i>
-                                    <input type="hidden" value="<?=$address['id']?>" >
+                                    <input type="hidden" value="<?= $address['id'] ?>">
                                 </a>
                             </div>
                             <div class="user__infor-detail m-1 p-2">
                                 <div class="title">
                                     <p>Họ và tên:</p>
-                                    <?php if ($fullname) : ?>
-                                        <span><?= $fullname ?></span>
+                                    <?php if (isset($address['fullname'])) : ?>
+                                        <span><?= $address['fullname'] ?></span>
                                     <?php else : ?>
                                         <p class='text-danger'>Bạn cần cập nhật họ và tên</p>
                                     <?php endif; ?>
 
                                 </div>
-                                <div class="title">
+                                <!-- <div class="title">
                                     <p>Email:</p>
                                     <?php if ($email) : ?>
                                         <span><?= $email ?></span>
@@ -96,11 +96,11 @@ $detail_ = $address["address_details"] ?? null;
                                         <p class='text-danger'>Bạn cần cập nhật họ và tên</p>
                                     <?php endif; ?>
 
-                                </div>
+                                </div> -->
                                 <div class="title">
                                     <p>Địa chỉ:</p>
-                                    <?php if ($detail) : ?>
-                                        <span><?= $detail ?></span>
+                                    <?php if (isset($address['address_details'])) : ?>
+                                        <span><?= $address['address_details'] ?></span>
                                     <?php else : ?>
                                         <p class='text-danger'>Bạn cần cập nhật địa chỉ</p>
                                     <?php endif; ?>
@@ -117,12 +117,11 @@ $detail_ = $address["address_details"] ?? null;
                                 </div> -->
                                 <div class="title">
                                     <p>Điện thoại</p>
-                                    <?php if ($phone) : ?>
-                                        <span><?= $phone ?></span>
+                                    <?php if (isset($address['phone_number'])) : ?>
+                                        <span><?= $address['phone_number'] ?></span>
                                     <?php else : ?>
                                         <p class='text-danger'>Bạn cần cập nhật số điện thoại</p>
                                     <?php endif; ?>
-
                                 </div>
                             </div>
                         </div>
@@ -135,10 +134,16 @@ $detail_ = $address["address_details"] ?? null;
                                         <p class='text-danger'>Bạn cần cập nhật họ và tên</p>
                                     <?php endif; ?>
 
-                                    <a href="?account&&action=delete&&id=<?=$add['id']?>">
-                                        <i class="bi bi-x text-danger"></i>
-                                        <input type="hidden" value="<?=$add['id']?>" >
-                                    </a>
+                                    <div class="d-flex flex-row gap-1">
+                                        <a href="?account&&action=modify&&id=<?= $add['id'] ?>" class="d-flex">
+                                            <i class="bi bi-pencil-square"></i>
+                                            <input type="hidden" value="<?= $add['id'] ?>">
+                                        </a>
+                                        <a href="?account&&action=delete&&id=<?= $add['id'] ?>" class="d-flex">
+                                            <i class="bi bi-x text-danger"></i>
+                                            <input type="hidden" value="<?= $add['id'] ?>">
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="user__infor-detail m-1 p-2">
                                     <div class="title">
@@ -205,7 +210,7 @@ $detail_ = $address["address_details"] ?? null;
                             </div>
                             <div class="form-check mb-2">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1" name="address-default">
-                                <label  class="form-check-label" for="exampleCheck1">Đặt làm địa chỉ mặc định</label>
+                                <label class="form-check-label" for="exampleCheck1">Đặt làm địa chỉ mặc định</label>
                             </div>
                             <input type="hidden" id="text_province" name="text_province" value="<?= $province ?>">
                             <input type="hidden" id="text_district" name="text_district" value="<?= $district ?>">

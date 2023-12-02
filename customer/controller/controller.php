@@ -214,6 +214,19 @@ class Controller
         $result = $user_model->__deleteById($id);
         
         $_SESSION['success-delete'] = $result;
+        
+        if ($result) {
+
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . '?account&&action=maps' . '">';
+            die();
+        }
+    }
+    public function control_account_modify($id,$user_id){
+        $user_model = new UserModel();
+        $result = $user_model->__modifyDefault($id,$user_id);
+        
+        $_SESSION['success-update'] = $result;
+        
         if ($result) {
 
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . '?account&&action=maps' . '">';
@@ -270,6 +283,15 @@ class Controller
                             
                             break;
                         }
+                    case "modify":{
+                        if (isset($_GET["id"])) {
+                                $id = $_GET["id"];
+                                $user_id = $_SESSION["user-id"];
+                                $this->control_account_modify($id,$user_id);
+                            }
+                            
+                            break;
+                    }
                     case "logic": {  
                         include_once "../view/layouts/account/order-detail.logic.php";
                         break;

@@ -95,6 +95,15 @@ class UserModel extends Database
         $result = self::$link->query($sql);
         return $result;
     }
+
+    public function __modifyDefault($id,$user_id){
+        $sql = "UPDATE address SET default_address = 0 WHERE user_id = $user_id;";
+        $result = self::$link->query($sql);
+        $sql1 = "UPDATE address SET default_address = 1 where user_id = $user_id AND id = $id;";
+        $result = self::$link->query($sql1);
+        
+        return $result;
+    }
     /*
     private $username;
     private $password;
