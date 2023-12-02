@@ -1,9 +1,30 @@
 <?php
+
 if (isset($_SESSION["user-id"])) {
-    echo $_SESSION['user-id'];
+    $user_id = $_SESSION['user-id'];
+} else {
+    $user_id = null;
 }
 
+if ($user_id) {
+    $user_model = new UserModel();
+    $users = $user_model->__get($user_id);
+    $user = $users->fetch_all(MYSQLI_ASSOC)[0];
+    $username = ($user['username']);
+}
+
+/*
+
+if($user_id){
+    echo 'a'.$user_id.'a';
+}
+else {
+    echo 'null'.$user_id.'null';
+}
+*/
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +37,13 @@ if (isset($_SESSION["user-id"])) {
     <link rel="stylesheet" href="../view/assets/css/base.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+
+
+
 </head>
 
 <body>
@@ -30,51 +58,51 @@ if (isset($_SESSION["user-id"])) {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav w-50 ms-5 mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="p-0 me-5 nav-link active" aria-current="page" href="./index.html">TRANG CHỦ</a>
+                            <a class="p-0 me-5 nav-link active" aria-current="page" href="../app/index.php">TRANG CHỦ</a>
                         </li>
                         <li class="header__dropdown-menu-item nav-item dropdown">
                             <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> NAM </a>
                             <ul class="dropdown-menu border-0 pb-0">
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                                <?php
+                                $categories = $category_model->get_category_by_object("Nam");
+                                foreach ($categories as $category) { ?>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id'] ?>"><?php echo $category['category_name']; ?></a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <li class="header__dropdown-menu-item nav-item dropdown">
                             <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> NỮ </a>
                             <ul class="dropdown-menu border-0 pb-0">
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                                <?php
+                                $categories = $category_model->get_category_by_object("Nữ");
+                                foreach ($categories as $category) { ?>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <li class="header__dropdown-menu-item nav-item dropdown">
                             <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> BÉ TRAI </a>
                             <ul class="dropdown-menu border-0 pb-0">
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                                <?php
+                                $categories = $category_model->get_category_by_object("Bé Trai");
+                                foreach ($categories as $category) { ?>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <li class="header__dropdown-menu-item nav-item dropdown">
                             <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> BÉ GÁI </a>
                             <ul class="dropdown-menu border-0 pb-0">
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
-                                <li class="border"><a class="dropdown-item" href="./item_list.html">Danh mục</a></li>
+                                <?php
+                                $categories = $category_model->get_category_by_object("Bé Gái");
+                                foreach ($categories as $category) { ?>
+                                    <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex mx-5 w-25" role="search">
-                        <input class="p-0 form-control me-2" type="search" placeholder="Bạn cần tìm gì ..." aria-label="Search">
+                    <form class="d-flex mx-5 w-25" role="search" method="post" action="../app/index.php?item_list">
+                        <input class="p-0 form-control me-2" type="search" placeholder="Bạn cần tìm gì ..." aria-label="Search" name='search' required>
                         <button class="p-0 btn w-50 btn-outline-success" type="submit">Tìm kiếm</button>
                     </form>
                     <ul class="ms-5 navbar-nav d-flex flex-row me-1">
@@ -92,14 +120,35 @@ if (isset($_SESSION["user-id"])) {
                                                     </li>
                                                 </ul>
                                             </div> -->
-                            <div class="header__login-dropdown dropdown-menu dropdown-menu-end">
-                                <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
-                                <hr class="hr hr-blurry w-75 my-2 mx-auto" />
-                                <div class="d-grid gap-2 col-10 mx-auto">
-                                    <button onclick="location.href='?controller=user&&action=signin'" class="btn btn-primary" type="button">Đăng nhập</button>
-                                    <button onclick="location.href='?controller=user&&action=signup'" class="btn btn-success" type="button">Đăng ký</button>
+                            <?php
+                            // Login
+                            if (isset($user_id)) {
+
+                            ?>
+
+                                <div class="header__user-dropdown dropdown-menu dropdown-menu-end">
+                                    <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
+                                    <hr class="hr hr-blurry w-75 my-2 mx-auto" />
+                                    <p class="ms-4 m-1 px-2"> Xin chào <?= $username ?></p>
+                                    <ul class="header__user-list">
+                                        <li><a href="?account">Thông tin tài khoản</a></li>
+                                        <li><a href="?account&&action=manage">Quản lý đơn hàng</a></li>
+                                        <li><a href="?account&&action=maps">Danh sách địa chỉ</a></li>
+                                        <li><a href="?controller=user&&action=logout">Đăng xuất</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
+                            <?php } else {  ?>
+                                <!-- Not login -->
+                                <div class="header__login-dropdown dropdown-menu dropdown-menu-end">
+                                    <p class="text-center mb-0">THÔNG TIN TÀI KHOẢN</p>
+                                    <hr class="hr hr-blurry w-75 my-2 mx-auto" />
+                                    <div class="d-grid gap-2 col-10 mx-auto">
+                                        <button onclick="location.href='?controller=user&&action=signin'" class="btn btn-primary" type="button">Đăng nhập</button>
+                                        <button onclick="location.href='?controller=user&&action=signup'" class="btn btn-success" type="button">Đăng ký</button>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </li>
                         <li class="nav-item me-lg-0 dropdown">
                             <a class="nav-link p-0 ms-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-cart3 fs-3"></i></a>
@@ -109,7 +158,7 @@ if (isset($_SESSION["user-id"])) {
                                 <div>
                                     <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item" href="./detail-item.html">
                                         <div class="col-md-4">
-                                            <img src="./assets/img/shoe/shoename/shoeimg.png" class="img-fluid rounded-start" alt="...">
+                                            <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="img-fluid rounded-start" alt="...">
                                         </div>
                                         <div class="col-md-8 card-body">
                                             <div class="row mx-0 mb-3">
@@ -129,7 +178,7 @@ if (isset($_SESSION["user-id"])) {
                                     </a>
                                     <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item" href="./detail-item.html">
                                         <div class="col-md-4">
-                                            <img src="./assets/img/shoe/shoename/shoeimg.png" class="img-fluid rounded-start" alt="...">
+                                            <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="img-fluid rounded-start" alt="...">
                                         </div>
                                         <div class="col-md-8 card-body">
                                             <div class="row mx-0 mb-3">

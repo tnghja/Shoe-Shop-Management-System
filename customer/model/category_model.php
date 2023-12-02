@@ -1,6 +1,5 @@
 <?php
 include_once '../lib/database.php';
-include_once '../model/category.php';
 
 class Category_Model
 {
@@ -15,13 +14,15 @@ class Category_Model
     {
         $query = "SELECT * FROM `category` WHERE object = '$object';";
         $result = $this->database->select($query);
-        $category_table = $result->fetch_all(MYSQLI_ASSOC);
-        $category_list = array();
-        foreach ($category_table as $row) {
-            $category = new Category($row['id'], $row['category_name'], $row['object']);
-            array_push($category_list, $category);
-        }
-        return $category_list;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function get_category_by_id($id)
+    {
+        $query = "SELECT * FROM `category` WHERE id = $id;";
+        $result = $this->database->select($query);
+        if(mysqli_num_rows($result) > 0)
+        return $result->fetch_all(MYSQLI_ASSOC)[0];
+        return null;
+    }
 }

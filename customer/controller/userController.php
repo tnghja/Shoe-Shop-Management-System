@@ -5,17 +5,14 @@ class User
     public function __construct()
     {
 
-        require('../model/userModel.php');
+        // require('../model/userModel.php');
 
-        $userModel = new UserModel();
         // self::signup();
 
         if (isset($_GET['action'])) {
             $action = $_GET['action'];
             switch ($action) {
                 case "signup": {
-
-
                         $this->signup();
                         break;
                     }
@@ -24,11 +21,19 @@ class User
                         if (!isset($_COOKIE['Cookieid'])) {
                             $this->signin();
                             break;
-                        }
-                        else {
-                            header("location:" .'.');
+                        } else {
+                            header("location:" . '.');
                         }
                     }
+                case 'logout': {
+                        echo "123";
+                        $this->logout();
+                        break;
+                    }
+                default : {
+                    header("location:" . '.');
+                    break;
+                }
             }
         }
 
@@ -44,7 +49,7 @@ class User
 
     public function signup()
     {
-        include('../view/user/signup.php');
+        include_once "../view/layouts/authentication/signup.php";
         if (isset($_POST['signup'])) {
             $userModel = new UserModel();
             $username = filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -87,7 +92,7 @@ class User
     public function signin()
     {
 
-        include_once('../view/user/login.php');
+        include_once "../view/layouts/authentication/login.php";
 
         if (isset($_POST['signin'])) {
             $userModel = new UserModel();
@@ -140,8 +145,17 @@ class User
         }
     }
 
-    public function logout(){
-        unset($_SESSION['user-id']);
-        setcookie('Cookieid','-1', time() - 86400*30,'/');
+    public function logout()
+    {
+        if (isset($_SESSION['user-id'])) {
+            var_dump($_SESSION['user-id']);
+            unset($_SESSION['user-id']);
+        } else {
+            echo "WTF";
+        }
+        setcookie('Cookieid', '-1', time() - 86400 * 30, '/');
+        setcookie('PHPSESSID', '-1', time() - 86400 * 30, '/'); // hơi dơ =))
+        include_once "../view/homepage.php";
+        header("location:" . './index.php');
     }
 }

@@ -1,4 +1,4 @@
 <?php
-include_once '../controller/baseController.php';
+include_once '../controller/controller.php';
 $controller = new Controller();
 $controller->invoke();
