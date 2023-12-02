@@ -43,22 +43,56 @@ class UserModel extends Database
 
         return $result;
     }
+    public function __getAllAddress($id)
+    {
+        $sql = "SELECT * from address where user_id = $id AND default_address != 1;";
+        $result = self::$link->query($sql);
 
+        return $result;
+    }
     public function __update($id, $fullname, $date, $province, $district, $detail, $phone)
     {
         $sql1 = "UPDATE customeraccount SET name = '$fullname', phone_number = '$phone', birthday = '$date' WHERE id = $id;";
         $result = self::$link->query($sql1);
 
-        if(mysqli_num_rows($this->__getAddress($id)) === 0){
-            $sql2 = "INSERT INTO address (user_id,province, district, phone_number,address_details,default_address)  
-            VALUES ('$id','$province', '$district', '$phone', '$detail',1);";
-        }
-        else {
-            $sql2 = "UPDATE address SET province = '$province', district = '$district',phone_number = '$phone' , address_details = '$detail' WHERE user_id = $id;";
+        if (mysqli_num_rows($this->__getAddress($id)) === 0) {
+            $sql2 = "INSERT INTO address (user_id,fullname,province, district, phone_number,address_details,default_address)  
+            VALUES ('$id','$fullname','$province', '$district', '$phone', '$detail',1);";
+        } else {
+            $sql2 = "UPDATE address SET fullname='$fullname', province = '$province', district = '$district',phone_number = '$phone' , address_details = '$detail' WHERE user_id = $id AND default=1;";
         }
         $result = self::$link->query($sql2);
-        
 
+
+        return $result;
+    }
+    public function __insertAdd($id, $fullname, $province, $district, $detail, $phone, $default)
+    {
+
+        /*
+        $result = self::$link->query($sql);
+        $date , $province, $district
+        */
+        if ($default) {
+            $sql = "UPDATE address SET default_address = 0 WHERE user_id = $id;";
+            $result = self::$link->query($sql);
+            $sql2 = "INSERT INTO address (fullname,user_id,province, district, phone_number,address_details,default_address)  
+            VALUES ('$fullname','$id','$province', '$district', '$phone', '$detail',1);";
+        } else {
+            $sql2 = "INSERT INTO address (fullname,user_id,province, district, phone_number,address_details,default_address)  
+            VALUES ('$fullname','$id','$province', '$district', '$phone', '$detail','$default');";
+        }
+
+        $result = self::$link->query($sql2);
+
+
+        return $result;
+    }
+
+    public function __deleteById($id)
+    {
+        $sql = "DELETE from address where id= $id";
+        $result = self::$link->query($sql);
         return $result;
     }
     /*

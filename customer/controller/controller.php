@@ -5,7 +5,7 @@ include_once "../model/product_model.php";
 include_once "../model/color_model.php";
 include_once "../model/size_model.php";
 include_once "../model/userModel.php";
-
+include_once "../model/orderModel.php";
 class Controller
 {
     public function invoke()
@@ -15,7 +15,10 @@ class Controller
             $controller = $_GET['controller'];
             require('../controller/' . $controller . 'Controller.php');
             $request = new User;
-        } else {
+        } else if(isset($_GET['logic'])) {
+            include_once "../view/layouts/account/order-detail.logic.php";
+        }
+        else {
             session_start();
             $this->controlHeader();
             $this->controlContent();
@@ -170,6 +173,54 @@ class Controller
         }
     }
 
+    public function control_account_update_add()
+    {
+        $user_model = new UserModel();
+
+        if (isset($_POST["fullname"])) {
+            $fullname = $_POST["fullname"];
+        }
+        if (isset($_POST["text_province"])) {
+            $province = $_POST["text_province"];
+        }
+        if (isset($_POST["text_district"])) {
+            $district = $_POST['text_district'];
+        }
+        if (isset($_POST['detail'])) {
+            $detail = $_POST['detail'];
+        }
+        if (isset($_POST['phone'])) {
+            $phone = $_POST['phone'];
+        }
+
+        if (isset($_POST['address-default'])) {
+            $default = 1;
+        } else {
+            $default = 0;
+        }
+        $id = $_SESSION['user-id'];
+        $result = $user_model->__insertAdd($id, $fullname, $province, $district, $detail, $phone, $default);
+
+        $_SESSION['success-update'] = $result;
+        if ($result) {
+
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . '?account&&action=maps' . '">';
+            die();
+        }
+    }
+    public function control_account_delete($id)
+    {
+        $user_model = new UserModel();
+        $result = $user_model->__deleteById($id);
+        
+        $_SESSION['success-delete'] = $result;
+        if ($result) {
+
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . '?account&&action=maps' . '">';
+            die();
+        }
+    }
+
     public function controlContent()
     {
         if (isset($_GET["item_list"])) {
@@ -201,12 +252,28 @@ class Controller
                         }
                     case "maps": {
                             include_once "../view/layouts/account/account-maps.php";
+                            if (isset($_POST["update-add"])) {
+                                $this->control_account_update_add();
+                            }
+
                             break;
                         }
                     case "notifi": {
                             include_once "../view/layouts/account/account-notifi.php";
                             break;
                         }
+                    case "delete": {
+                            if (isset($_GET["id"])) {
+                                $id = $_GET["id"];
+                                $this->control_account_delete($id);
+                            }
+                            
+                            break;
+                        }
+                    case "logic": {  
+                        include_once "../view/layouts/account/order-detail.logic.php";
+                        break;
+                    }
                     default: {
                             include_once "../view/layouts/account/account.php";
                             break;

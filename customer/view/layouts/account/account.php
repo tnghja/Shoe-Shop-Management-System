@@ -5,7 +5,7 @@ if (isset($_SESSION["user-id"])) {
 } else {
     $user_id = null;
 }
-echo $user_id;
+// echo $user_id;
 $user_model = new UserModel();
 $users = $user_model->__get($user_id);
 $user = $users->fetch_all(MYSQLI_ASSOC)[0];
@@ -33,11 +33,10 @@ $detail = $address['address_details'] ?? null;
                     <img src="../view/assets/img/avatar/avatar9.jpg">
                     <h3>Xin chào</h3>
                     <?php if (isset($user['username'])) : ?>
-                        <p></p><?= $user['username'] ?></p>
+                        <p><?= $user['username'] ?></p>
                     <?php else : ?>
                         <p></p>
                     <?php endif ?>
-
                 </div>
                 <div class="user__menu mt-1">
                     <div class="user__menu mt-3">
