@@ -90,12 +90,13 @@ function closeModal() {
   errorModal.style.display = "none";
 }
 
-function updateQuantity(product_id, color_id, size_id) {
+function updateQuantity(user_id, product_id, color_id, size_id) {
     // Create the payload object
 
     console.log("'updateQuantity' listener is called.");
 
     let payload = {
+        user_id: user_id,
         product_id: product_id,
         color_id: color_id,
         size_id: size_id,
