@@ -15,7 +15,7 @@
     </div>
 
     <!-- main content wrapper -->
-    <div class="maincontent container container-fluid">
+    <div class="maincontent container-fluid">
         <!-- to do -->
         <div class="mb-2">
             THÊM SẢN PHẨM
@@ -103,7 +103,6 @@
                         <img id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="Choose avatar" style="width: 150px;" />
                     </div>
                 </div>
-
             </div>
 
             <!-- size and stock -->

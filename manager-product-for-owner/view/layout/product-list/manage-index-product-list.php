@@ -19,7 +19,7 @@ include __DIR__ . "/inc/head.php";
     </div>
 
     <!--list product main content wrapper -->
-    <div class="productlist_main mx-0 px-0 container-fluid">
+    <div class="productlist_main container-fluid">
 
         <div class="productlist_content_header">
             <!-- mot phan cua product main content header gom: tieu de va nut them san pham -->

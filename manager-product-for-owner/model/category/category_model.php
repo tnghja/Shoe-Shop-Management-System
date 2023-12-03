@@ -23,12 +23,12 @@ class Category_Model
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // tra ve mot mang
     public function get_category_by_id($id)
     {
         $query = "SELECT * FROM `category` WHERE id = $id;";
         $result = $this->database->select($query);
-        return $result->fetch_all(MYSQLI_ASSOC)[0];
-
+        return $result->fetch_all(MYSQLI_ASSOC)[0]; //*
     }
 }
 

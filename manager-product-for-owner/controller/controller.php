@@ -3,6 +3,7 @@ include_once __DIR__ . '/../model/category/category_model.php';
 include_once __DIR__ . '/../model/product/product_model.php';
 include_once __DIR__ . '/../model/color/color_model.php';
 include_once __DIR__ . '/../model/size/size_model.php';
+include_once __DIR__ . '/../model/inventory/inventory_model.php';
 
 class Controller
 {
@@ -15,20 +16,17 @@ class Controller
 
     public function controlHeader()
     {
-        echo 'Hello. How are you header';
         include_once __DIR__ . '/../view/partials/header.php';
     }
 
     public function controlFooter()
     {
-        echo 'Hello. How are you header';
         include_once __DIR__ . '/../view/partials/footer.php';
     }
 
     //index?page=
     public function controlContent()
     {
-        echo 'Hello. How are you content';
         $page = '';
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
@@ -81,23 +79,9 @@ class Controller
         }
 
         if ($action == 'submit') {
-            echo '<pre> You are already submitted a product </pre>';
-            echo '<pre> We are handling your request </pre>';
-
-            $productname = '';
-            $productcode = '';
-            $customertype = '';
-            $categoryid = '';
-            $colorid = '';
-            $productprice = '';
-            $productimage = '';
-            $productsize = [];
-            $productdesc = '';
 
             if (isset($_POST['addSubmitBTN'])) {
                 $productname = $_POST['productname'];
-                $productcode = $_POST['productcode'];
-                $customertype = $_POST['customertype'];
                 $categoryid = $_POST['categoryid'];
                 $colorid = $_POST['colorid'];
                 $productprice = $_POST['productprice'];
@@ -138,10 +122,148 @@ class Controller
 
     public function control_inventory()
     {
-        // todo
-        include_once __DIR__.'/../view/layout/inventory/manage-index-inventory.php';
+
+        if (isset($_GET['product'])) {
+            $product_id = $_GET['product'];
+            $this->manage_color_of_product($product_id);
+        } else {
+            $categoryObj = new Category_Model();
+            $inventoryObj = new Inventory_Model();
+            $productList = $inventoryObj->get_all_product_not_desc();
+            include_once __DIR__ . '/../view/layout/inventory/manage-index-inventory.php';
+        }
+    }
+
+    public function manage_color_of_product($product_id)
+    {
+        if (isset($_GET['color'])) {
+            $color_id = $_GET['color'];
+            $this->manage_stock_of_product_of_color($product_id, $color_id);
+        } else {
+
+            // handle add new color for product
+            if (isset($_POST['submitAddNewColorForProduct']) && $_POST['submitAddNewColorForProduct'] == 'TRUE') {
+
+                $colorid = $_POST['colorid'];
+                $productimage = $_POST['productimage'];
+                $productsize = [];
+
+                for ($i = 0; $i < 45 - 24 + 1; $i++) {
+                    if (isset($_POST['size' . $i + 24])) {
+                        array_push($productsize, true);
+                    } else {
+                        array_push($productsize, false);
+                    }
+                }
+
+                $inventoryObj = new Inventory_Model();
+                $res = $inventoryObj->add_new_color_for_product($product_id, $colorid, $productimage, $productsize);
+
+            }elseif (isset($_POST['submitRemoveColorOfProduct']) && $_POST['submitRemoveColorOfProduct'] == 'TRUE'){
+
+                $removeColorId = $_POST['removeColorId'];
+                $inventoryObj = new Inventory_Model();
+                $res = $inventoryObj->remove_color_of_product($product_id, $removeColorId);
+
+                echo "<h1>Xoa thanh cong</h1>";
+
+            }
+
+            $inventoryObj = new Inventory_Model();
+            include_once __DIR__ . '/../view/layout/inventory/mange-color-of-product.php';
+        }
+    }
+
+    public function manage_stock_of_product_of_color($product_id, $color_id)
+    {
+
+
+        if (isset($_POST['submitAddNewSizeForProduct']) && $_POST['submitAddNewSizeForProduct'] == 'TRUE') {
+            // ADD
+            $newSizeList = [];
+
+            for ($i = 0; $i < 45 - 24 + 1; $i++) {
+                if (isset($_POST['size' . $i + 24])) {
+                    array_push($newSizeList, $i + 24);
+                } else {
+                    array_push($newSizeList, NULL);
+                }
+            }
+
+            $this->handle_add_new_size_for_productColor($product_id, $color_id, $newSizeList);
+
+        } elseif (isset($_POST['submitUpdateQuantity']) && $_POST['submitUpdateQuantity'] == 'TRUE') {
+            // UPDATE
+            $sizeQuantityList = [];
+
+            for ($i = 0; $i < 45 - 24 + 1; $i++) {
+                if (isset($_POST['numOfSize' . $i + 24])) {
+                    array_push($sizeQuantityList, ($_POST['numOfSize' . $i + 24]));
+                } else {
+                    array_push($sizeQuantityList, NULL);
+                }
+            }
+
+            $this->handle_update_quantity_for_productColor($product_id, $color_id, $sizeQuantityList);
+
+        } elseif (isset($_POST['submitRemoveSizeOfProduct']) && $_POST['submitRemoveSizeOfProduct'] == 'TRUE') {
+            // REMOVE
+            $removeSizeList = [];
+
+            for ($i = 0; $i < 45 - 24 + 1; $i++) {
+                if (isset($_POST['size' . $i + 24])) {
+                    array_push($removeSizeList, $i + 24);
+                } else {
+                    array_push($removeSizeList, NULL);
+                }
+            }
+
+            $this->handle_remove_size_of_productColor($product_id, $color_id, $removeSizeList);
+        }
+
+        $inventoryObj = new Inventory_Model();
+        include_once __DIR__ . '/../view/layout/inventory/manage-stock.php';
+    }
+
+
+    public function handle_add_new_size_for_productColor($product_id, $color_id, $newSizeList)
+    {
+
+        $inventoryObj = new Inventory_Model();
+        foreach ($newSizeList as $newSize) {
+            if ($newSize != NULL) {
+                $res = $inventoryObj->add_new_size_for_productColor($product_id, $color_id, $newSize);
+            }
+        }
+    }
+
+    public function handle_update_quantity_for_productColor($product_id, $color_id, $sizeQuantityList)
+    {
+        $inventoryObj = new Inventory_Model();
+        $sizeCount = 24;
+        foreach ($sizeQuantityList as $sizeQuantity) {
+            if ($sizeQuantity != NULL) {
+                $res = $inventoryObj->update_quantity_for_aSize_of_productColor($product_id, $color_id, $sizeCount, $sizeQuantity);
+            }
+            $sizeCount += 1;
+        }
+    }
+
+    public function handle_remove_size_of_productColor($product_id, $color_id, $removeSizeList){
+
+        $inventoryObj = new Inventory_Model();
+        foreach ($removeSizeList as $removeSize) {
+            if ($removeSize != NULL) {
+                $res = $inventoryObj->remove_size_of_productColor($product_id, $color_id, $removeSize);
+            }
+        }
+
     }
 }
+
+
+
+
 
 // ------------------
 // Dung code
