@@ -64,7 +64,7 @@ else {
                             <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> NAM </a>
                             <ul class="dropdown-menu border-0 pb-0">
                                 <?php
-                                $categories = $category_model->get_category_by_object("Nam");
+                                $categories = $category_model->get_category_by_object("1");
                                 foreach ($categories as $category) { ?>
                                     <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id'] ?>"><?php echo $category['category_name']; ?></a></li>
                                 <?php } ?>
@@ -74,7 +74,7 @@ else {
                             <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> NỮ </a>
                             <ul class="dropdown-menu border-0 pb-0">
                                 <?php
-                                $categories = $category_model->get_category_by_object("Nữ");
+                                $categories = $category_model->get_category_by_object("2");
                                 foreach ($categories as $category) { ?>
                                     <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                 <?php } ?>
@@ -84,7 +84,7 @@ else {
                             <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> BÉ TRAI </a>
                             <ul class="dropdown-menu border-0 pb-0">
                                 <?php
-                                $categories = $category_model->get_category_by_object("Bé Trai");
+                                $categories = $category_model->get_category_by_object("3");
                                 foreach ($categories as $category) { ?>
                                     <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                 <?php } ?>
@@ -94,7 +94,7 @@ else {
                             <a class="p-0 me-5 nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> BÉ GÁI </a>
                             <ul class="dropdown-menu border-0 pb-0">
                                 <?php
-                                $categories = $category_model->get_category_by_object("Bé Gái");
+                                $categories = $category_model->get_category_by_object("4");
                                 foreach ($categories as $category) { ?>
                                     <li class="border"><a class="dropdown-item" href="../app/index.php?item_list&&category_id=<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></a></li>
                                 <?php } ?>
