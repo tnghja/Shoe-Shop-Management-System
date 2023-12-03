@@ -49,20 +49,21 @@ document
   });
 
 
-document.getElementById("checkout-complete").addEventListener("click", () => {
+function checkout_complete(user_id) {
     // Assuming you have a <select> element with the id "mySelect"
     let provinceNode = document.getElementById("user-info__select-province");
     let districtNode = document.getElementById("user-info__select-district");
 
     // Get the selected option
     let prov = provinceNode.options[provinceNode.selectedIndex].innerText;
-    let distr = districtNode.options[provinceNode.selectedIndex].innerText;
+    let distr = districtNode.options[districtNode.selectedIndex].innerText;
     let fullName = document.getElementById('full-name').value;
     let phoneNumber = document.getElementById('phone-number').value;
     let addr = document.getElementById('address').value;
     let paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
 
     payload = {
+        "user_id": user_id,
         province: prov,
         district: distr,
         full_name: fullName,
@@ -89,5 +90,5 @@ document.getElementById("checkout-complete").addEventListener("click", () => {
             failModel.style.display = "block";
         }
     )
-})
+}
 

@@ -19,7 +19,8 @@ foreach ($fields as $field) {
 }
 
 // If user is anonymous and the cart is empty, set an order id to the cookie
-$user_id = isset($_SESSION['user-id']) or null;
+$user_id = $payload["user_id"];
+echo $user_id;
 $order_id = null;
 
 // Check if there exists any item in user's cart
@@ -43,7 +44,7 @@ if ($user_id) {
 } else if (!isset($_COOKIE['order-id'])) {
     // If the user is using the app anonymously...
     $create_order_q = "INSERT INTO orderdetails (is_cart) VALUES (TRUE)";
-    $prep_stmt = mysqli_prepare($db->link, $create_order_q);
+    $prep_stmt = mysqli_prepare(Database::$link, $create_order_q);
 
     if (!$prep_stmt->execute()) {
         http_response_code(500);
@@ -68,13 +69,15 @@ $product_check_q = "SELECT order_id, product_id, color_id, size_id
                     FROM order_has_product
                     WHERE order_id =".$order_id." AND product_id =".$product_id." AND color_id = ".$color_id." AND size_id = ".$size_id.";";
 
+echo $product_check_q;
+
 if (!$db->select($product_check_q)) {
     // Add new item and quantity to the cart
     $add_item_q = "INSERT INTO order_has_product
                     (order_id, product_id, color_id, size_id, product_count)
                     VALUES (?, ?, ?, ?, ?)";
 
-    $add_item_prep = $db->link->prepare($add_item_q);
+    $add_item_prep = Database::$link->prepare($add_item_q);
     $add_item_prep->bind_param("iiiii", $order_id, $product_id, $color_id, $size_id, $quantity);
 
     if (!$add_item_prep->execute()) {

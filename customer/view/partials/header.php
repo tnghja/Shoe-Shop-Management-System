@@ -156,52 +156,33 @@ else {
                                 <p class="text-center mb-0">GIỎ HÀNG</p>
                                 <hr class="hr hr-blurry w-75 my-2 mx-auto" />
                                 <div>
-                                    <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item" href="./detail-item.html">
-                                        <div class="col-md-4">
-                                            <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="img-fluid rounded-start" alt="...">
-                                        </div>
-                                        <div class="col-md-8 card-body">
-                                            <div class="row mx-0 mb-3">
-                                                <p class="card-text col-md-12 header__cart-title">Tên sản phẩm</p>
+                                    <?php foreach ($cart_items as $cart_item) { ?>
+                                        <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item" href="./detail-item.html">
+                                            <div class="col-md-4">
+                                                <img src="<?php echo $cart_item["product_img"] ?>" class="img-fluid rounded-start" alt="...">
                                             </div>
-                                            <div class="row mb-3 mx-0">
-                                                <div class="col-md-8">
-                                                    <p class="card-text"><small class="text-body-secondary">Màu/Size</small>
-                                                    </p>
+                                            <div class="col-md-8 card-body">
+                                                <div class="row mx-0 mb-3">
+                                                    <p class="card-text col-md-12 header__cart-title"><?php echo $cart_item["product_name"] ?></p>
                                                 </div>
-                                                <div class="col-md-2 header__cart-quantity"> 1 </div>
-                                            </div>
-                                            <div class="row justify-content-end mx-0">
-                                                <p class="card-text col-md-6">500.000đ</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="row g-0 border link-underline link-underline-opacity-0 text-black header__cart-item" href="./detail-item.html">
-                                        <div class="col-md-4">
-                                            <img src="../view/assets/img/shoe/shoename/shoeimg.png" class="img-fluid rounded-start" alt="...">
-                                        </div>
-                                        <div class="col-md-8 card-body">
-                                            <div class="row mx-0 mb-3">
-                                                <p class="card-text col-md-12 header__cart-title">Tên sản phẩm</p>
-                                            </div>
-                                            <div class="row mb-3 mx-0">
-                                                <div class="col-md-8">
-                                                    <p class="card-text"><small class="text-body-secondary">Màu/Size</small>
-                                                    </p>
+                                                <div class="row mb-3 mx-0">
+                                                    <div class="col-md-8">
+                                                        <p class="card-text"><small class="text-body-secondary">Màu: <?php echo $cart_item["color_name"] ?></small>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-2 header__cart-quantity"> <?php echo $cart_item["cart_quantity"] ?> </div>
                                                 </div>
-                                                <div class="col-md-2 header__cart-quantity"> 1 </div>
                                             </div>
-                                            <div class="row justify-content-end mx-0">
-                                                <p class="card-text col-md-6">500.000đ</p>
-                                            </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    <?php } ?>
                                 </div>
+                                <?php if ($total_price) { ?>
                                 <div class="row justify-content-end mx-0 my-2">
-                                    <p class="card-text text-danger col-md-4">1.000.000đ</p>
+                                    <p class="card-text text-danger col-md-4"><?php echo $total_price ?> đ</p>
                                 </div>
+                                <?php } ?>
                                 <div class="d-grid col-10 mx-auto">
-                                    <button onclick="location.href='./cart.html'" class="btn btn-dark" type="button">Xem giỏ hàng</button>
+                                    <button onclick="location.href='.?cart'" class="btn btn-dark" type="button">Xem giỏ hàng</button>
                                 </div>
                             </div>
                         </li>

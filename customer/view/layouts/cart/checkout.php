@@ -1,3 +1,19 @@
+    <?php 
+        $user_id = 'null';
+        if (isset($_SESSION['user-id'])) {
+            $user_id = $_SESSION['user-id'];
+        }
+        
+        $first_name = ""; $last_name = ""; $phone_number = "";
+        $info_row = $db->select("SELECT firstname, lastname, phone_number FROM customeraccount WHERE id = ".$user_id.";");
+        if ($info_row) {
+            $info_row = $info_row->fetch_assoc();
+            $first_name = $info_row["firstname"];
+            $last_name = $info_row["lastname"];
+            $phone_number = $info_row["phone_number"];
+        }
+    ?>
+
     <div class="main-body container mb-5">
         <div class="row">
             <h1 class="text-center my-5">Thanh toán</h1>
@@ -53,7 +69,7 @@
                 <div class="d-flex flex-column justify-content-start">
                     <h4 class="text-md-start text-sm-center">Thông tin giao hàng</h3>
                     <div class="form-floating">
-                        <input required type="text" id="full-name" class="form-control mb-2" placeholder="Họ và tên">
+                        <input required type="text" id="full-name" value="<?php echo $first_name ?> <?php echo $last_name ?>" class="form-control mb-2" placeholder="Họ và tên">
                         <label for="full-name">Họ và tên<label>
                     </div>
                     <div id="user-info__select-location">
@@ -75,7 +91,7 @@
                         </div>
                     </div>
                     <div class="form-floating">
-                        <input required  type="text" id="phone-number" class="form-control mb-2" placeholder="Số điện thoại">
+                        <input required  type="text" id="phone-number" value="<?php echo $phone_number ?>" class="form-control mb-2" placeholder="Số điện thoại">
                         <label for="phone-number">Số điện thoại</label>
                     </div>
                 </div>
@@ -105,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" id="checkout-complete" class="btn btn-primary col-4 align-self-center">Đặt hàng</button>
+                <button type="button" id="checkout-complete" onclick="checkout_complete(<?php echo $user_id ?>)" class="btn btn-primary col-4 align-self-center">Đặt hàng</button>
                 </div>
         </div>
     </div>

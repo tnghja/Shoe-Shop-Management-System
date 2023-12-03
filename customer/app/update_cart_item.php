@@ -8,7 +8,7 @@ $session = new Session();
 // Validate payload's sent from the client
 $request_body = file_get_contents('php://input');
 $payload = json_decode($request_body, true);
-$fields = ["product_id", "color_id", "size_id", "quantity"];
+$fields = ["product_id", "color_id", "size_id", "quantity", "user_id"];
 
 foreach ($fields as $field) {
     if (!isset($payload[$field])) {
@@ -18,8 +18,7 @@ foreach ($fields as $field) {
     }
 }
 
-// If user is anonymous and the cart is empty, set an order id to the cookie
-$user_id = isset($_SESSION['user-id']) or null;
+$user_id = $payload["user_id"];
 $order_id = null;
 
 // Check if there exists any item in user's cart
