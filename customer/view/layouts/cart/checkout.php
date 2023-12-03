@@ -8,118 +8,74 @@
 
                 <div class="cart d-flex flex-column border-bottom">
 
+                <?php foreach ($cart_items as $cart_item) { ?>
+
                     <div class="cart-item container mb-2">
                         <div class="row mb-1">
-                            <img src="../view/assets/img/shoe/shoename3/shoes.png" class="col-lg-2">
+                            <img src="<?php echo $cart_item['product_img'] ?>" class="col-lg-2">
                             <div class="cart-item-info col-md-8 col-sm-10">
                                 <h5 class="cart-item-title">
-                                    Tên sản phẩm
+                                    <?php echo $cart_item['product_name'] ?>
                                 </h5>
+
                                 <div class="cart-item-attr d-flex">
-                                    <p class="me-2">Màu sắc: đỏ</p>
-                                    <p class="me-2">Kích thước: 42</p>
-                                    <p class="me-2">Số lượng: 1</p>
+                                    <p class="me-2">Màu sắc: <?php echo $cart_item['color_name'] ?></p>
+                                    <p class="me-2">Kích thước: <?php echo $cart_item['size_name'] ?></p>
+                                    <p class="me-2">Số lượng: <?php echo $cart_item['cart_quantity'] ?></p>
                                 </div>
                             </div>
                             <div class="cart-item-price col-2 py-1">
-                                <h5 class="text-end">500.000 đ</h5>
+                                <h5 class="text-end"><?php echo $cart_item['price'] ?>đ</h5>
                             </div>
                         </div>
                     </div>
 
-                    <div class="cart-item container mb-2">
-                        <div class="row mb-1">
-                            <img src="../view/assets/img/shoe/shoename3/shoes.png" class="col-lg-2">
-                            <div class="cart-item-info col-md-8 col-sm-10">
-                                <h5 class="cart-item-title"> Tên sản phẩm </h5>
-                                <div class="cart-item-attr d-flex">
-                                    <p class="me-2">Màu sắc: đỏ</p>
-                                    <p class="me-2">Kích thước: 42</p>
-                                    <p class="me-2">Số lượng: 1</p>
-                                </div>
-                            </div>
-                            <div class="cart-item-price col-2 py-1">
-                                <h5 class="text-end">500.000 đ</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart-item container mb-2">
-                        <div class="row mb-1">
-                            <img src="../view/assets/img/shoe/shoename3/shoes.png" class="col-lg-2">
-                            <div class="cart-item-info col-md-8 col-sm-10">
-                                <h5 class="cart-item-title"> Tên sản phẩm </h5>
-                                <div class="cart-item-attr d-flex">
-                                    <p class="me-2">Màu sắc: đỏ</p>
-                                    <p class="me-2">Kích thước: 42</p>
-                                    <p class="me-2">Số lượng: 1</p>
-                                </div>
-                            </div>
-                            <div class="cart-item-price col-2 py-1">
-                                <h5 class="text-end">500.000 đ</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart-item container mb-2">
-                        <div class="row mb-1">
-                            <img src="../view/assets/img/shoe/shoename3/shoes.png" class="col-lg-2">
-                            <div class="cart-item-info col-md-8 col-sm-10">
-                                <h5 class="cart-item-title"> Tên sản phẩm </h5>
-                                <div class="cart-item-attr d-flex">
-                                    <p class="me-2">Màu sắc: đỏ</p>
-                                    <p class="me-2">Kích thước: 42</p>
-                                    <p class="me-2">Số lượng: 1</p>
-                                </div>
-                            </div>
-                            <div class="cart-item-price col-2 py-1">
-                                <h5 class="text-end">500.000 đ</h5>
-                            </div>
-                        </div>
-                    </div>
+                <?php } ?>
 
                 </div>
 
                 <div class="row">
                     <h5 class="col-8">Giá trị đơn hàng</h5>
-                    <h5 class="col-4 text-end">10000$</h5>
+                    <h5 class="col-4 text-end"><?php echo $total_price ?> đ</h5>
                 </div>
 
                 <div class="row">
                     <h5 class="col-8">Phí vận chuyển</h5>
-                    <h5 class="col-4 text-end">4$</h5>
+                    <h5 class="col-4 text-end">0 đ</h5>
                 </div>
 
                 <div class="row">
                     <h5 class="col-8">Tổng</h5>
-                    <h5 class="col-4 text-end">10000$</h5>
+                    <h5 class="col-4 text-end"><?php echo $total_price ?> đ</h5>
                 </div>
             </div>
             <div class="col-md d-flex flex-column justify-content-start">
                 <div class="d-flex flex-column justify-content-start">
                     <h4 class="text-md-start text-sm-center">Thông tin giao hàng</h3>
                     <div class="form-floating">
-                        <input type="text" id="full-name" class="form-control mb-2" placeholder="Họ và tên">
+                        <input required type="text" id="full-name" class="form-control mb-2" placeholder="Họ và tên">
                         <label for="full-name">Họ và tên<label>
                     </div>
                     <div id="user-info__select-location">
                         <div class="form-floating">
-                            <select class="form-control form-select mb-2" id="user-info__select-province">
+                            <select required  class="form-control form-select mb-2" id="user-info__select-province">
                                 <option selected>Chọn tỉnh/thành phố</option>
                             </select>
                             <label for="user-info__select-province">tỉnh/thành phố</label>
                         </div>
                         <div class="form-floating">
-                            <select class="form-control form-select mb-2" id="user-info__select-district">
+                            <select required class="form-control form-select mb-2" id="user-info__select-district">
                                 <option selected>Chọn quận/huyện</option>
                             </select>
                             <label for="user-info__select-district">Quận/huyện</label>
                         </div>
                         <div class="form-floating">
-                            <input type="text" class="form-control mb-2" id="address" placeholder="Số nhà, đường,...">
+                            <input required type="text" class="form-control mb-2" id="address" placeholder="Số nhà, đường,...">
                             <label for="address">Địa chỉ nhận hàng</label>
                         </div>
                     </div>
                     <div class="form-floating">
-                        <input type="text" id="phone-number" class="form-control mb-2" placeholder="Số điện thoại">
+                        <input required  type="text" id="phone-number" class="form-control mb-2" placeholder="Số điện thoại">
                         <label for="phone-number">Số điện thoại</label>
                     </div>
                 </div>
@@ -127,21 +83,21 @@
                     <h4 class="text-start mt-2">Thanh toán qua</h1>
                     <div class="container">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment-method" value="" id="momo-payment">
+                            <input class="form-check-input" type="radio" name="payment-method" value=3 id="momo-payment">
                             <label class="form-check-label d-flex justify-content-between" for="momo-payment">
                                 <p class="">Thanh toán bằng Momo</p>
                                 <img src="../view/assets/img/momo.jpg" class="payment-method__icon">
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment-method" value="" id="zalopay-payment">
+                            <input class="form-check-input" type="radio" name="payment-method" value=2 id="zalopay-payment">
                             <label class="form-check-label d-flex justify-content-between" for="zalo-payment">
                                 <p class="">Thanh toán bằng Zalopay</p>
                                 <img src="../view/assets/img/zalopay.png" class="payment-method__icon">
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment-method" value="" id="cash-payment">
+                            <input class="form-check-input" checked type="radio" name="payment-method" value=1 id="cash-payment">
                             <label class="form-check-label d-flex justify-content-between" for="zalo-payment">
                                 <p class="">Thanh toán khi nhận hàng</p>
                                 <img src="../view/assets/img/cash.png" class="payment-method__icon">
@@ -149,7 +105,44 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary col-4 align-self-center">Đặt hàng</button>
+                <button type="button" id="checkout-complete" class="btn btn-primary col-4 align-self-center">Đặt hàng</button>
+                </div>
+        </div>
+    </div>
+
+<div class="modal" id="checkout-success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Đặt mua thành công!</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Cảm ơn bạn vì đã chọn FiveChicken.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/app/" type="button" class="btn btn-primary mx-auto">Về trang chủ</a>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal" id="checkout-failed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Có lỗi xảy ra.</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Vui lòng thử lại sau.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/app/" type="button" class="btn btn-primary mx-auto">Về trang chủ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../view/assets/js/fetch_geo_data.js"></script>
+<script src="../view/assets/js/main.js"></script>

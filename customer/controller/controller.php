@@ -238,6 +238,7 @@ class Controller
     {
         if (isset($_GET["item_list"])) {
             $this->control_item_list();
+            $this->control_item_list();
         } else if (isset($_GET["detail_item"])) {
             $this->control_detail_item();
         } else if (isset($_GET["account"])) {
@@ -306,11 +307,13 @@ class Controller
             }
         } else {
             include_once "../view//layouts/homepage.php";
+            include_once "../view//layouts/homepage.php";
         }
     }
 
     public function controlFooter()
     {
+        include_once "../view//partials/footer.php";
         include_once "../view//partials/footer.php";
     }
 }
