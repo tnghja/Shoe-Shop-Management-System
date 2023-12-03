@@ -1,7 +1,3 @@
-<?php
-include __DIR__ . "/inc/head.php";
-?>
-
 <!-- main wrapper -->
 <div class="main_wrapper d-flex flex-row">
     <!-- side navigate wrapper -->
@@ -10,7 +6,7 @@ include __DIR__ . "/inc/head.php";
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=dashboard">Dashboard</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=product-list">Danh sách
                 sản phẩm</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=add-product" >Thêm sản phẩm</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=add-product">Thêm sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=category">Danh mục sản
                 phẩm</a>
@@ -43,10 +39,9 @@ include __DIR__ . "/inc/head.php";
                     </div>
                 </div>
 
-                <a href="/manage-index-add.html" type="button" class="btn btn-primary me-4 rounded-4">Thêm sản phẩm</a>
+                <a href="index.php?page=add-product" type="button" class="btn btn-primary me-4 rounded-4">Thêm sản phẩm</a>
             </div>
         </div>
-
 
         <!-- danh sach san pham -->
         <div class="productlist mx-2">
@@ -57,457 +52,78 @@ include __DIR__ . "/inc/head.php";
                         table-sm mb-0">
                     <thead class="table-secondary table-sm">
                         <tr>
-                            <th style="width: 80px;">Hình ảnh</th>
-                            <th>Mã</th>
+                            <th class="text-center" style="width: 50px;">Mã</th>
                             <th>Tên sản phẩm</th>
-                            <th>Màu</th>
-                            <th>Tồn kho</th>
-                            <th>Giá</th>
-                            <th style="width: 200px;">Thao tác</th>
+                            <th class="text-center">Đối tượng</th>
+                            <th class="text-center">Loại</th>
+                            <th style="width: 150px;" class="text-center">Giá</th>
+                            <th style="width: 120px;" class="text-center">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody class="producttable__body">
-                        <tr class="table__row" id="table_element_first">
-                            <td scope="row">
-                                <img class="" src="/assets/img/shoe/shoename3/shoes.png" width="70px" height="70px" alt="avatar">
-                            </td>
-                            <td>
-                                HSM00100
-                            </td>
-                            <td>
-                                Giày Thể Thao Nữ Biti's Hunter
-                            </td>
-                            <td>
-                                Nâu
-                            </td>
-                            <td>
-                                199200
-                            </td>
-                            <td>
-                                736,000
-                            </td>
-                            <td class="productoperator" class="btn-group btn-group-sm p-0 m-0" role="button" aria-label="check stock of the product">
-                                <div class="checkproduct btn btn-sm btn-outline-secondary">
-                                    KIỂM TRA
-                                </div>
+                        <?php foreach ($productList as $product) {
+                            // echo var_dump($product['id']);
 
+                            $category = $categoryObj->get_category_by_id($product['category_id']);
+                        ?>
+                            <tr class="table__row">
+                                <td class="text-center">
+                                    <?php echo $product['id'] ?>
+                                </td>
 
-                            </td>
-                        </tr>
-                        <tr class="table__row" id="table_element_second">
-                            <td scope="row">
-                                <img class="" src="/assets/img/shoe/shoename3/shoes.png" width="70px" height="70px" alt="avatar">
-                            </td>
-                            <td>
-                                HSM00100
-                            </td>
-                            <td>
-                                Giày Thể Thao Nữ Biti's Hunter
-                            </td>
-                            <td>
-                                Trắng
-                            </td>
-                            <td>
-                                199200
-                            </td>
-                            <td>
-                                736,000
-                            </td>
-                            <td class="productoperator" class="btn-group btn-group-sm p-0 m-0" role="button" aria-label="check stock of the product">
-                                <div class="checkproduct btn btn-sm btn-outline-secondary">
-                                    KIỂM TRA
-                                </div>
+                                <td>
+                                    <?php echo $product['product_name'] ?>
+                                </td>
 
+                                <td class="text-center">
+                                    <?php echo $category['object'] ?>
+                                </td>
 
-                            </td>
-                        </tr>
-                        <tr class="ttable__row" id="table_element_third">
-                            <td scope="row">
-                                <img class="" src="/assets/img/shoe/shoename3/shoes.png" width="70px" height="70px" alt="avatar">
-                            </td>
-                            <td>
-                                HSM00100
-                            </td>
-                            <td>
-                                Giày Thể Thao Nữ Biti's Hunter
-                            </td>
-                            <td>
-                                Trắng
-                            </td>
-                            <td>
-                                199200
-                            </td>
-                            <td>
-                                736,000
-                            </td>
-                            <td class="productoperator" class="btn-group btn-group-sm p-0 m-0" role="button" aria-label="check stock of the product">
-                                <div class="checkproduct btn btn-sm btn-outline-secondary">
-                                    KIỂM TRA
-                                </div>
+                                <td class="text-center">
+                                    <?php echo $category['category_name'] ?>
+                                </td>
 
+                                <td style="width: 150px;" class="text-center">
+                                    <?php echo $product['price'] ?>
+                                </td>
 
-                            </td>
-                        </tr>
-                        <tr class="table__row" id="table_element_fourth">
-                            <td scope="row">
-                                <img class="" src="/assets/img/shoe/shoename3/shoes.png" width="70px" height="70px" alt="avatar">
-                            </td>
-                            <td>
-                                HSM00100
-                            </td>
-                            <td>
-                                Giày Thể Thao Nữ Biti's Hunter
-                            </td>
-                            <td>
-                                Trắng
-                            </td>
-                            <td>
-                                199200
-                            </td>
-                            <td>
-                                736,000
-                            </td>
-                            <td class="productoperator" class="btn-group btn-group-sm p-0 m-0" role="button" aria-label="check stock of the product">
-                                <div class="checkproduct btn btn-sm btn-outline-secondary">
-                                    KIỂM TRA
-                                </div>
+                                <td style="width: 120px;" class="text-center">
+                                    <a class="btn btn-secondary p-2 m-0" href="index.php?page=inventory&product=<?php echo $product['id'] ?>" role="button" aria-label="check stock of the product">
+                                        KIỂM TRA
+                                    </a>
+                                </td>
+                            </tr>
 
-
-                            </td>
-                        </tr>
-                        <tr class="table__row" id="table_element_fifth">
-                            <td scope="row">
-                                <img class="" src="/assets/img/shoe/shoename3/shoes.png" width="70px" height="70px" alt="avatar">
-                            </td>
-                            <td>
-                                HSM00100
-                            </td>
-                            <td>
-                                Giày Thể Thao Nữ Biti's Hunter
-                            </td>
-                            <td>
-                                Trắng
-                            </td>
-                            <td>
-                                199200
-                            </td>
-                            <td>
-                                736,000
-                            </td>
-                            <td class="productoperator" class="btn-group btn-group-sm p-0 m-0" role="button" aria-label="check stock of the product">
-                                <div class="checkproduct btn btn-sm btn-outline-secondary">
-                                    KIỂM TRA
-                                </div>
-                            </td>
-                        </tr>
+                        <?php
+                        }
+                        ?>
                     </tbody>
                     <tfoot>
 
                     </tfoot>
                 </table>
                 <!-- navigation -->
-                <nav aria-label="Page navigation" class="m-1 mb-3">
-                    <ul class="pagination pagination-sm justify-content-end me-2">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <nav aria-label=" Page navigation" class="m-1 mb-3">
+                                        <ul class="pagination pagination-sm justify-content-end me-2">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        </nav>
 
             </div>
-            <!-- sise and stock -->
-            <div class="view_stock">
-                <div class="containner container-fluid">
-                    <div class="d-flex flex-lg-row flex-column m-0 justify-content-around">
-                        <div class="view_stock__productInfor mx-1 mb-lg-0 mb-1 d-md-flex flex-row border border-2 border-black rounded-2 bg-info-subtle">
-                            <div class="mx-3 text-black">
-                                Mã sản phẩm: HSM00100
-                            </div>
-                            <div class="mx-3 text-black">
-                                Tên sản phẩm: Giày Thể Thao Nữ Biti's Hunter
-                            </div>
-                            <div class="mx-3 text-black">
-                                Tổng tồn kho: 199200
-                            </div>
-                        </div>
-                        <div class="mx-1 mb-lg-0 mb-1" class="btn-group btn-group-sm p-0 m-0" role="button" aria-label="update stock of the product">
-                            <div class="checkproduct btn btn-sm btn-danger">
-                                CẬP NHẬT
-                            </div>
-                        </div>
-                        <div class="mx-1 mb-lg-0 mb-1" class="btn-group btn-group-sm p-0 m-0" role="button" aria-label="save">
-                            <div class="checkproduct btn btn-sm btn-danger">
-                                LƯU THAY ĐỔI
-                            </div>
-                        </div>
-                    </div>
-                    <form class="inventoryform" action="" method="get">
-                        <div class="size_stock border border-1 rounded-2 border-light bg-body-tertiary px-1 py-2 my-1">
-                            <div class="size_stock d-flex flex-row flex-wrap">
-                                <!-- size 24 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize24" id="checksize24" checked disabled>
-                                        <label class="form-check-label" for="checksize24" aria-readonly="true">
-                                            size24
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize24" id="numofsize24" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 25 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize25" id="checksize25" checked disabled>
-                                        <label class="form-check-label" for="checksize25" aria-readonly="true">
-                                            size25
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize25" id="numofsize25" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 26 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize26" id="checksize26" checked disabled>
-                                        <label class="form-check-label" for="checksize26" aria-readonly="true">
-                                            size26
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize26" id="numofsize26" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 27 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize27" id="checksize27" checked disabled>
-                                        <label class="form-check-label" for="checksize27" aria-readonly="true">
-                                            size27
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize27" id="numofsize27" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 28 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize28" id="checksize28" checked disabled>
-                                        <label class="form-check-label" for="checksize28" aria-readonly="true">
-                                            size28
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize28" id="numofsize28" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 29 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize29" id="checksize29" checked disabled>
-                                        <label class="form-check-label" for="checksize29" aria-readonly="true">
-                                            size29
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize29" id="numofsize29" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 30 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize30" id="checksize30" checked disabled>
-                                        <label class="form-check-label" for="checksize30" aria-readonly="true">
-                                            size30
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize30" id="numofsize30" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 31 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize31" id="checksize31" checked disabled>
-                                        <label class="form-check-label" for="checksize31" aria-readonly="true">
-                                            size31
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize31" id="numofsize31" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 32 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize32" id="checksize32" checked disabled>
-                                        <label class="form-check-label" for="checksize32" aria-readonly="true">
-                                            size32
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize32" id="numofsize32" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 33 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize33" id="checksize33" checked disabled>
-                                        <label class="form-check-label" for="checksize33" aria-readonly="true">
-                                            size33
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize33" id="numofsize33" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 34 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize34" id="checksize34" checked disabled>
-                                        <label class="form-check-label" for="checksize34" aria-readonly="true">
-                                            size34
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize34" id="numofsize34" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 35 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize35" id="checksize35" checked disabled>
-                                        <label class="form-check-label" for="checksize35" aria-readonly="true">
-                                            size35
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize35" id="numofsize35" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 36 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize36" id="checksize36" checked disabled>
-                                        <label class="form-check-label" for="checksize36" aria-readonly="true">
-                                            size36
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize36" id="numofsize36" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 37 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize37" id="checksize37" checked disabled>
-                                        <label class="form-check-label" for="checksize37" aria-readonly="true">
-                                            size37
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize37" id="numofsize37" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 38 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize38" id="checksize38" checked disabled>
-                                        <label class="form-check-label" for="checksize38" aria-readonly="true">
-                                            size38
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize38" id="numofsize38" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 39 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize39" id="checksize39" checked disabled>
-                                        <label class="form-check-label" for="checksize39" aria-readonly="true">
-                                            size39
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize39" id="numofsize39" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 40 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize40" id="checksize40" checked disabled>
-                                        <label class="form-check-label" for="checksize40" aria-readonly="true">
-                                            size40
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize40" id="numofsize40" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 41 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize41" id="checksize41" checked disabled>
-                                        <label class="form-check-label" for="checksize41" aria-readonly="true">
-                                            size41
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize41" id="numofsize41" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 42 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize42" id="checksize42" checked disabled>
-                                        <label class="form-check-label" for="checksize42" aria-readonly="true">
-                                            size42
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize42" id="numofsize42" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 43 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize43" id="checksize43" checked disabled>
-                                        <label class="form-check-label" for="checksize43" aria-readonly="true">
-                                            size43
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize43" id="numofsize43" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 44 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize44" id="checksize44" checked disabled>
-                                        <label class="form-check-label" for="checksize44" aria-readonly="true">
-                                            size44
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize44" id="numofsize44" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                                <!-- size 45 -->
-                                <div class="form-check-inline d-flex flex-column align-content-between m-3 p-1 border rounded-2">
-                                    <div>
-                                        <input class="form-check-input" type="checkbox" value="checksize45" id="checksize45" checked disabled>
-                                        <label class="form-check-label" for="checksize45" aria-readonly="true">
-                                            size45
-                                        </label>
-                                    </div>
-                                    <input type="number" class="form-control text-end pe-0" name="numofsize45" id="numofsize45" maxlength="5" max="10000" min="0" value="900" readonly>
-                                </div>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
         </div>
 
     </div>
 
 </div>
-
-<?php
-include __DIR__ . "/inc/foot.php";
-?>

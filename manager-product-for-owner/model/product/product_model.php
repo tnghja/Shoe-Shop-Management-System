@@ -17,7 +17,8 @@ class Product_Model
         return $result->fetch_all(MYSQLI_ASSOC)[0];
     }
 
-    public function get_product_list($category_id)
+    // rename 'get_product_list()' to 'get_product_list_by_category()' - 2/12/2023
+    public function get_product_list_by_category($category_id)
     {
         $query = "SELECT * FROM `product` WHERE category_id = '$category_id';";
         $result = $this->database->select($query);
@@ -174,6 +175,7 @@ class Product_Model
         return $result->fetch_all(MYSQLI_ASSOC)[0]['product_img'];
     }
 
+    // Dung's function
     public function add_product_infor($productname, $productprice, $productdesc, $category_id, $colorid, $productimage, $productsize)
     {
         // validate input
@@ -183,17 +185,13 @@ class Product_Model
 
         $query = "INSERT INTO `product`(`id`, `product_name`, `price`, `description`, `category_id`) VALUES (NULL, '$productname', '$productprice', '$productdesc', '$category_id')";
         $product_id = $this->database->insert_for_autoIncrement($query);
-
-        echo "<h1>" . var_dump($product_id) . "</h1>";
-
-
         
 
         $query = "INSERT INTO `product_has_colors` (`product_id`, `color_id`, `product_img`) VALUES ('$product_id', '$colorid', '$productimage')";
         $result1 = $this->database->insert($query);
 
-        echo "<h1>" . var_dump($product_id) . "</h1>";
 
+        // insert size
         for ($i = 24; $i <= 45; $i++) {
             if ($productsize[$i - 24] == true) {
 
@@ -201,8 +199,6 @@ class Product_Model
 
                 $query_sizeid = "SELECT * FROM `size` WHERE `size_name` = '$i'";
                 $result_sizeid = $this->database->select($query_sizeid);
-
-                echo "<h1>" . var_dump($result_sizeid) . "</h1>";
 
                 $size_id = $result_sizeid->fetch_all(MYSQLI_ASSOC)[0]['id'];
 
@@ -218,14 +214,15 @@ class Product_Model
         }
 
         echo "<h1>" . var_dump($product_id) . "</h1>";
+        return $product_id;
     }
 
-    // public function add_product_infor($productname, $productprice, $productdesc, $category_id){
-    //     echo '<h1> eerrr1 </h1>';
-    //     $productname = $this->database->validateInput($productname);
-    //     $productdesc = $this->database->validateInput($productdesc);
-    //     $query = "INSERT INTO `product`(`product_name`, `price`, `description`, `category_id`) VALUES ('$productname', '$productprice', '$productdesc', '$category_id')";
-    //     $result = $this->database->insert($query);
-    //     return ($result) ? $result->fetch_all(MYSQLI_ASSOC) : false;
-    // }
+    public function get_all_product(){
+        $query = "SELECT *  FROM product";
+        $result = $this->database->select($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    
+
 }
