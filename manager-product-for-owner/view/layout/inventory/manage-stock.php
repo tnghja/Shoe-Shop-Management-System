@@ -96,9 +96,9 @@
                                 <?php echo $total_stock ?>
                             </td>
                             <td style="width: 100px;" class="text-center">
-                                <button class="btn btn-danger p-2 m-0" role="submit" name="submitRemoveColorOfProduct" value="TRUE" <?php if ($total_stock != -1) {
-                                                                                                                                        echo 'disabled';
-                                                                                                                                    } ?>>
+                                <button form="formRemoveColorOfProductInMangeStockPage" class="btn btn-danger p-2 m-0" role="submit" name="submitRemoveColorOfProduct" value="TRUE" <?php if ($total_stock != -1) {
+                                                                                                                                                                                        echo 'disabled';
+                                                                                                                                                                                    } ?>>
                                     XOÁ
                                 </button>
                             </td>
@@ -173,7 +173,7 @@
         <!-- remove a size of productColor -->
         <div class="remove_size_of_product p-3 mb-2">
             <div class="mx-2">
-                <h6>XOÁ MỘT SIZE CỦA SẢN PHẨM</h6>
+                <h6>XOÁ SIZE CỦA SẢN PHẨM</h6>
             </div>
             <div class="containner container-fluid border m-1 p-1">
                 <form class="inventoryFormForRemoveSizeOfProduct" action="#" method="POST">
@@ -222,11 +222,17 @@
             </div>
         </div>
 
+        <div hidden class="remove_color_of_product">
+            <h3>Hello. this is hidden form which contain infor product(color) wanted to remove</h3>
+            <form method="post" id="formRemoveColorOfProductInMangeStockPage" action="index.php?page=inventory&product=<?php echo $product_id ?>">
+                <input type="text" name="removeColorId" value="<?php echo $color_id ?>">
+            </form>
+        </div>
 
         <!-- add a new size for product -->
         <div class="add_new_size p-3 mb-2">
             <div class="mx-2">
-                <h6>THÊM MỘT SIZE MỚI CHO SẢN PHẨM</h6>
+                <h6>THÊM SIZE MỚI CHO SẢN PHẨM</h6>
             </div>
             <div class="containner container-fluid border m-1 p-1">
                 <form class="inventoryFormForAddNewSizeForProduct" action="#" method="POST">

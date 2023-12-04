@@ -191,11 +191,11 @@ class Inventory_Model
     }
 
     // xoa mot mau cua mot san pham nao do
-    public function remove_color_of_product($product_id, $color_id) {
+    public function remove_color_of_product($product_id, $color_id)
+    {
         $query = "DELETE FROM `product_has_colors` WHERE `product_has_colors`.`product_id` = $product_id AND `product_has_colors`.`color_id` = $color_id";
         $result = $this->database->delete($query);
         return true;
-    
     }
 
     // them size cho mot san pham voi mot mau cu the
@@ -233,5 +233,15 @@ class Inventory_Model
         $result = $this->database->update($query);
 
         return $result;
+    }
+
+    public function remove_product_notHasColor_by_id($product_id)
+    {
+        $query = "DELETE FROM `product` WHERE `product`.`id` = $product_id";
+        $result = $this->database->delete($query);
+        if ($result == false) {
+            return false;
+        }
+        return true;
     }
 }

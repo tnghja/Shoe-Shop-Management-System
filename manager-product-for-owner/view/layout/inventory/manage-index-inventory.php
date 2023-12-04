@@ -57,12 +57,19 @@
                             <th class="text-center">Đối tượng</th>
                             <th class="text-center">Loại</th>
                             <th style="width: 150px;" class="text-center">Giá</th>
-                            <th style="width: 120px;" class="text-center">Thao tác</th>
+                            <th style="width: 200px;" class="text-center">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody class="producttable__body">
                         <?php foreach ($productList as $product) {
                             // echo var_dump($product['id']);
+
+                            $productHasColor = true;
+
+                            if ($inventoryObj->get_colors_of_product($product['id']) == false) {
+                                $productHasColor = false;
+                            }
+                            // echo var_dump($productHasColor);
 
                             $category = $categoryObj->get_category_by_id($product['category_id']);
                         ?>
@@ -87,10 +94,15 @@
                                     <?php echo $product['price'] ?>
                                 </td>
 
-                                <td style="width: 120px;" class="text-center">
-                                    <a class="btn btn-secondary p-2 m-0" href="index.php?page=inventory&product=<?php echo $product['id'] ?>" role="button" aria-label="check stock of the product">
+                                <td style="width: 200px;" class="text-center d-flex justify-content-around">
+                                    <a class="btn btn-secondary p-2 m-0" href="index.php?page=inventory&product=<?php echo $product['id'] ?>" role="button" aria-label="check color of the product">
                                         KIỂM TRA
                                     </a>
+                                    <button class="btn btn-danger p-2 m-0" role="button" name="submitRemoveProduct" value="TRUE" onclick="return confirmSubmitRemoveProduct(<?php echo $product['id'] ?>, 'formRemoveProduct')" form="formRemoveProduct" formaction="index.php?page=inventory&removeProduct=TRUE" aria-label="remove the product" <?php if ($productHasColor == true) {
+                                                                                                                                                                                                    echo 'disabled';
+                                                                                                                                                                                                } ?>>
+                                        XOÁ
+                                    </button>
                                 </td>
                             </tr>
 
@@ -102,26 +114,18 @@
 
                     </tfoot>
                 </table>
-                <!-- navigation -->
-                <nav aria-label=" Page navigation" class="m-1 mb-3">
-                                        <ul class="pagination pagination-sm justify-content-end me-2">
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        </nav>
-
+                
+                <div class="mt-2">
+                    <div hidden>Pagination</div>
+                </div>
             </div>
+        </div>
+
+        <div hidden>
+            <h3>this is hidden form to contain infor product removed</h3>
+            <form id="formRemoveProduct" method="post">
+                <input id="inputIdOfProductRemoved" type="text" name="removeProductId" value="-1">
+            </form>
         </div>
 
     </div>

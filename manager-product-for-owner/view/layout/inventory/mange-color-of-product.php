@@ -115,6 +115,20 @@
                 </table>
             </div>
 
+            <?php
+            if ($product_color_img_list == false) {
+                echo "<hr>";
+                echo "<div>
+                        <h5>SẢN PHẨM HIỆN KHÔNG CÓ MÀU NÀO.</h5>
+                        <h6>BẠN CÓ THỂ THÊM MÀU CHO SẢN PHẨM Ở CHỨC NĂNG BÊN DƯỚI.</h6>
+                        <h6>BẠN CÓ THỂ XOÁ LOẠI SẢN PHẨM NÀY.</h6>
+                    </div>";
+            ?>
+                <hr>
+            <?php
+            }
+            ?>
+
 
 
         </div>
@@ -123,7 +137,7 @@
         <div class="remove_color_of_product mx-2 mb-3">
             <!-- to do -->
             <div class="mx-2">
-                <h6> XOÁ SẢN PHẨM THEO MÀU </h6>
+                <h6> XOÁ MÀU CỦA SẢN PHẨM </h6>
             </div>
             <!-- Form -->
             <?php
@@ -140,38 +154,38 @@
             }
             ?>
             <form class="inventoryFormForRemoveColorOfProduct row g-3 border m-1 p-1" name="remove_color_of_product" method="post" action="#">
-                    <div class="form__btn col-12">
-                        <button class="btn btn-primary" id="resetRemoveColorOfProduct" type="reset" onclick="disableInputs_number_of_stocks_inventory('RemoveColorOfProduct')">HUỶ</button>
-                        <button class="btn btn-primary" id="enableRemoveColorOfProduct" type="button" onclick="enableInputs_number_of_stocks_inventory('RemoveColorOfProduct')" <?php if (empty($arrColorhadNoSize)) {
-                                                                                                                                                                                    echo 'disabled';
-                                                                                                                                                                                } ?>>
-                            THAO TÁC
-                        </button>
-                        <button type="submit" name="submitRemoveColorOfProduct" value="TRUE" id="submitRemoveColorOfProduct" class="checkproduct btn btn-danger" disabled>XOÁ</button>
-                    </div>
+                <div class="form__btn col-12">
+                    <button class="btn btn-primary" id="resetRemoveColorOfProduct" type="reset" onclick="disableInputs_number_of_stocks_inventory('RemoveColorOfProduct')">HUỶ</button>
+                    <button class="btn btn-primary" id="enableRemoveColorOfProduct" type="button" onclick="enableInputs_number_of_stocks_inventory('RemoveColorOfProduct')" <?php if (empty($arrColorhadNoSize)) {
+                                                                                                                                                                                echo 'disabled';
+                                                                                                                                                                            } ?>>
+                        THAO TÁC
+                    </button>
+                    <button type="submit" name="submitRemoveColorOfProduct" value="TRUE" id="submitRemoveColorOfProduct" class="checkproduct btn btn-danger" disabled>XOÁ</button>
+                </div>
 
 
-                    <!--a select remove productColor -->
-                    <!-- color -->
-                    <!-- php -->
-                    <div class="form__color col-md-6 col-lg-4 mb-2">
-                        <label for="productcolor" class="form-label">Các màu của sản phẩm có thẻ xoá:</label>
-                        <select name="removeColorId" class="inputForRemoveColorOfProduct form-select" disabled>
-                            <?php
-                            if (empty($arrColorhadNoSize)) {
-                                echo "<option selected>Không có size nào có thể xoá</option>";
-                            } else {
-                                echo "<option selected>Chọn màu</option>";
-                                foreach ($arrColorhadNoSize as $key => $value) {
-                            ?>
-                                    <option value="<?php echo $value ?>"><?php echo $key ?></option>
-                            <?php
-                                }
+                <!--a select remove productColor -->
+                <!-- color -->
+                <!-- php -->
+                <div class="form__color col-md-6 col-lg-4 mb-2">
+                    <label for="productcolor" class="form-label">Các màu của sản phẩm có thể xoá (chỉ có thể xoá những màu không có size):</label>
+                    <select name="removeColorId" class="inputForRemoveColorOfProduct form-select" disabled>
+                        <?php
+                        if (empty($arrColorhadNoSize)) {
+                            echo "<option selected>Không có màu nào có thể xoá</option>";
+                        } else {
+                            echo "<option selected>Chọn màu</option>";
+                            foreach ($arrColorhadNoSize as $key => $value) {
+                        ?>
+                                <option value="<?php echo $value ?>"><?php echo $key ?></option>
+                        <?php
                             }
-                            ?>
-                        </select>
-                    </div>
-                    <!-- php -->
+                        }
+                        ?>
+                    </select>
+                </div>
+                <!-- php -->
 
             </form>
         </div>
