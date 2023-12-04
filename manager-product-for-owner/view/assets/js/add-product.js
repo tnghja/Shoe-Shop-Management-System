@@ -73,3 +73,22 @@ function trigger_disable_button_id(btnId){
         return;
     }
 }
+
+
+function confirmSubmitRemoveProduct(product_id, form_name){
+
+    var conf = confirm(`Bạn muốn xoá xản phẩm này! (mã sản phẩm: ${product_id})`);
+
+    if (conf == true){
+        var form = document.querySelector(`#${form_name}`);
+
+        var inputElement = form.querySelector('#inputIdOfProductRemoved');
+    
+        inputElement.value = product_id;  
+
+        return true;
+    }else{
+        return false;
+    }
+
+}

@@ -81,12 +81,15 @@ class Controller
         if ($action == 'submit') {
 
             if (isset($_POST['addSubmitBTN'])) {
+
                 $productname = $_POST['productname'];
                 $categoryid = $_POST['categoryid'];
                 $colorid = $_POST['colorid'];
                 $productprice = $_POST['productprice'];
                 $productimage = $_POST['productimage'];
                 $productdesc = $_POST['productdesc'];
+
+                $productsize = [];
 
                 for ($i = 0; $i < 45 - 24 + 1; $i++) {
                     if (isset($_POST['size' . $i + 24])) {
@@ -95,9 +98,10 @@ class Controller
                         array_push($productsize, false);
                     }
                 }
-
+                
                 $product = new Product_Model();
                 $res = $product->add_product_infor($productname, $productprice, $productdesc, $categoryid, $colorid, $productimage, $productsize);
+
 
                 header('location: ../app/index.php?page=product-list');
             } else {
@@ -127,6 +131,18 @@ class Controller
             $product_id = $_GET['product'];
             $this->manage_color_of_product($product_id);
         } else {
+
+            // neu co dau hieu xoa mot san pham
+            if (isset($_GET['removeProduct']) && $_GET['removeProduct'] == "TRUE") {
+
+                if (isset($_POST['submitRemoveProduct']) && $_POST['submitRemoveProduct'] == "TRUE") {
+                    if (isset($_POST['removeProductId'])) {
+                        $removeProductId = $_POST['removeProductId'];
+                        $this->handle_remove_product_by_id($removeProductId);
+                    }
+                }
+            }
+
             $categoryObj = new Category_Model();
             $inventoryObj = new Inventory_Model();
             $productList = $inventoryObj->get_all_product_not_desc();
@@ -138,6 +154,7 @@ class Controller
     {
         if (isset($_GET['color'])) {
             $color_id = $_GET['color'];
+
             $this->manage_stock_of_product_of_color($product_id, $color_id);
         } else {
 
@@ -158,15 +175,11 @@ class Controller
 
                 $inventoryObj = new Inventory_Model();
                 $res = $inventoryObj->add_new_color_for_product($product_id, $colorid, $productimage, $productsize);
-
-            }elseif (isset($_POST['submitRemoveColorOfProduct']) && $_POST['submitRemoveColorOfProduct'] == 'TRUE'){
+            } elseif (isset($_POST['submitRemoveColorOfProduct']) && $_POST['submitRemoveColorOfProduct'] == 'TRUE') {
 
                 $removeColorId = $_POST['removeColorId'];
                 $inventoryObj = new Inventory_Model();
                 $res = $inventoryObj->remove_color_of_product($product_id, $removeColorId);
-
-                echo "<h1>Xoa thanh cong</h1>";
-
             }
 
             $inventoryObj = new Inventory_Model();
@@ -191,7 +204,6 @@ class Controller
             }
 
             $this->handle_add_new_size_for_productColor($product_id, $color_id, $newSizeList);
-
         } elseif (isset($_POST['submitUpdateQuantity']) && $_POST['submitUpdateQuantity'] == 'TRUE') {
             // UPDATE
             $sizeQuantityList = [];
@@ -205,7 +217,6 @@ class Controller
             }
 
             $this->handle_update_quantity_for_productColor($product_id, $color_id, $sizeQuantityList);
-
         } elseif (isset($_POST['submitRemoveSizeOfProduct']) && $_POST['submitRemoveSizeOfProduct'] == 'TRUE') {
             // REMOVE
             $removeSizeList = [];
@@ -249,7 +260,8 @@ class Controller
         }
     }
 
-    public function handle_remove_size_of_productColor($product_id, $color_id, $removeSizeList){
+    public function handle_remove_size_of_productColor($product_id, $color_id, $removeSizeList)
+    {
 
         $inventoryObj = new Inventory_Model();
         foreach ($removeSizeList as $removeSize) {
@@ -257,7 +269,18 @@ class Controller
                 $res = $inventoryObj->remove_size_of_productColor($product_id, $color_id, $removeSize);
             }
         }
+    }
 
+
+    public function handle_remove_product_by_id($removeProductId)
+    {
+
+        $inventoryObj = new Inventory_Model();
+        $colorOfProduct = $inventoryObj->get_colors_of_product($removeProductId);
+
+        if ($colorOfProduct == false) {
+            $res = $inventoryObj->remove_product_notHasColor_by_id($removeProductId);
+        }
     }
 }
 
