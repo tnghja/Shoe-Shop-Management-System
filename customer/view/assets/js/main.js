@@ -90,6 +90,11 @@ function closeModal() {
   errorModal.style.display = "none";
 }
 
+// Function to close the modal
+function closeAddProductModal() {
+  reload();
+}
+
 function updateQuantity(user_id, product_id, color_id, size_id) {
     // Create the payload object
 
