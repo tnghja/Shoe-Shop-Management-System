@@ -3,6 +3,8 @@
     if (isset($_SESSION["user-id"])) {
         $user_id = $_SESSION["user-id"];
     }
+
+    $count = 0;
    ?>
    
    <div class="my-4">
@@ -11,6 +13,7 @@
         <div class="container mb-2 col-6 align-self-center">
             <?php while ($cart_items and $cart_item = $cart_items->fetch_assoc()) {?>
             <?php if ($cart_item["cart_quantity"] > 0) { ?>
+                <?php $count += 1; ?>
                 <div class="row my-3">
                     <img src="<?php echo $cart_item['product_img'] ?>" class="col-lg-2">
                     <div class="cart-item-info col-md-8 col-sm-10">
@@ -42,11 +45,10 @@
                         <h5 class="text-end"><?php echo $cart_item["price"] ?> đ</h5>
                     </div>
                 </div>
-            <?php } ?>
-            <?php } ?>
+            <?php } } ?>
         </div>
 
-        <?php if ($cart_items) {?>
+        <?php if ($count) {?>
             <div class="text-center my-2">
                 <button onclick="location.href='./?checkout'" type="button" class="btn btn-primary">Đặt mua</button>
             </div>

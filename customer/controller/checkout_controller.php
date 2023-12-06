@@ -108,8 +108,6 @@ class PaymentController extends Controller {
                         JOIN product ON order_has_product.product_id = product.id
                         WHERE order_has_product.order_id = ".$cart_id.";";
 
-        echo $total_price_q;
-
 
         $rows = $this->db->select($total_price_q)->fetch_all(MYSQLI_ASSOC);
 
@@ -131,6 +129,18 @@ class PaymentController extends Controller {
         if (!$this->db->update($update_quantity_query)) {
             http_response_code(500);
             echo "DEBUG: error occured while updating quantity.";
+            exit;
+        }
+
+        $delete_empty_item_q = "DELETE FROM order_has_product
+                                WHERE order_has_product.order_id = ".$cart_id."
+                                AND order_has_product.product_count = 0;";   
+
+//        echo $delete_empty_item_q;
+
+        if (!$this->db->update($delete_empty_item_q)) {
+            http_response_code(500);
+            echo "DEBUG: error occured while deleting empty items in the order.";
             exit;
         }
 

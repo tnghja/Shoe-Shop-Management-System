@@ -5,11 +5,10 @@
         }
         
         $first_name = ""; $last_name = ""; $phone_number = "";
-        $info_row = $db->select("SELECT firstname, lastname, phone_number FROM customeraccount WHERE id = ".$user_id.";");
+        $info_row = $db->select("SELECT name, phone_number FROM customeraccount WHERE id = ".$user_id.";");
         if ($info_row) {
             $info_row = $info_row->fetch_assoc();
-            $first_name = $info_row["firstname"];
-            $last_name = $info_row["lastname"];
+            $fullname = $info_row["name"];
             $phone_number = $info_row["phone_number"];
         }
     ?>
@@ -18,6 +17,7 @@
         <div class="row">
             <h1 class="text-center my-5">Thanh toán</h1>
         </div>
+        <?php if ($total_price > 0) { ?>
         <div class="container row">
             <div class="col-md-7">
                 <h4 class="text-md-start text-sm-center">Sản phẩm</h3>
@@ -25,7 +25,11 @@
                 <div class="cart d-flex flex-column border-bottom">
 
                 <?php foreach ($cart_items as $cart_item) { ?>
-
+                    <?php 
+                        if ($cart_item['cart_quantity'] == 0) {
+                            continue;
+                        }
+                    ?>
                     <div class="cart-item container mb-2">
                         <div class="row mb-1">
                             <img src="<?php echo $cart_item['product_img'] ?>" class="col-lg-2">
@@ -124,6 +128,11 @@
                 <button type="button" id="checkout-complete" onclick="checkout_complete(<?php echo $user_id ?>)" class="btn btn-primary col-4 align-self-center">Đặt hàng</button>
                 </div>
         </div>
+        <?php } else { ?>
+            <div class="row">
+                <h2 class="text-center my-5">Giỏ hàng trống.</h2>
+            </div>
+        <?php } ?>
     </div>
 
 <div class="modal" id="checkout-success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

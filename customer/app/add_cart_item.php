@@ -31,12 +31,18 @@ if ($user_id) {
 
     if (!$res) {
         // Create new order
+        // Create new order
         $create_order_q = " INSERT INTO orderdetails (customer_id, is_cart) VALUES ({mysqli_real_escape_string($user_id)}, TRUE)";
+        $prep_stmt = mysqli_prepare(Database::$link, $create_order_q);
 
-        if(!$db->insert($create_order_q)) {
+        if (!$prep_stmt->execute()) {
             http_response_code(500);
+            echo "DEBUG: An error occured while creating a new cart.";
+            echo "DEBUG: account id = ".$user_id."\n";
             exit;
         }
+    
+        $order_id =$prep_stmt->insert_id;
     } else {
         $row = $res->fetch_assoc();
         $order_id = $row['id'];
@@ -91,7 +97,7 @@ if (!$db->select($product_check_q)) {
                     SET product_count = product_count + ?
                     WHERE order_id = ? AND product_id = ? AND color_id = ? AND size_id = ?";
 
-    $add_item_prep = $db->link->prepare($add_item_q);
+    $add_item_prep = Database::$link->prepare($add_item_q);
     $add_item_prep->bind_param("iiiii", $quantity, $order_id, $product_id, $color_id, $size_id);
 
     if (!$add_item_prep->execute()) {

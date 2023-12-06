@@ -80,6 +80,11 @@ function add_item_handler(quantity, user_id) {
 }
 
 // Function to close the modal
+function reloadPage() {
+  location.reload();
+}
+
+// Function to close the modal
 function closeModal() {
   var modal = document.getElementById("limitModal");
   var successModal = document.getElementById("add-item-success");
@@ -90,10 +95,6 @@ function closeModal() {
   errorModal.style.display = "none";
 }
 
-// Function to close the modal
-function closeAddProductModal() {
-  reload();
-}
 
 function updateQuantity(user_id, product_id, color_id, size_id) {
     // Create the payload object

@@ -11,14 +11,17 @@ $payload = json_decode($request_body, true);
 $fields = ["product_id", "color_id", "size_id", "quantity", "user_id"];
 
 foreach ($fields as $field) {
-    if (!isset($payload[$field])) {
+    if (!isset($payload[$field]) and $field != "user_id") {
         echo "DEBUG: '{$field}' is not set.";
         http_response_code(400);
         exit;
     }
 }
 
-$user_id = $payload["user_id"];
+$user_id = null;
+if (isset($payload["user_id"])) {
+    $user_id = $payload["user_id"];
+}
 $order_id = null;
 
 // Check if there exists any item in user's cart

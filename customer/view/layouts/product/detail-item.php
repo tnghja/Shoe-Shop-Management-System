@@ -105,7 +105,7 @@ if (isset($_SESSION['user-id'])) {
                     <p>Mời bạn mua sắm tiếp.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary mx-auto" onclick="closeAddProductModal()">OK</button>
+                    <button type="button" class="btn btn-primary mx-auto" onclick="location.reload()">OK</button>
                 </div>
             </div>
         </div>

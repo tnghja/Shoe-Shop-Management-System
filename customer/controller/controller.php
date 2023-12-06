@@ -441,6 +441,7 @@ class Controller
                 fn ($total_price, $cart_item) => $total_price + $cart_item["price"] * $cart_item["cart_quantity"], 0);
 
             include_once "../view/layouts/cart/checkout.php";
+
         } else {
             include_once "../view/layouts/cart/checkout-error.php";
         }
