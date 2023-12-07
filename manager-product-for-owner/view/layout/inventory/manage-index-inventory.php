@@ -61,7 +61,7 @@
 
                             $productHasColor = true;
 
-                            if ($inventoryObj->get_colors_of_product($product['id']) == false) {
+                            if (empty($inventoryObj->get_colors_of_product($product['id']))) {
                                 $productHasColor = false;
                             }
                             // echo var_dump($productHasColor);

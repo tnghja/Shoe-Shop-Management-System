@@ -38,8 +38,8 @@
                         hinh dai dien, anh mo ta, huy bo, xac nhan -->
 
 
-            <!-- php variable $productInfo: id, product_name, price, description, category_id -->
             <!-- php variable $product_id -->
+            <!-- php variable $productInfo: id, product_name, price, description, category_id -->
             <!-- $inventoryObj, $categoryObj, $productObj -->
 
             <div class="view__name col-12">
@@ -95,7 +95,7 @@
                 <div class="productImage border rounded-2 p-1 d-flex flex-wrap">
 
                     <?php
-                    if ($product_color_img_list != false) {
+                    if (!empty($product_color_img_list)) {
                         $i = 0;
                         foreach ($product_color_img_list as $product_color_img) {
                             $img = $product_color_img['product_img'];
@@ -106,13 +106,15 @@
                     ?>
                             <div class="mx-3 my-1">
                                 <figure class="" style="width:150px">
-                                    <figcaption class="text-center">Fig.<?= $i ?> - <?= $color ?></figcaption>
+                                    <figcaption class="text-center">Màu.<?= $i ?> - <?= $color ?></figcaption>
                                     <img src="<?= $img ?>" alt="Hình ảnh sản phẩm mã <?= $product_id ?> - màu <?= $color ?>" style="width:150px">
                                 </figure>
                             </div>
 
                     <?php
                         }
+                    }else{
+                        echo "<p>Sản phẩm không có màu nào!</p>";
                     }
                     ?>
                 </div>

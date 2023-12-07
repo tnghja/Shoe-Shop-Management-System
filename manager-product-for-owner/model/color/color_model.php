@@ -48,9 +48,13 @@ class Color_Model
         return implode(',', $remove_color);
     }
 
+    // if search to result, return a list, otherwise return []
     public function get_color_type_list(){
         $query = "SELECT * FROM `color`";
         $result = $this->database->select($query);
+        if ($result == false){
+            return [];
+        }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

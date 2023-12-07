@@ -52,7 +52,7 @@
                         $product = $inventoryObj->get_product_by_id_not_desc($product_id);
                         $product_color_img_list = $inventoryObj->get_colors_of_product($product_id);
 
-                        if ($product_color_img_list != false) {
+                        if (!empty($product_color_img_list)) {
                             foreach ($product_color_img_list as $product_color_img) {
                                 $img = $product_color_img['product_img'];
                                 $color = $product_color_img['color_name'];
@@ -63,9 +63,9 @@
 
                                 $productSizeList = $inventoryObj->get_sizes_of_productColor($product_id, $color_id);
 
-                                if ($productSizeList == false) {
+                                if (empty($productSizeList)) {
                                     $total_stock = -1;
-                                    $all_size_product_has = 'Sản phẩm hiện không có';
+                                    $all_size_product_has = 'Sản phẩm hiện không có size';
                                 } else {
                                     $total_stock = 0;
                                     foreach ($productSizeList as $productSize) {
@@ -116,7 +116,7 @@
             </div>
 
             <?php
-            if ($product_color_img_list == false) {
+            if (empty($product_color_img_list)) {
                 echo "<hr>";
                 echo "<div>
                         <h5>SẢN PHẨM HIỆN KHÔNG CÓ MÀU NÀO.</h5>
@@ -142,14 +142,16 @@
             <!-- Form -->
             <?php
             $arrColorhadNoSize = [];
-            foreach ($product_color_img_list as $product_color_img) {
-                $color_id = $product_color_img['color_id'];
-                $color = $product_color_img['color_name'];
+            if (!empty($product_color_img_list)) {
+                foreach ($product_color_img_list as $product_color_img) {
+                    $color_id = $product_color_img['color_id'];
+                    $color = $product_color_img['color_name'];
 
-                $productSizeList = $inventoryObj->get_sizes_of_productColor($product_id, $color_id);
+                    $productSizeList = $inventoryObj->get_sizes_of_productColor($product_id, $color_id);
 
-                if ($productSizeList == false) {
-                    $arrColorhadNoSize[$color] = $color_id;
+                    if (empty($productSizeList)) {
+                        $arrColorhadNoSize[$color] = $color_id;
+                    }
                 }
             }
             ?>
@@ -175,7 +177,7 @@
                         if (empty($arrColorhadNoSize)) {
                             echo "<option selected>Không có màu nào có thể xoá</option>";
                         } else {
-                            echo "<option selected>Chọn màu</option>";
+                            echo "<option selected>Chọn màu muốn xoá</option>";
                             foreach ($arrColorhadNoSize as $key => $value) {
                         ?>
                                 <option value="<?php echo $value ?>"><?php echo $key ?></option>
@@ -236,20 +238,20 @@
                         <div class="border border-1 rounded-2 px-1 py-2">
                             <div class="d-flex flex-row flex-wrap">
                                 <?php
-                                $minSize = 24;
-                                $maxSize = 45;
-                                $i = 0;
+                                $sizeList = $sizeObj->get_size_list_in_db();
+                                if (!empty($sizeList)) {
+                                    // $minSize = $sizeObj->get_min_size();
+                                    // $maxSize = $sizeObj->get_max_size();
+                                    foreach ($sizeList as $size) {
                                 ?>
+                                        <div class="form-check-inline m-3">
+                                            <input class="form-check-input" type="checkbox" name="<?= 'size' . $size['size_name'] ?>" value="TRUE" id="<?= 'size' . $size['size_name'] ?>">
+                                            <label class="form-check-label" for="<?= 'size' . $size['size_name'] ?>">
+                                                Size <?= $size['size_name'] ?>
+                                            </label>
+                                        </div>
                                 <?php
-                                for ($i = $minSize; $i <= $maxSize; $i++) {
-                                ?>
-                                    <div class="form-check-inline m-3">
-                                        <input class="form-check-input" type="checkbox" name="<?= 'size' . $i ?>" value="TRUE" id="<?= 'size' . $i ?>">
-                                        <label class="form-check-label" for="<?= 'size' . $i ?>">
-                                            Size <?= $i ?>
-                                        </label>
-                                    </div>
-                                <?php
+                                    }
                                 }
                                 ?>
                             </div>
