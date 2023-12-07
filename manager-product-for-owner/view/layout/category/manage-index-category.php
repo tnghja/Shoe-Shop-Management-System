@@ -8,7 +8,7 @@
                 phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=product-list">Danh sách
                 sản phẩm</a>
-                <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=add-product">Thêm sản phẩm</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=add-product">Thêm sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=inventory">Nhà kho</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
         </nav>
@@ -26,7 +26,7 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 5%;">SST</th>
-                            <th  class="text-center" style="width: 5%;">Mã</th>
+                            <th class="text-center" style="width: 5%;">Mã</th>
                             <th class="text-center" style="width: 20%;">Đối tượng</th>
                             <th>Loại sản phẩm</th>
                             <th class="text-center">Số sản phẩm</th>
@@ -37,28 +37,34 @@
                         <!-- php $objectList -->
                         <?php
                         $count = 0;
-                        foreach ($objectList as $object) {
-                            $categoryListByObj = $categoryObj->get_category_by_object($object['object']);
-                            $numOfProduct = '';
-                            foreach ($categoryListByObj as $category) {
-                                $count++;
-                                $numOfProduct = $categoryObj->get_number_of_product_has_categoryId($category['id']);
+                        if (!empty($objectList)) {
+                            foreach ($objectList as $object) {
+                                $categoryListByObj = $categoryObj->get_category_by_object($object['object']);
+                                $numOfProduct = '';
+                                foreach ($categoryListByObj as $category) {
+                                    $count++;
+                                    $numOfProduct = $categoryObj->get_number_of_product_has_categoryId($category['id']);
                         ?>
-                                <tr>
-                                    <td class="text-center"><?= $count ?></td>
-                                    <td class="text-center"><?= $category['id'] ?></td>
-                                    <td class="text-center"><?= $category['object'] ?></td>
-                                    <td><?= $category['category_name'] ?></td>
-                                    <td class="text-center"><?= $numOfProduct ?></td>
-                                    <td class="catalog_operator" class="btn-group btn-group-sm p-0 m-0" role="button group" aria-label="operator button group">
-                                        <button type="button" onclick="infoModalEditCategory('<?= $category['id'] ?>', '<?= $category['object'] ?>', '<?= $category['category_name'] ?>')" class="edit_producttpye btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#edit_staticBackdrop">
-                                            SỬA
-                                        </button>
-                                        <button class="btn btn-sm btn-danger" form="formForDeleteCategory" formaction="index.php?page=category&delete" role="submit" <?php if ($numOfProduct > 0){echo "disabled";} ?> onclick="infoFormDeleteCategory('<?= $category['id'] ?>')">XOÁ</button>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td class="text-center"><?= $count ?></td>
+                                        <td class="text-center"><?= $category['id'] ?></td>
+                                        <td class="text-center"><?= $category['object'] ?></td>
+                                        <td><?= $category['category_name'] ?></td>
+                                        <td class="text-center"><?= $numOfProduct ?></td>
+                                        <td class="catalog_operator" class="btn-group btn-group-sm p-0 m-0" role="button group" aria-label="operator button group">
+                                            <button type="button" onclick="infoModalEditCategory('<?= $category['id'] ?>', '<?= $category['object'] ?>', '<?= $category['category_name'] ?>')" class="edit_producttpye btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#edit_staticBackdrop">
+                                                SỬA
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" form="formForDeleteCategory" formaction="index.php?page=category&delete" role="submit" <?php if ($numOfProduct > 0) {
+                                                                                                                                                                                echo "disabled";
+                                                                                                                                                                            } ?> onclick="infoFormDeleteCategory('<?= $category['id'] ?>')">XOÁ</button>
+                                        </td>
+                                    </tr>
                         <?php
+                                }
                             }
+                        }else{
+                            echo "<p>Hiện tại không có danh mục sản phẩm! Hãy thêm danh mục sản phẩm.</p>";
                         }
                         ?>
                     </tbody>
@@ -116,13 +122,10 @@
                         <div class="form_add_catalog__cus col-md-5">
                             <label for="customertype" class="form-label">Đối tượng</label>
                             <select id="customertype" class="form-select" name="categoryObject">
-                                <?php
-                                foreach ($objectList as $object) {
-                                ?>
-                                    <option value="<?= $object['object'] ?>"><?= $object['object'] ?></option>
-                                <?php
-                                }
-                                ?>
+                                <option value="Nam" selected>Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Bé trai">Bé trai</option>
+                                <option value="Bé gái">Bé gái</option>
                             </select>
                         </div>
                     </div>

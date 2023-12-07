@@ -74,6 +74,7 @@ class Controller
     {
 
         $action = '';
+
         if (isset($_GET['action'])) {
             $action = $_GET['action'];
         }
@@ -101,21 +102,24 @@ class Controller
                     }
                 }
 
-                echo "<h1>add</h1>";
+                // echo var_dump($productsize);
+
+                // echo "<h1>add</h1>";
 
                 $product = new Product_Model();
 
-                echo "<h1>add</h1>";
-                
+                // echo "<h1>add2</h1>";
+
                 $res = $product->add_product_infor($productname, $productprice, $productdesc, $categoryid, $colorid, $productimage, $productsize);
 
-                echo "<h1>add</h1>";
+                // echo "<h1>add3</h1>";
 
                 header('location: ../app/index.php?page=product-list');
             } else {
                 header('location: ../app/index.php?page=add-product');
             }
         } else {
+            $sizeObj = new Size_Model();
             $categoryObj = new Category_Model();
             $colorObj = new Color_Model();
             include_once __DIR__ . '/../view/layout/add-product/manage-index-add.php';
@@ -129,10 +133,12 @@ class Controller
 
             $product_id = $_GET['view'];
 
+            // model
             $productObj = new Product_Model();
             $categoryObj = new Category_Model();
             $inventoryObj = new Inventory_Model();
 
+            // variable product info
             $productInfo = $productObj->get_product_by_id($product_id);
 
             include_once __DIR__ . '/../view/layout/product-list/manage-index-view-info-product.php';
@@ -182,6 +188,7 @@ class Controller
             }
 
             $productColorList = $inventoryObj->get_colors_of_product($product_id);
+
             foreach ($productColorList as $productColor) {
                 if (isset($_POST['updateAvatarColorId' . $productColor['color_id']])) {
                     $updateAvatar = $_POST['updateAvatarColorId' . $productColor['color_id']];
@@ -211,7 +218,7 @@ class Controller
             $searchRes = $inventoryObj->search_product_list($searchInput);
             $checkSearcherUsed = true;
 
-            if ($searchRes != false) {
+            if (!empty($searchRes)) {
                 $productList = $searchRes;
             }
         }
@@ -222,14 +229,11 @@ class Controller
 
         if ($checkSearcherUsed == false) {
             $searchRes = $inventoryObj->get_all_product_not_desc();
-            if ($searchRes != false) {
+            if (!empty($searchRes)) {
                 $productList = $searchRes;
             }
         }
 
-        if ($productList == false) {
-            $productList = [];
-        }
         include_once __DIR__ . '/../view/layout/product-list/manage-index-product-list.php';
     }
 
@@ -248,10 +252,6 @@ class Controller
         } elseif (isset($_GET['delete'])) {
             $category_id = $_POST['deleteCategoryId'];
 
-            $productObj = new Product_Model();
-
-            $productListByCategory = $productObj->get_product_list_by_category($category_id);
-
             $categoryObj = new Category_Model();
             $res = $categoryObj->delete_category_by_id($category_id);
             header("location: index.php?page=category");
@@ -266,6 +266,17 @@ class Controller
 
         $categoryObj = new Category_Model();
         $objectList = $categoryObj->get_object_list();
+
+        // echo "<hr>";
+        // echo "<pre>" . var_dump($objectList) . "</pre>";
+        // echo "<hr>";
+
+        // if (empty($objectList)) {
+        //     echo "<hr>";
+        //     echo "<pre> hello </pre>";
+        //     echo "<hr>";
+        // }
+
         include_once __DIR__ . '/../view/layout/category/manage-index-category.php';
     }
 
@@ -278,9 +289,9 @@ class Controller
         if (isset($_GET['product'])) {
             $product_id = $_GET['product'];
             $this->manage_color_of_product($product_id);
+
         } else {
 
-            // neu co dau hieu xoa mot san pham
             if (isset($_GET['SearchProduct'])) {
                 $searchInput = $_GET['SearchProduct'];
 
@@ -290,9 +301,11 @@ class Controller
 
                 $checkSearcherUsed = true;
 
-                if ($searchRes != false) {
+                if (!empty($searchRes)) {
                     $productList = $searchRes;
                 }
+
+                // neu co dau hieu xoa mot san pham
             } else if (isset($_GET['removeProduct']) && $_GET['removeProduct'] == "TRUE") {
 
                 if (isset($_POST['submitRemoveProduct']) && $_POST['submitRemoveProduct'] == "TRUE") {
@@ -308,7 +321,7 @@ class Controller
 
             if ($checkSearcherUsed == false) {
                 $searchRes = $inventoryObj->get_all_product_not_desc();
-                if ($searchRes != false) {
+                if (!empty($searchRes)) {
                     $productList = $searchRes;
                 }
             }
@@ -332,6 +345,7 @@ class Controller
                 $productimage = $_POST['productimage'];
                 $productsize = [];
 
+                // fixed maxsize = 45, minsize = 24
                 for ($i = 0; $i < 45 - 24 + 1; $i++) {
                     if (isset($_POST['size' . $i + 24])) {
                         array_push($productsize, true);
@@ -349,6 +363,7 @@ class Controller
                 $res = $inventoryObj->remove_color_of_product($product_id, $removeColorId);
             }
 
+            $sizeObj = new Size_Model();
             $inventoryObj = new Inventory_Model();
             include_once __DIR__ . '/../view/layout/inventory/mange-color-of-product.php';
         }
@@ -356,7 +371,6 @@ class Controller
 
     public function manage_stock_of_product_of_color($product_id, $color_id)
     {
-
 
         if (isset($_POST['submitAddNewSizeForProduct']) && $_POST['submitAddNewSizeForProduct'] == 'TRUE') {
             // ADD
