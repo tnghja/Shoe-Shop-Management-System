@@ -4,13 +4,13 @@
     <div class="sidenav text-wrap p-0 m-0">
         <nav class="nav nav-pills flex-column text-center p-0 m-0">
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=dashboard">Dashboard</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=category">Danh mục sản
+                phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=product-list">Danh sách
                 sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=add-product">Thêm sản phẩm</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=category">Danh mục sản
-                phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4 active" aria-current="page" href="#">Nhà kho</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
         </nav>
     </div>
     <!--list product main content wrapper -->
@@ -223,7 +223,7 @@
                 </div>
                 <div class="form__avatar col-12">
                     <div>
-                        <img id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="Choose avatar" style="width: 200px;" />
+                        <img class="selectedAvatarClass" id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="Choose avatar" style="width: 200px;" />
                     </div>
                 </div>
 
@@ -267,7 +267,7 @@
                 <!-- cancel -->
                 <div class="form__cancel col-12">
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-warning" type="reset" onclick="displayAvatarFromInputLink('', 'selectedAvatar')">HUỶ</button>
+                        <button class="btn btn-warning" type="reset" onclick="resetDisplayAvatar('selectedAvatarClass')">HUỶ</button>
                     </div>
                 </div>
             </form>

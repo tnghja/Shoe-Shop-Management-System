@@ -4,13 +4,13 @@
     <div class="sidenav text-wrap p-0 m-0">
         <nav class="nav nav-pills flex-column text-center p-0 m-0">
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=dashboard">Dashboard</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=category">Danh mục sản
+                phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=product-list">Danh sách
                 sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4 active" aria-current="page" href="#">Thêm sản phẩm</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=category">Danh mục sản
-                phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=inventory">Nhà kho</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
         </nav>
     </div>
 
@@ -33,12 +33,6 @@
                 <input type="text" name="productname" class="form-control" id="name" required>
             </div>
 
-            <!-- code -->
-            <div class="form__code col-lg-4">
-                <label for="code" class="form-label">Mã sản phẩm</label>
-                <input type="text" name="productcode" class="form-control" id="code" required>
-            </div>
-
             <!-- doi tuong/customer -->
             <div class="formm__cus col-md-6 col-lg-4">
 
@@ -46,7 +40,9 @@
                 <select id="customertype" name="customertype" class="form-select" required onchange="ajaxCategorySelection(this.value)">
                     <option selected value="unselected">Chọn đối tượng</option>
                     <?php
-                    $objList = $categoryObj->get_customer_object_list();
+
+                    $objList = $categoryObj->get_object_list();
+
                     foreach ($objList as $obj) {
                     ?>
                         <option value="<?php echo $obj['object'] ?>"><?php echo $obj['object'] ?></option>
@@ -88,10 +84,10 @@
             </div>
             <!-- php -->
 
-            <!-- code -->
+            <!-- gia -->
             <div class="form__code col-md-6 col-lg-4">
                 <label for="price" class="form-label">Giá sản phẩm</label>
-                <input type="number" max="100000000000" name="productprice" class="form-control" id="price" required>
+                <input type="number" max="1000000000" name="productprice" class="form-control" id="price" required>
             </div>
 
             <!-- avatar -->
@@ -100,7 +96,7 @@
                     <label class="form-label m-0 mb-2" for="avatar" style="width: 150px;">Chọn hình ảnh (nhập link)</label>
                     <input type="text" name="productimage" class="form-control mb-1" style="width: 300px;" id="avatar" onchange="displayAvatarFromInputLink(this.value, 'selectedAvatar')" required />
                     <div>
-                        <img id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="Choose avatar" style="width: 150px;" />
+                        <img class="selectedAvatarClass" id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="Choose avatar" style="width: 150px;" />
                     </div>
                 </div>
             </div>
@@ -151,7 +147,7 @@
             <!-- cancel -->
             <div class="form__cancel col-12">
                 <div class="d-flex justify-content-center">
-                    <button type="reset" class="btn btn-danger">HUỶ</button>
+                    <button type="reset" class="btn btn-danger" onclick="resetDisplayAvatar('selectedAvatarClass')">HUỶ</button>
                 </div>
             </div>
         </form>

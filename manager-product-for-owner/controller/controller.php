@@ -82,6 +82,8 @@ class Controller
 
             if (isset($_POST['addSubmitBTN'])) {
 
+                echo "<h1>add</h1>";
+
                 $productname = $_POST['productname'];
                 $categoryid = $_POST['categoryid'];
                 $colorid = $_POST['colorid'];
@@ -98,10 +100,16 @@ class Controller
                         array_push($productsize, false);
                     }
                 }
-                
+
+                echo "<h1>add</h1>";
+
                 $product = new Product_Model();
+
+                echo "<h1>add</h1>";
+                
                 $res = $product->add_product_infor($productname, $productprice, $productdesc, $categoryid, $colorid, $productimage, $productsize);
 
+                echo "<h1>add</h1>";
 
                 header('location: ../app/index.php?page=product-list');
             } else {
@@ -116,16 +124,156 @@ class Controller
 
     public function control_product_list()
     {
+
+        if (isset($_GET['view'])) {
+
+            $product_id = $_GET['view'];
+
+            $productObj = new Product_Model();
+            $categoryObj = new Category_Model();
+            $inventoryObj = new Inventory_Model();
+
+            $productInfo = $productObj->get_product_by_id($product_id);
+
+            include_once __DIR__ . '/../view/layout/product-list/manage-index-view-info-product.php';
+        } elseif (isset($_GET['edit'])) {
+
+            $productObj = new Product_Model();
+            $categoryObj = new Category_Model(); //use
+            $inventoryObj = new Inventory_Model();
+
+
+            $product_id = $_GET['edit'];
+            $productInfo = $productObj->get_product_by_id($product_id);
+
+            include_once __DIR__ . '/../view/layout/product-list/manage-index-edit-product.php';
+        } elseif (isset($_GET['edited'])) {
+
+            echo "<h1>you are edited</h1>";
+
+            $productObj = new Product_Model();
+            $inventoryObj = new Inventory_Model();
+
+
+            $product_id = $_GET['edited'];
+
+            $updateName = '';
+            $updatePrice = '';
+            $updateDescription = '';
+            $updateAvatar = '';
+
+            if (isset($_POST['updateName'])) {
+                $updateName = $_POST['updateName'];
+
+                $res = $productObj->updateNameProductById($product_id, $updateName);
+            }
+
+            if (isset($_POST['updatePrice'])) {
+                $updatePrice = $_POST['updatePrice'];
+
+                $res = $productObj->updatePriceProductById($product_id, $updatePrice);
+            }
+
+
+            if (isset($_POST['updateDescription'])) {
+                $updateDescription = $_POST['updateDescription'];
+
+                $res = $productObj->updateDescriptionProductById($product_id, $updateDescription);
+            }
+
+            $productColorList = $inventoryObj->get_colors_of_product($product_id);
+            foreach ($productColorList as $productColor) {
+                if (isset($_POST['updateAvatarColorId' . $productColor['color_id']])) {
+                    $updateAvatar = $_POST['updateAvatarColorId' . $productColor['color_id']];
+
+                    if ($updateAvatar != "") {
+                        $res = $productObj->updateAvatarProductById($product_id, $productColor['color_id'], $updateAvatar);
+                    }
+                }
+            }
+
+            header("location: index.php?page=product-list&view=" . $product_id);
+        } else {
+            $this->display_product_list_page();
+        }
+    }
+
+    public function display_product_list_page()
+    {
+
+        $checkSearcherUsed = false;
+        $productList = [];
+
+        if (isset($_GET['SearchProduct'])) {
+            $searchInput = $_GET['SearchProduct'];
+
+            $inventoryObj = new Inventory_Model();
+            $searchRes = $inventoryObj->search_product_list($searchInput);
+            $checkSearcherUsed = true;
+
+            if ($searchRes != false) {
+                $productList = $searchRes;
+            }
+        }
+
+
+        $categoryObj = new Category_Model();
+        $inventoryObj = new Inventory_Model();
+
+        if ($checkSearcherUsed == false) {
+            $searchRes = $inventoryObj->get_all_product_not_desc();
+            if ($searchRes != false) {
+                $productList = $searchRes;
+            }
+        }
+
+        if ($productList == false) {
+            $productList = [];
+        }
         include_once __DIR__ . '/../view/layout/product-list/manage-index-product-list.php';
     }
 
     public function control_category()
     {
         // todo
+
+        if (isset($_GET['addCategory']) && isset($_GET['addCategory']) == "TRUE") {
+            $objName = $_POST['categoryObject'];
+            $newCategoryName = $_POST['newCategoryName'];
+
+            $categoryObj = new Category_Model();
+            $res = $categoryObj->add_category($objName, $newCategoryName);
+
+            header("location: index.php?page=category");
+        } elseif (isset($_GET['delete'])) {
+            $category_id = $_POST['deleteCategoryId'];
+
+            $productObj = new Product_Model();
+
+            $productListByCategory = $productObj->get_product_list_by_category($category_id);
+
+            $categoryObj = new Category_Model();
+            $res = $categoryObj->delete_category_by_id($category_id);
+            header("location: index.php?page=category");
+        } elseif (isset($_GET['edit'])) {
+
+            $category_id = $_GET['edit'];
+            $editCategory = $_POST['editCategory'];
+
+            $categoryObj = new Category_Model();
+            $res = $categoryObj->edit_category_by_id_object($category_id, $editCategory);
+        }
+
+        $categoryObj = new Category_Model();
+        $objectList = $categoryObj->get_object_list();
+        include_once __DIR__ . '/../view/layout/category/manage-index-category.php';
     }
 
     public function control_inventory()
     {
+
+        $checkSearcherUsed = false;
+        $productList = [];
 
         if (isset($_GET['product'])) {
             $product_id = $_GET['product'];
@@ -133,7 +281,19 @@ class Controller
         } else {
 
             // neu co dau hieu xoa mot san pham
-            if (isset($_GET['removeProduct']) && $_GET['removeProduct'] == "TRUE") {
+            if (isset($_GET['SearchProduct'])) {
+                $searchInput = $_GET['SearchProduct'];
+
+                $inventoryObj = new Inventory_Model();
+
+                $searchRes = $inventoryObj->search_product_list($searchInput);
+
+                $checkSearcherUsed = true;
+
+                if ($searchRes != false) {
+                    $productList = $searchRes;
+                }
+            } else if (isset($_GET['removeProduct']) && $_GET['removeProduct'] == "TRUE") {
 
                 if (isset($_POST['submitRemoveProduct']) && $_POST['submitRemoveProduct'] == "TRUE") {
                     if (isset($_POST['removeProductId'])) {
@@ -145,7 +305,14 @@ class Controller
 
             $categoryObj = new Category_Model();
             $inventoryObj = new Inventory_Model();
-            $productList = $inventoryObj->get_all_product_not_desc();
+
+            if ($checkSearcherUsed == false) {
+                $searchRes = $inventoryObj->get_all_product_not_desc();
+                if ($searchRes != false) {
+                    $productList = $searchRes;
+                }
+            }
+
             include_once __DIR__ . '/../view/layout/inventory/manage-index-inventory.php';
         }
     }

@@ -10,8 +10,6 @@ class Inventory_Model
         $this->database = new Database();
     }
 
-
-
     //check product id is exist
     public function is_exist_product_id($id)
     {
@@ -55,10 +53,17 @@ class Inventory_Model
         }
     }
 
+    // if search to result, return a list, otherwise return false
     public function search_product_list($search)
     {
-        $query = "SELECT * FROM `product` WHERE product_name like '%$search%';";
+        $searchInput = $this->database->validateInput($search);
+
+        $query = "SELECT * FROM `product` WHERE product_name like '%$searchInput%';";
+
         $result = $this->database->select($query);
+        if ($result == false){
+            return false;
+        }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -125,7 +130,7 @@ class Inventory_Model
         return $result->fetch_all(MYSQLI_ASSOC)[0]['quantity']; // tra ve mot so
     }
 
-    // function is error. 
+    // function is error. not use
     public function update_quantity_of_product($product_id, $size_name, $color_id)
     {
         $size_id = $this->get_id_of_size_name($size_name);
@@ -153,10 +158,14 @@ class Inventory_Model
         return $result->fetch_all(MYSQLI_ASSOC)[0]['product_img'];
     }
 
+    // neu co san pham, tra ve danh sach, khong co san pham, tra ve false
     public function get_all_product_not_desc()
     {
         $query = "SELECT `id`, `product_name`, `price`, `category_id` FROM product";
         $result = $this->database->select($query);
+        if ($result == false){
+            return false;
+        }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
