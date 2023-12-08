@@ -5,21 +5,20 @@
     <div class="sidenav text-wrap p-0 m-0">
         <nav class="nav nav-pills flex-column text-center p-0 m-0">
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4 active" aria-current="page" href="#">Dashboard</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=category">Danh mục sản
+                phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=product-list">Danh sách
                 sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=add-product">Thêm sản phẩm</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=category">Danh mục sản
-                phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=inventory">Nhà kho</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
         </nav>
     </div>
-
 
     <!-- ### -->
     <!-- main content wrapper -->
     <!-- to do -->
-    <div class="maincontent container container-fluid">
+    <div class="maincontent container-fluid">
         <div class="">
             <div class="sumary p-3 my-1 d-flex flex-row flex-wrap justify-content-xxl-between justify-content-md-around">
                 <div class="summary__element border-3 m-1 py-2 px-5 rounded-4">
