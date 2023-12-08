@@ -114,6 +114,9 @@ function updateQuantity(user_id, product_id, color_id, size_id) {
 
         // Retrieve the quantity value from the input element
         var quantity = inputElement.value;
+        if (quantity < 0) {
+            return;
+        }
 
         payload.quantity = quantity;
 
