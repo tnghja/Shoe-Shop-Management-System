@@ -53,7 +53,7 @@ class Inventory_Model
         }
     }
 
-    // if search to result, return a list, otherwise return false
+    // if search to result, return a list, otherwise return []
     public function search_product_list($search)
     {
         $searchInput = $this->database->validateInput($search);
@@ -62,7 +62,7 @@ class Inventory_Model
 
         $result = $this->database->select($query);
         if ($result == false){
-            return false;
+            return [];
         }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -78,44 +78,47 @@ class Inventory_Model
         return $result->fetch_all(MYSQLI_ASSOC)[0]['color_name'];
     }
 
+    // if search to result, return a list, otherwise return []
     public function get_colors_of_product($product_id)
     {
         $query = "SELECT color_id, product_img, color_name FROM `product_has_colors`, `color` WHERE id=color_id and product_id = $product_id;";
         $result = $this->database->select($query);
         if ($result == false) {
-            return false;
+            return [];
         }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // if search to result, return a list, otherwise return []
     public function get_colors_not_of_product($product_id)
     {
         $query = "SELECT id, color_name FROM color LEFT JOIN product_has_colors ON color.id = product_has_colors.color_id AND product_has_colors.product_id = $product_id WHERE product_has_colors.color_id IS NULL;";
         $result = $this->database->select($query);
         if ($result == false) {
-            return false;
+            return [];
         }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // return false if product has no size // san pham ao ma // loi do tu dien du lieu vao database ma khong thong qua web quan ly
+    // if search to result, return a list, otherwise return []
     public function get_sizes_of_productColor($product_id, $color_id)
     {
         $query = "SELECT size_id, size_name, quantity FROM `color_has_sizes`, `size` WHERE size_id=id and color_id=$color_id and product_id = $product_id;";
         $result = $this->database->select($query);
         if ($result == false) {
-            return false;
+            return [];
         }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // if search to result, return a list, otherwise return []
     public function get_sizes_not_of_productColor($product_id, $color_id)
     {
 
         $query = "SELECT id, size_name FROM `size` LEFT JOIN `color_has_sizes` ON size.id = color_has_sizes.size_id AND color_has_sizes.product_id = $product_id AND color_has_sizes.color_id = $color_id WHERE color_has_sizes.size_id IS NULL;";
         $result = $this->database->select($query);
         if ($result == false) {
-            return false;
+            return [];
         }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -128,16 +131,6 @@ class Inventory_Model
         $query = "SELECT quantity FROM `color_has_sizes` WHERE size_id = $size_id and color_id = $color_id and product_id = $product_id;";
         $result = $this->database->select($query);
         return $result->fetch_all(MYSQLI_ASSOC)[0]['quantity']; // tra ve mot so
-    }
-
-    // function is error. not use
-    public function update_quantity_of_product($product_id, $size_name, $color_id)
-    {
-        $size_id = $this->get_id_of_size_name($size_name);
-
-        $query = "UPDATE `color_has_sizes` SET `quantity`='100' WHERE product_id = $product_id AND size_id = $size_id;";
-        $result = $this->database->update($query);
-        return $result;
     }
 
     public function get_id_of_size_name($size_name)
@@ -158,13 +151,13 @@ class Inventory_Model
         return $result->fetch_all(MYSQLI_ASSOC)[0]['product_img'];
     }
 
-    // neu co san pham, tra ve danh sach, khong co san pham, tra ve false
+    // neu co san pham, tra ve danh sach, khong co san pham, tra ve []
     public function get_all_product_not_desc()
     {
         $query = "SELECT `id`, `product_name`, `price`, `category_id` FROM product";
         $result = $this->database->select($query);
         if ($result == false){
-            return false;
+            return [];
         }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -253,4 +246,6 @@ class Inventory_Model
         }
         return true;
     }
+
+
 }

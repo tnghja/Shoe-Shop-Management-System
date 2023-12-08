@@ -10,7 +10,7 @@
                 sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=add-product">Thêm sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4 active" aria-current="page" href="#">Nhà kho</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=manage">Quản lý đơn hàng</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
         </nav>
     </div>
     <!--list product main content wrapper -->
@@ -66,7 +66,7 @@
 
                         $total_stock = -999;
 
-                        if ($productSizeList == false) {
+                        if (empty($productSizeList)) {
                             $total_stock = -1;
                         } else {
                             $total_stock = 0;
@@ -123,7 +123,7 @@
                             $size_name = '';
                             $isHasASize = true;
 
-                            if ($productSizeList != false) {
+                            if (!empty($productSizeList)) {
 
                                 foreach ($productSizeList as $productSize) {
                                     $quantityOfsize = $productSize['quantity'];
@@ -181,7 +181,7 @@
                         <div class="size_stock d-flex flex-row flex-wrap">
                             <!-- php -->
                             <?php
-                            if ($productSizeList != false) {
+                            if (!empty($productSizeList)) {
                                 foreach ($productSizeList as $productSize) {
                                     $size_name = $productSize['size_name'];
                             ?>
@@ -244,7 +244,7 @@
                             ?>
 
                             <?php
-                            if ($sizeListNotHad != false) {
+                            if (!empty($sizeListNotHad)) {
                                 foreach ($sizeListNotHad as $size) {
                             ?>
                                     <div class="form-check-inline m-3">

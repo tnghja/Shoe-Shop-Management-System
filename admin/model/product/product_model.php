@@ -22,13 +22,13 @@ class Product_Model
     }
 
     // rename 'get_product_list()' to 'get_product_list_by_category()' - 2/12/2023
-    // neu khong co san pham nao thi tra ve false
+    // neu khong co san pham nao thi tra ve []
     public function get_product_list_by_category($category_id)
     {
         $query = "SELECT * FROM `product` WHERE category_id = '$category_id';";
         $result = $this->database->select($query);
         if ($result == false){
-            return false;
+            return [];
         }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -187,26 +187,31 @@ class Product_Model
     public function add_product_infor($productname, $productprice, $productdesc, $category_id, $colorid, $productimage, $productsize)
     {
         // validate input
+        // echo "<h1>inner</h1>";
         $productname = $this->database->validateInput($productname);
         $productdesc = $this->database->validateInput($productdesc);
         $productimage = $this->database->validateInput($productimage);
 
+        // echo "<h1>inner 1</h1>";
+        
         $query = "INSERT INTO `product`(`id`, `product_name`, `price`, `description`, `category_id`) VALUES (NULL, '$productname', '$productprice', '$productdesc', '$category_id')";
         $product_id = $this->database->insert_for_autoIncrement($query);
 
+        // echo "<h1>inner 2</h1>";
+
         $query = "INSERT INTO `product_has_colors` (`product_id`, `color_id`, `product_img`) VALUES ('$product_id', '$colorid', '$productimage')";
 
-        echo "<h1>inner 2</h1>";
+        // echo "<h1>inner 2</h1>";
 
         $result1 = $this->database->insert($query);
 
-        echo "<h1>inner 2</h1>";
+        // echo "<h1>inner 2</h1>";
 
         // insert size
         for ($i = 24; $i <= 45; $i++) {
             if ($productsize[$i - 24] == true) {
 
-                echo "<h1>" . $i . "</h1>";
+                // echo "<h1>" . $i . "</h1>";
 
                 $query_sizeid = "SELECT * FROM `size` WHERE `size_name` = '$i'";
                 $result_sizeid = $this->database->select($query_sizeid);
@@ -217,13 +222,13 @@ class Product_Model
 
                 $result2 = $this->database->insert($query);
 
-                if ($result2 == true) {
-                    echo "<pre> insert size '$i' thanh cong </pre>";
-                }
+                // if ($result2 == true) {
+                //     echo "<pre> insert size '$i' thanh cong </pre>";
+                // }
             }
         }
 
-        echo "<h1>" . var_dump($product_id) . "</h1>";
+        // echo "<h1>" . var_dump($product_id) . "</h1>";
         return $product_id;
     }
 
