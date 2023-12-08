@@ -3,34 +3,31 @@ include '../config/config.php';
 
 class Database
 {
-    static private $host = DB_HOST;
-    static private $user = DB_USER;
-    static private $pass = DB_PASS;
-    static private $dbname = DB_NAME;
+    public $host = DB_HOST;
+    public $user = DB_USER;
+    public $pass = DB_PASS;
+    public $dbname = DB_NAME;
 
-    static public $link;
-    static  public $error;
+    public $link;
+    public $error;
+
     public function __construct()
     {
         $this->connectDB();
     }
 
-    static public function connectDB()
+    private function connectDB()
     {
-        try {
-            self::$link = new mysqli(self::$host, self::$user, self::$pass, self::$dbname);
-            if (self::$link->connect_error) {
-                throw new Exception("Connect failed: " . self::$link->connect_error);
-            }
-            mysqli_set_charset(self::$link, 'utf8');
-            // echo "Connected successfully";
-            return self::$link;
-        } catch (Exception $e) {
-            echo "Connection error: " . $e->getMessage();
+        $this->link = new mysqli(
+            $this->host,
+            $this->user,
+            $this->pass,
+            $this->dbname
+        );
+        if (!$this->link) {
+            $this->error = "Connection fail" . $this->link->connect_error;
+            return false;
         }
-    }
-    public function closeDB(){
-        self::$link = null;
     }
 
 
@@ -38,8 +35,8 @@ class Database
     // Select or Read data
     public function select($query)
     {
-        $result = self::$link->query($query) or
-        die($this->link->error . __LINE__);
+        $result = $this->link->query($query) or
+            die($this->link->error . __LINE__);
         if ($result->num_rows > 0) {
             return $result;
         } else {
@@ -50,8 +47,8 @@ class Database
     // Insert data
     public function insert($query)
     {
-        $insert_row = self::$link->query($query) or
-        die($this->link->error . __LINE__);
+        $insert_row = $this->link->query($query) or
+            die($this->link->error . __LINE__);
         if ($insert_row) {
             return $insert_row;
         } else {
@@ -62,8 +59,8 @@ class Database
     // Update data
     public function update($query)
     {
-        $update_row = self::$link->query($query) or
-        die($this->link->error . __LINE__);
+        $update_row = $this->link->query($query) or
+            die($this->link->error . __LINE__);
         if ($update_row) {
             return $update_row;
         } else {
@@ -74,8 +71,8 @@ class Database
     // Delete data
     public function delete($query)
     {
-        $delete_row = self::$link->query($query) or
-        die($this->link->error . __LINE__);
+        $delete_row = $this->link->query($query) or
+            die($this->link->error . __LINE__);
         if ($delete_row) {
             return $delete_row;
         } else {

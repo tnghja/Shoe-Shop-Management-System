@@ -10,7 +10,7 @@
                 sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=add-product">Thêm sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4 active" aria-current="page" href="#">Nhà kho</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=manage">Quản lý đơn hàng</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
         </nav>
     </div>
 
@@ -61,7 +61,7 @@
 
                             $productHasColor = true;
 
-                            if ($inventoryObj->get_colors_of_product($product['id']) == false) {
+                            if (empty($inventoryObj->get_colors_of_product($product['id']))) {
                                 $productHasColor = false;
                             }
                             // echo var_dump($productHasColor);

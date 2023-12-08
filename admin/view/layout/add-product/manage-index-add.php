@@ -10,18 +10,38 @@
                 sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4 active" aria-current="page" href="#">Thêm sản phẩm</a>
             <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=inventory">Nhà kho</a>
-            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="../app/index.php?page=manage">Quản lý đơn hàng</a>
+            <a class="nav-link px-3 py-3 px-0 my-2 rounded-4" href="#">Quản lý đơn hàng</a>
         </nav>
     </div>
 
     <!-- main content wrapper -->
     <div class="maincontent container-fluid">
+        <?php
+        $objList = $categoryObj->get_object_list();
+        $colorList = $colorObj->get_color_type_list();
+        $sizeList = $sizeObj->get_size_list_in_db();
+        ?>
         <!-- to do -->
         <div class="mb-2">
-            THÊM SẢN PHẨM
+            <h6>THÊM SẢN PHẨM</h6>
+            <?php
+            if (empty($objList)) {
+                echo "<h6>Không có danh mục sản phẩm! Hãy thêm danh mục sản phẩm trước.</h6>";
+            }
+            if (empty($colorList)) {
+                echo "<h6>Trong database không có màu nào! Hãy thêm màu vào database trước.</h6>";
+            }
+            if (empty($sizeList)) {
+                echo "<h6>Trong database không có size nào! Hãy thêm size vào database trước.</h6>";
+            }
+            ?>
         </div>
         <!-- Form -->
-        <form class="row g-3" name="addproductform" method="post" action="../app/index.php?page=add-product&action=submit">
+        <form class="row g-3" name="addproductform" method="post" action="../app/index.php?page=add-product&action=submit" <?php
+                                                                                                                            if (empty($objList) || empty($colorList) || empty($sizeList)) {
+                                                                                                                                echo "hidden";
+                                                                                                                            }
+                                                                                                                            ?>>
             <!-- action="../app/index.php?page=add-product&action=submit" -->
             <!-- ten san pham, ma san pham, loai san pham, ngay ra mat, 
                         doi tuong, size, mau sac mo ta, gia san pham, so luong trong kho, 
@@ -40,9 +60,6 @@
                 <select id="customertype" name="customertype" class="form-select" required onchange="ajaxCategorySelection(this.value)">
                     <option selected value="unselected">Chọn đối tượng</option>
                     <?php
-
-                    $objList = $categoryObj->get_object_list();
-
                     foreach ($objList as $obj) {
                     ?>
                         <option value="<?php echo $obj['object'] ?>"><?php echo $obj['object'] ?></option>
@@ -73,11 +90,12 @@
                 <label for="productcolor" class="form-label">Màu sản phẩm</label>
                 <select id="productcolor" name="colorid" class="form-select">
                     <?php
-                    $colorList = $colorObj->get_color_type_list();
-                    foreach ($colorList as $color) {
+                    if (!empty($colorList)) {
+                        foreach ($colorList as $color) {
                     ?>
-                        <option value="<?php echo $color['id'] ?>"><?php echo $color['color_name'] ?></option>
+                            <option value="<?php echo $color['id'] ?>"><?php echo $color['color_name'] ?></option>
                     <?php
+                        }
                     }
                     ?>
                 </select>
@@ -110,20 +128,19 @@
                     <div class="border border-1 rounded-2 px-1 py-2">
                         <div class="d-flex flex-row flex-wrap">
                             <?php
-                            $minSize = 24;
-                            $maxSize = 45;
-                            $i = 0;
+                            if (!empty($sizeList)) {
+                                // $minSize = $sizeObj->get_min_size();
+                                // $maxSize = $sizeObj->get_max_size();
+                                foreach ($sizeList as $size) {
                             ?>
+                                    <div class="form-check-inline m-3">
+                                        <input class="form-check-input" type="checkbox" name="<?= 'size' . $size['size_name'] ?>" value="TRUE" id="<?= 'size' . $size['size_name'] ?>">
+                                        <label class="form-check-label" for="<?= 'size' . $size['size_name'] ?>">
+                                            Size <?= $size['size_name'] ?>
+                                        </label>
+                                    </div>
                             <?php
-                            for ($i = $minSize; $i <= $maxSize; $i++) {
-                            ?>
-                                <div class="form-check-inline m-3">
-                                    <input class="form-check-input" type="checkbox" name="<?= 'size' . $i ?>" value="TRUE" id="<?= 'size' . $i ?>">
-                                    <label class="form-check-label" for="<?= 'size' . $i ?>">
-                                        Size <?= $i ?>
-                                    </label>
-                                </div>
-                            <?php
+                                }
                             }
                             ?>
                         </div>
@@ -140,7 +157,11 @@
             <!-- submit -->
             <div class="form__submit col-12">
                 <div class="d-flex justify-content-center">
-                    <button type="submit" name="addSubmitBTN" value="TRUE" class="btn btn-primary px-3 py-2">THÊM</button>
+                    <button type="submit" name="addSubmitBTN" value="TRUE" class="btn btn-primary px-3 py-2" <?php
+                                                                                                                if (empty($objList) || empty($colorList) || empty($sizeList)) {
+                                                                                                                    echo "disabled";
+                                                                                                                }
+                                                                                                                ?>>THÊM</button>
                 </div>
             </div>
 

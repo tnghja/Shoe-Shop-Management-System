@@ -70,14 +70,13 @@
                     </thead>
                     <tbody class="producttable__body">
                         <?php foreach ($productList as $product) {
-                            // echo var_dump($product['id']);
 
-                            $productHasColor = true;
+                            // $productHasColor = true;
 
-                            if ($inventoryObj->get_colors_of_product($product['id']) == false) {
-                                $productHasColor = false;
-                            }
-                            // echo var_dump($productHasColor);
+                            // if (empty($inventoryObj->get_colors_of_product($product['id']))) {
+                            //     $productHasColor = false;
+                            // }
+                            // // echo var_dump($productHasColor);
 
                             $category = $categoryObj->get_category_by_id($product['category_id']);
                         ?>

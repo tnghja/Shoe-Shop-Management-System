@@ -10,25 +10,32 @@ class Category_Model
         $this->database = new Database();
     }
 
+    // if search to result, return a list, otherwise return []
     public function get_category_by_object($object)
     {
         $query = "SELECT * FROM `category` WHERE object = '$object';";
         $result = $this->database->select($query);
+        if ($result == false){
+            return [];
+        }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function get_object_list(){
         $query = "SELECT DISTINCT `object` FROM `category`";
         $result = $this->database->select($query);
+        if ($result == false){
+            return [];
+        }
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // tra ve mot mang
+    //* error if $id not find
     public function get_category_by_id($id)
     {
         $query = "SELECT * FROM `category` WHERE id = $id;";
         $result = $this->database->select($query);
-        return $result->fetch_all(MYSQLI_ASSOC)[0]; //*
+        return $result->fetch_all(MYSQLI_ASSOC)[0];
     }
 
     function add_category($object, $categoryName) {
