@@ -20,7 +20,7 @@
   - View order status 
 
 ## Member in charge
-- Nguyễn Đại Tiến : 
+- Nguyễn Đại Tiến (Leader): 
   - Design : Item List 
   - Develop : Item List, Item Detail
 - Nguyễn Trương Phước Thọ : 
