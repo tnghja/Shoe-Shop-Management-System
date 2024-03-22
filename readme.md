@@ -30,8 +30,8 @@
   - Design : Checkout
   - Develop : Checkout
 - Bùi Tiến Dũng : 
-  - Design : Product Management
-  - Develop : Product Management
+  - Design : Product Management, Storehouse Management
+  - Develop : Product Management, Storehouse Management
 - Nguyễn Trung Nghĩa : 
   - Design : Item Detail 
 
