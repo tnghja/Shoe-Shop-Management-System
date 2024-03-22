@@ -59,7 +59,7 @@
 - **Category Management(insert, delete, update) (For Admin)**
 ![image](https://github.com/tien2114988/Shoe-Shop-Management-System/assets/110327876/7d457f63-1c62-4455-8e9b-9caf434b2882)
 
-- **Product Management(insert, delete, update) **
+- **Product Management(insert, delete, update)**
 ![image](https://github.com/tien2114988/Shoe-Shop-Management-System/assets/110327876/ac29e153-5902-471e-8258-83f1b39f711f)
 
 - **Storehouse Management (manage size, color of products)**
