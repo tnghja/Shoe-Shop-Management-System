@@ -4,10 +4,6 @@
 - Frontend : HTML, CSS (Bootstrap), JS
 - Backend : PHP
 
-
-## How to run
-- Import shoe_shop.sql with database name : shoe_shop
-
 ## Feature
 - Customer : 
   - Login/Signin 
@@ -18,6 +14,11 @@
   - Login/Signin
   - Manage(add, remove, update) products
   - View order status 
+
+
+## Video Demo
+https://www.youtube.com/watch?v=EaYfwPvVSvI
+
 
 ## Member in charge
 - Nguyễn Đại Tiến (Leader) : 
@@ -34,6 +35,12 @@
   - Develop : Product Management, Storehouse Management
 - Nguyễn Trung Nghĩa : 
   - Design : Item Detail 
+
+
+
+## How to run
+- Import shoe_shop.sql with database name : shoe_shop
+
 
 ## Overview
 - **Home Page (For Customer)**
@@ -68,6 +75,5 @@
 - **Order Management (confirm orders)**
 ![image](https://github.com/tien2114988/Shoe-Shop-Management-System/assets/110327876/31cf4fe7-11c4-474b-84c2-e3092922e8dd)
 
-## Video Demo
-https://www.youtube.com/watch?v=EaYfwPvVSvI
+
 
