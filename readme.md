@@ -32,7 +32,7 @@ https://www.youtube.com/watch?v=EaYfwPvVSvI
 - Bùi Tiến Dũng : 
   - Design : Product Management, Storehouse Management
   - Develop : Product Management, Storehouse Management
-- Nguyễn Trung Nghĩa : 
+- Nguyễn Trung Nghĩa (me) : 
   - Design : Item Detail
   - Develop : Product Management
 
