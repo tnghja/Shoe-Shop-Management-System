@@ -15,7 +15,6 @@
   - Manage(add, remove, update) products
   - View order status 
 
-
 ## Video Demo
 https://www.youtube.com/watch?v=EaYfwPvVSvI
 
@@ -34,7 +33,8 @@ https://www.youtube.com/watch?v=EaYfwPvVSvI
   - Design : Product Management, Storehouse Management
   - Develop : Product Management, Storehouse Management
 - Nguyễn Trung Nghĩa : 
-  - Design : Item Detail 
+  - Design : Item Detail
+  - Develop : Product Management
 
 
 
